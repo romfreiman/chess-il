@@ -30,11 +30,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. Requesting a non-existent player ID returns a clear error response (not a crash or HTML)
   4. Adding `?force=true` to the request triggers a fresh scrape even if cached data exists
   5. If chess.org.il is unreachable, stale cached data is returned with a `stale: true` flag
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 01-01: TBD
-- [ ] 01-02: TBD
+- [ ] 01-01-PLAN.md — Project scaffold, shared types, and scraper (fetch + parse + validate) with tests
+- [ ] 01-02-PLAN.md — Supabase caching layer (getCachedPlayer, isStale, upsertPlayer) with tests
+- [ ] 01-03-PLAN.md — Express API route, Netlify Function entry point, full pipeline wiring
 
 ### Phase 2: Home & App Shell
 **Goal**: Users can navigate the app, search for a player by ID, and see a properly structured RTL Hebrew interface
@@ -109,7 +110,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Data Pipeline | 0/0 | Not started | - |
+| 1. Data Pipeline | 0/3 | Planned | - |
 | 2. Home & App Shell | 0/0 | Not started | - |
 | 3. Player Dashboard | 0/0 | Not started | - |
 | 4. Polish & Persistence | 0/0 | Not started | - |
