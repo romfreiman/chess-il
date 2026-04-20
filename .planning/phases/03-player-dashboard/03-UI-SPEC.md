@@ -33,8 +33,8 @@ Declared values (must be multiples of 4):
 
 | Token | Value | Usage |
 |-------|-------|-------|
-| xs | 4px (`gap-1`, `p-1`) | Icon gaps, inline chip padding, W/D/L chip internal spacing |
-| sm | 8px (`gap-2`, `p-2`, `py-2`) | Icon button padding, compact element spacing, badge padding |
+| xs | 4px (`gap-1`, `p-1`) | Icon gaps, inline chip padding, W/D/L chip internal spacing, badge vertical padding |
+| sm | 8px (`gap-2`, `p-2`, `py-2`) | Icon button padding, compact element spacing, badge horizontal padding, chart toggle button padding |
 | md | 16px (`gap-4`, `p-4`, `px-4`) | Card internal padding, default element spacing, section horizontal padding |
 | lg | 24px (`gap-6`, `py-6`) | Spacing between dashboard sections, card group gaps |
 | xl | 32px (`gap-8`, `py-8`) | Page top/bottom padding, major section breaks |
@@ -58,7 +58,7 @@ Exceptions: Chart container uses `height: 300px` (line/area/bar chart) and `heig
 
 **Weight usage:**
 - 400 (normal): Body text, labels, metadata, table cells, tooltip content
-- 700 (bold): Player name in header, section headings, metric card values, card titles
+- 700 (bold): Player name in header, section headings, metric card values, card titles, badge text
 
 **Phase-specific typography assignments:**
 | Element | Size | Weight | Notes |
@@ -71,9 +71,9 @@ Exceptions: Chart container uses `height: 300px` (line/area/bar chart) and `heig
 | Tournament name | 14px | 400 | In table rows and mobile cards |
 | Tournament date | 14px | 400 | Gray metadata |
 | Rating change number | 14px | 700 | Bold for emphasis, colored |
-| Badge text ("בהמתנה", "חדש") | 12px | 500 | `text-xs font-medium` |
+| Badge text ("בהמתנה", "חדש") | 14px | 700 | `text-sm font-bold` |
 | Pagination text ("עמוד 2 מתוך 5") | 14px | 400 | Subtle navigation indicator |
-| Chart axis labels | 12px | 400 | Recharts default small labels |
+| Chart axis labels | 14px | 400 | Recharts axis labels use `text-sm` |
 | Chart tooltip text | 14px | 400 | Readable on hover |
 
 **Source:** Heebo font from Phase 2 (D-13). Size scale derived from existing codebase usage (`text-sm`, `text-base`, `text-lg`, `text-xl`).
@@ -132,7 +132,7 @@ Exceptions: Chart container uses `height: 300px` (line/area/bar chart) and `heig
 | Player name | 28px bold, `text-gray-900 dark:text-gray-50` |
 | Club name | 14px normal, `text-gray-600 dark:text-gray-400` |
 | Birth year | 14px normal, `text-gray-500 dark:text-gray-400`, format: "שנת לידה: 1990" |
-| Grade badge | 12px medium, `bg-primary/10 text-primary px-2 py-0.5 rounded-full` |
+| Grade badge | 14px bold, `bg-primary/10 text-primary px-2 py-1 rounded-full` |
 | FIDE link | 14px normal, `text-primary hover:underline`, opens new tab, icon: `ExternalLink` (14px) |
 | Refresh button | `RefreshCw` icon (20px), `text-gray-400 hover:text-primary`, top-end corner of card |
 | Layout | Name + grade badge on first line, club + birth year on second line, FIDE link on third line. Refresh button absolutely positioned top-end. |
@@ -163,12 +163,12 @@ Exceptions: Chart container uses `height: 300px` (line/area/bar chart) and `heig
 |----------|-------|
 | Container | `bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4` |
 | Section heading | "היסטוריית דירוג" -- 20px bold |
-| Toggle buttons | `LineChart` and `BarChart3` Lucide icons (18px) in card header, end-aligned. Active: `text-primary bg-primary/10 rounded-lg p-1.5`. Inactive: `text-gray-400 hover:text-gray-600 p-1.5`. |
+| Toggle buttons | `LineChart` and `BarChart3` Lucide icons (18px) in card header, end-aligned. Active: `text-primary bg-primary/10 rounded-lg p-2`. Inactive: `text-gray-400 hover:text-gray-600 p-2`. |
 | Chart height | 300px via `ResponsiveContainer` |
 | Line mode | `AreaChart` with gradient fill. Stroke: `#378ADD`, strokeWidth: 2. Gradient: `#378ADD` at 30% opacity top, 0% opacity bottom. Dot: `fill="#378ADD"`, r=4. |
 | Bar mode | `BarChart` with `#378ADD` fill bars, radius: `[4, 4, 0, 0]` top corners rounded. |
-| X-axis | Hebrew month-year labels ("ינו '26"), `text-gray-500`, 12px. Tick line hidden. |
-| Y-axis | Rating values, `text-gray-500`, 12px. Domain: `[dataMin - 50, dataMax + 50]` for breathing room. |
+| X-axis | Hebrew month-year labels ("ינו '26"), `text-gray-500`, 14px. Tick line hidden. |
+| Y-axis | Rating values, `text-gray-500`, 14px. Domain: `[dataMin - 50, dataMax + 50]` for breathing room. |
 | Tooltip | Custom component: white card (`bg-white dark:bg-gray-800 shadow-lg rounded-lg p-3 border border-gray-200 dark:border-gray-700`). Shows: rating value (16px bold), date (14px gray), tournament name (14px gray). |
 | Grid | `CartesianGrid strokeDasharray="3 3"` with `stroke="#E5E7EB"` light / `stroke="#374151"` dark. |
 | Desktop layout (D-02) | 65% width in a flex container with donut chart at 35%. `flex gap-6` on `md:` breakpoint. |
@@ -205,8 +205,8 @@ Table row: `border-b border-gray-100 dark:border-gray-700 py-3 px-4`. Hover: `ho
 
 | Badge | Style |
 |-------|-------|
-| "בהמתנה" (pending) | `text-xs font-medium bg-pending/10 text-pending px-2 py-0.5 rounded-full` |
-| "חדש" (new) | `text-xs font-medium bg-primary/10 text-primary px-2 py-0.5 rounded-full` |
+| "בהמתנה" (pending) | `text-sm font-bold bg-pending/10 text-pending px-2 py-1 rounded-full` |
+| "חדש" (new) | `text-sm font-bold bg-primary/10 text-primary px-2 py-1 rounded-full` |
 | Positive change | `text-sm font-bold text-positive` with `TrendingUp` icon (14px) |
 | Negative change | `text-sm font-bold text-negative` with `TrendingDown` icon (14px) |
 | Zero change | `text-sm font-bold text-gray-500 dark:text-gray-400`, no icon |
@@ -285,8 +285,8 @@ Table row: `border-b border-gray-100 dark:border-gray-700 py-3 px-4`. Hover: `ho
 | Element | Default | Hover | Active/Pressed | Disabled | Focus |
 |---------|---------|-------|----------------|----------|-------|
 | Refresh button | `text-gray-400` | `text-primary` | `text-primary opacity-75` | N/A | `ring-2 ring-primary ring-offset-2` |
-| Chart toggle (inactive) | `text-gray-400 p-1.5` | `text-gray-600` | N/A | N/A | `ring-2 ring-primary` |
-| Chart toggle (active) | `text-primary bg-primary/10 rounded-lg p-1.5` | N/A (already active) | N/A | N/A | `ring-2 ring-primary` |
+| Chart toggle (inactive) | `text-gray-400 p-2` | `text-gray-600` | N/A | N/A | `ring-2 ring-primary` |
+| Chart toggle (active) | `text-primary bg-primary/10 rounded-lg p-2` | N/A (already active) | N/A | N/A | `ring-2 ring-primary` |
 | Tournament link | `text-primary` | `underline` | N/A | N/A | `ring-2 ring-primary` |
 | Pagination button | `text-primary` | `underline` | N/A | `text-gray-400 cursor-not-allowed` | `ring-2 ring-primary` |
 | FIDE link | `text-primary` | `underline` | N/A | N/A | `ring-2 ring-primary` |
