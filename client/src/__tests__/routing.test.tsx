@@ -32,10 +32,11 @@ describe('Routing', () => {
   });
 
   it('renders PlayerPage with player ID at "/player/205001"', async () => {
-    renderRoute('/player/205001');
+    const { container } = renderRoute('/player/205001');
     await waitFor(() => {
-      // PlayerPage shows loading state while fetching player data
-      expect(screen.getByText(/טוען נתוני שחקן/)).toBeInTheDocument();
+      // PlayerPage shows skeleton loaders while fetching player data
+      const pulseElements = container.querySelectorAll('.animate-pulse');
+      expect(pulseElements.length).toBeGreaterThan(0);
     });
   });
 

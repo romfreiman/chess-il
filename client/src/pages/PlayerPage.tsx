@@ -5,6 +5,12 @@ import { MetricCards } from '../components/dashboard/MetricCards';
 import { RatingChart } from '../components/dashboard/RatingChart';
 import { WinLossChart } from '../components/dashboard/WinLossChart';
 import { TournamentList } from '../components/dashboard/TournamentList';
+import { PlayerHeaderSkeleton } from '../components/dashboard/skeletons/PlayerHeaderSkeleton';
+import { MetricCardsSkeleton } from '../components/dashboard/skeletons/MetricCardsSkeleton';
+import { RatingChartSkeleton } from '../components/dashboard/skeletons/RatingChartSkeleton';
+import { WinLossChartSkeleton } from '../components/dashboard/skeletons/WinLossChartSkeleton';
+import { TournamentListSkeleton } from '../components/dashboard/skeletons/TournamentListSkeleton';
+import { ErrorState } from '../components/feedback/ErrorState';
 
 export function PlayerPage() {
   const { id } = useParams<{ id: string }>();
@@ -12,18 +18,29 @@ export function PlayerPage() {
 
   if (loading) {
     return (
-      <div className="max-w-5xl mx-auto px-4 py-8 text-center">
-        <p className="text-gray-500 dark:text-gray-400">טוען נתוני שחקן...</p>
+      <div className="max-w-5xl mx-auto px-4 py-8 space-y-6">
+        <PlayerHeaderSkeleton />
+        <MetricCardsSkeleton />
+        <div className="flex flex-col md:flex-row gap-6">
+          <div className="w-full md:w-[65%]">
+            <RatingChartSkeleton />
+          </div>
+          <div className="w-full md:w-[35%]">
+            <WinLossChartSkeleton />
+          </div>
+        </div>
+        <TournamentListSkeleton />
       </div>
     );
   }
 
   if (error) {
+    const errorType = error.toLowerCase().includes('not found') || error.includes('\u05DC\u05D0 \u05E0\u05DE\u05E6\u05D0')
+      ? 'not-found' as const
+      : 'network' as const;
     return (
-      <div className="max-w-5xl mx-auto px-4 py-8 text-center">
-        <p className="text-gray-500 dark:text-gray-400">
-          לא הצלחנו לטעון את נתוני השחקן. נסו שוב מאוחר יותר.
-        </p>
+      <div className="max-w-5xl mx-auto px-4 py-8">
+        <ErrorState errorType={errorType} onRetry={refresh} />
       </div>
     );
   }

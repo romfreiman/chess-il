@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
 import { vi, type Mock } from 'vitest';
 import { PlayerPage } from '../pages/PlayerPage';
@@ -23,7 +23,7 @@ describe('PlayerPage', () => {
     vi.clearAllMocks();
   });
 
-  it('shows loading message while data is loading', () => {
+  it('shows skeleton loaders while data is loading', () => {
     mockUsePlayer.mockReturnValue({
       data: null,
       loading: true,
@@ -31,11 +31,13 @@ describe('PlayerPage', () => {
       refresh: vi.fn(),
     });
 
-    renderPlayerPage();
-    expect(screen.getByText('טוען נתוני שחקן...')).toBeInTheDocument();
+    const { container } = renderPlayerPage();
+    // Skeleton components use animate-pulse class
+    const pulseElements = container.querySelectorAll('.animate-pulse');
+    expect(pulseElements.length).toBeGreaterThan(0);
   });
 
-  it('shows error message when error occurs', () => {
+  it('shows error state with retry button when error occurs', () => {
     mockUsePlayer.mockReturnValue({
       data: null,
       loading: false,
@@ -44,9 +46,34 @@ describe('PlayerPage', () => {
     });
 
     renderPlayerPage();
-    expect(
-      screen.getByText(/לא הצלחנו לטעון את נתוני השחקן/),
-    ).toBeInTheDocument();
+    expect(screen.getByText('\u05E9\u05D2\u05D9\u05D0\u05D4 \u05D1\u05D8\u05E2\u05D9\u05E0\u05EA \u05E0\u05EA\u05D5\u05E0\u05D9\u05DD')).toBeInTheDocument();
+    expect(screen.getByText('\u05E0\u05E1\u05D4 \u05E9\u05D5\u05D1')).toBeInTheDocument();
+  });
+
+  it('shows not-found error for 404 errors', () => {
+    mockUsePlayer.mockReturnValue({
+      data: null,
+      loading: false,
+      error: 'Player not found',
+      refresh: vi.fn(),
+    });
+
+    renderPlayerPage();
+    expect(screen.getByText('\u05E9\u05D7\u05E7\u05DF \u05DC\u05D0 \u05E0\u05DE\u05E6\u05D0')).toBeInTheDocument();
+  });
+
+  it('calls refresh when retry button is clicked on error', () => {
+    const mockRefresh = vi.fn();
+    mockUsePlayer.mockReturnValue({
+      data: null,
+      loading: false,
+      error: 'Network error',
+      refresh: mockRefresh,
+    });
+
+    renderPlayerPage();
+    fireEvent.click(screen.getByText('\u05E0\u05E1\u05D4 \u05E9\u05D5\u05D1'));
+    expect(mockRefresh).toHaveBeenCalledOnce();
   });
 
   it('renders PlayerHeader when data is loaded', () => {
