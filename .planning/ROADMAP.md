@@ -47,12 +47,11 @@ Plans:
   3. All pages render correctly on a 375px wide screen with no horizontal overflow
   4. Browser back/forward buttons work correctly across all routes (`/`, `/player/:id`, `/compare`)
   5. Home page displays saved player cards (populated in Phase 4) with proper RTL layout
-**Plans**: TBD
-**UI hint**: yes
+**Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: TBD
-- [ ] 02-02: TBD
+- [ ] 02-01-PLAN.md — Scaffold Vite + React + Tailwind frontend, app shell, routing, navbar, dark mode, test infra
+- [ ] 02-02-PLAN.md — Hero search with validation, recent suggestions, player cards, grid, empty state, HomePage
 
 ### Phase 3: Player Dashboard
 **Goal**: Users see a complete, data-rich dashboard for any player with header info, key metrics, rating chart, tournament table, and win/loss breakdown
@@ -111,7 +110,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Data Pipeline | 1/3 | In Progress | - |
-| 2. Home & App Shell | 0/0 | Not started | - |
+| 2. Home & App Shell | 0/2 | Not started | - |
 | 3. Player Dashboard | 0/0 | Not started | - |
 | 4. Polish & Persistence | 0/0 | Not started | - |
 | 5. Player Comparison | 0/0 | Not started | - |
