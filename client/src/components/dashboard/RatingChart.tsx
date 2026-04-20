@@ -127,7 +127,7 @@ export function RatingChart({ tournaments, currentRating }: RatingChartProps) {
             className={
               chartType === 'line'
                 ? 'text-primary bg-primary/10 rounded-lg p-2'
-                : 'text-gray-400 hover:text-gray-600 p-2'
+                : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-2'
             }
           >
             <LineChartIcon size={18} />
@@ -138,7 +138,7 @@ export function RatingChart({ tournaments, currentRating }: RatingChartProps) {
             className={
               chartType === 'bar'
                 ? 'text-primary bg-primary/10 rounded-lg p-2'
-                : 'text-gray-400 hover:text-gray-600 p-2'
+                : 'text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 p-2'
             }
           >
             <BarChart3 size={18} />

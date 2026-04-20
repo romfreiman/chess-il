@@ -181,7 +181,7 @@ export function TournamentList({ tournaments }: TournamentListProps) {
             <button
               onClick={() => setCurrentPage((p) => p - 1)}
               disabled={currentPage === 1}
-              className="text-sm text-primary hover:underline disabled:text-gray-400 disabled:no-underline disabled:cursor-not-allowed"
+              className="text-sm text-primary hover:underline disabled:text-gray-400 dark:disabled:text-gray-500 disabled:no-underline disabled:cursor-not-allowed"
             >
               הקודם
             </button>
@@ -191,7 +191,7 @@ export function TournamentList({ tournaments }: TournamentListProps) {
             <button
               onClick={() => setCurrentPage((p) => p + 1)}
               disabled={currentPage === totalPages}
-              className="text-sm text-primary hover:underline disabled:text-gray-400 disabled:no-underline disabled:cursor-not-allowed"
+              className="text-sm text-primary hover:underline disabled:text-gray-400 dark:disabled:text-gray-500 disabled:no-underline disabled:cursor-not-allowed"
             >
               הבא
             </button>
@@ -242,7 +242,7 @@ export function TournamentList({ tournaments }: TournamentListProps) {
             <button
               onClick={() => setCurrentPage((p) => p - 1)}
               disabled={currentPage === 1}
-              className="text-sm text-primary hover:underline disabled:text-gray-400 disabled:no-underline disabled:cursor-not-allowed"
+              className="text-sm text-primary hover:underline disabled:text-gray-400 dark:disabled:text-gray-500 disabled:no-underline disabled:cursor-not-allowed"
             >
               הקודם
             </button>
@@ -252,7 +252,7 @@ export function TournamentList({ tournaments }: TournamentListProps) {
             <button
               onClick={() => setCurrentPage((p) => p + 1)}
               disabled={currentPage === totalPages}
-              className="text-sm text-primary hover:underline disabled:text-gray-400 disabled:no-underline disabled:cursor-not-allowed"
+              className="text-sm text-primary hover:underline disabled:text-gray-400 dark:disabled:text-gray-500 disabled:no-underline disabled:cursor-not-allowed"
             >
               הבא
             </button>
