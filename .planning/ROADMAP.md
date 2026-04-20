@@ -52,7 +52,7 @@ Plans:
 Plans:
 - [x] 02-01-PLAN.md — Scaffold Vite + React + Tailwind frontend, app shell, routing, navbar, dark mode, test infra
 - [x] 02-02-PLAN.md — Hero search with validation, recent suggestions, player cards, grid, empty state, HomePage
-- [ ] 02-03-PLAN.md — UAT gap closure: dark mode icon contrast fix and search validation message
+- [x] 02-03-PLAN.md — UAT gap closure: dark mode icon contrast fix and search validation message
 
 ### Phase 3: Player Dashboard
 **Goal**: Users see a complete, data-rich dashboard for any player with header info, key metrics, rating chart, tournament table, and win/loss breakdown
