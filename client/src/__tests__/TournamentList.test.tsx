@@ -25,8 +25,9 @@ describe('TournamentList', () => {
     const user = userEvent.setup();
     render(<TournamentList tournaments={mockTournaments} />);
 
-    const nextButton = screen.getByRole('button', { name: /הבא/ });
-    await user.click(nextButton);
+    // Both desktop and mobile render pagination; pick the first
+    const nextButtons = screen.getAllByRole('button', { name: /הבא/ });
+    await user.click(nextButtons[0]);
 
     // 11th tournament should now be visible
     expect(screen.getAllByText(mockTournaments[10].tournamentName).length).toBeGreaterThanOrEqual(1);
@@ -36,11 +37,11 @@ describe('TournamentList', () => {
     const user = userEvent.setup();
     render(<TournamentList tournaments={mockTournaments} />);
 
-    const nextButton = screen.getByRole('button', { name: /הבא/ });
-    await user.click(nextButton);
+    const nextButtons = screen.getAllByRole('button', { name: /הבא/ });
+    await user.click(nextButtons[0]);
 
-    const prevButton = screen.getByRole('button', { name: /הקודם/ });
-    await user.click(prevButton);
+    const prevButtons = screen.getAllByRole('button', { name: /הקודם/ });
+    await user.click(prevButtons[0]);
 
     // First tournament should be visible again
     expect(screen.getAllByText(mockTournaments[0].tournamentName).length).toBeGreaterThanOrEqual(1);
@@ -48,24 +49,25 @@ describe('TournamentList', () => {
 
   it('"הקודם" button is disabled on first page', () => {
     render(<TournamentList tournaments={mockTournaments} />);
-    const prevButton = screen.getByRole('button', { name: /הקודם/ });
-    expect(prevButton).toBeDisabled();
+    const prevButtons = screen.getAllByRole('button', { name: /הקודם/ });
+    expect(prevButtons[0]).toBeDisabled();
   });
 
   it('"הבא" button is disabled on last page', async () => {
     const user = userEvent.setup();
     render(<TournamentList tournaments={mockTournaments} />);
 
-    const nextButton = screen.getByRole('button', { name: /הבא/ });
-    await user.click(nextButton);
+    const nextButtons = screen.getAllByRole('button', { name: /הבא/ });
+    await user.click(nextButtons[0]);
 
     // Now on last page (2 of 2), next should be disabled
-    expect(nextButton).toBeDisabled();
+    expect(nextButtons[0]).toBeDisabled();
   });
 
   it('page indicator shows "עמוד 1 מתוך 2" format', () => {
     render(<TournamentList tournaments={mockTournaments} />);
-    expect(screen.getByText('עמוד 1 מתוך 2')).toBeInTheDocument();
+    // Both desktop and mobile show page indicator
+    expect(screen.getAllByText('עמוד 1 מתוך 2').length).toBeGreaterThanOrEqual(1);
   });
 
   it('tournament name renders as a link with target="_blank"', () => {
@@ -162,9 +164,9 @@ describe('TournamentList', () => {
     const { rerender } = render(<TournamentList tournaments={mockTournaments} />);
 
     // Navigate to page 2
-    const nextButton = screen.getByRole('button', { name: /הבא/ });
-    await user.click(nextButton);
-    expect(screen.getByText('עמוד 2 מתוך 2')).toBeInTheDocument();
+    const nextButtons = screen.getAllByRole('button', { name: /הבא/ });
+    await user.click(nextButtons[0]);
+    expect(screen.getAllByText('עמוד 2 מתוך 2').length).toBeGreaterThanOrEqual(1);
 
     // Change tournaments prop
     const newTournaments = mockTournaments.slice(0, 5);
