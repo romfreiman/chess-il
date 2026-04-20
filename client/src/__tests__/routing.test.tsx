@@ -26,7 +26,8 @@ describe('Routing', () => {
   it('renders HomePage content at "/"', async () => {
     renderRoute('/');
     await waitFor(() => {
-      expect(screen.getByText('דף הבית')).toBeInTheDocument();
+      // HomePage now shows empty state prompt instead of placeholder
+      expect(screen.getByText('חפשו שחקן כדי להתחיל')).toBeInTheDocument();
     });
   });
 
@@ -47,7 +48,8 @@ describe('Routing', () => {
   it('navigates between routes via links', async () => {
     renderRoute('/');
     await waitFor(() => {
-      expect(screen.getByText('דף הבית')).toBeInTheDocument();
+      // HomePage now shows empty state prompt instead of placeholder
+      expect(screen.getByText('חפשו שחקן כדי להתחיל')).toBeInTheDocument();
     });
     // Navbar should be present on all routes
     expect(screen.getByText('Chess IL')).toBeInTheDocument();
