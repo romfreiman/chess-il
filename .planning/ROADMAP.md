@@ -81,12 +81,12 @@ Plans:
   3. When a player is not found or scraping fails, a friendly Hebrew error message is displayed
   4. User can save a player from the dashboard and see them listed on the home page with name, rating, and a remove button
   5. Attempting to save more than 10 players shows a limit message; saved players persist across browser sessions via localStorage
-**Plans**: TBD
+**Plans**: 2 plans
 **UI hint**: yes
 
 Plans:
-- [ ] 04-01: TBD
-- [ ] 04-02: TBD
+- [ ] 04-01-PLAN.md — Skeleton loaders, ErrorState component, dark mode audit, PlayerPage loading/error wiring
+- [ ] 04-02-PLAN.md — useSavedPlayers hook, SavedPlayersContext, save/remove buttons, Toast, home page wiring
 
 ### Phase 5: Player Comparison
 **Goal**: Users can compare two players side by side with relative metrics, overlaid rating histories, and shared tournament detection
@@ -113,5 +113,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 1. Data Pipeline | 1/3 | In Progress | - |
 | 2. Home & App Shell | 2/3 | In Progress |  |
 | 3. Player Dashboard | 0/3 | Planned    |  |
-| 4. Polish & Persistence | 0/0 | Not started | - |
+| 4. Polish & Persistence | 0/2 | Planned | - |
 | 5. Player Comparison | 0/0 | Not started | - |
