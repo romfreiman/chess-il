@@ -1,9 +1,9 @@
 ---
-status: diagnosed
+status: resolved
 phase: 02-home-app-shell
 source: [02-01-SUMMARY.md, 02-02-SUMMARY.md]
 started: 2026-04-20T11:30:00Z
-updated: 2026-04-20T11:45:00Z
+updated: 2026-04-20T15:10:00Z
 ---
 
 ## Current Test
@@ -66,7 +66,7 @@ blocked: 0
 ## Gaps
 
 - truth: "Icons in dark mode should be clearly visible with sufficient contrast"
-  status: failed
+  status: resolved
   reason: "User reported: the icons on the dark theme are too dark and almost invisible"
   severity: major
   test: 5
@@ -83,7 +83,7 @@ blocked: 0
     - "Add text-gray-600 dark:text-gray-300 to ThemeToggle button"
     - "Add dark:text-gray-500 to EmptyState Search icon"
 - truth: "Non-numeric input should show a validation message to the user"
-  status: failed
+  status: resolved
   reason: "User reported: better to add alert that only numeric number is accepted"
   severity: minor
   test: 6
