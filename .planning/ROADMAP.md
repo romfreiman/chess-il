@@ -67,8 +67,8 @@ Plans:
 **Plans**: 3 plans
 
 Plans:
-- [ ] 03-01-PLAN.md — Install Recharts, usePlayer hook, mock fixtures, PlayerHeader and MetricCards with tests
-- [ ] 03-02-PLAN.md — RatingChart (line/bar toggle, gradient, tooltips) and WinLossChart (donut) with tests
+- [x] 03-01-PLAN.md — Install Recharts, usePlayer hook, mock fixtures, PlayerHeader and MetricCards with tests
+- [x] 03-02-PLAN.md — RatingChart (line/bar toggle, gradient, tooltips) and WinLossChart (donut) with tests
 - [ ] 03-03-PLAN.md — TournamentList (responsive table/cards, pagination, badges) and PlayerPage wiring
 
 ### Phase 4: Polish & Persistence
@@ -112,6 +112,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Data Pipeline | 1/3 | In Progress | - |
 | 2. Home & App Shell | 2/3 | In Progress |  |
-| 3. Player Dashboard | 0/3 | Planned | - |
+| 3. Player Dashboard | 0/3 | Planned    |  |
 | 4. Polish & Persistence | 0/0 | Not started | - |
 | 5. Player Comparison | 0/0 | Not started | - |

@@ -31,23 +31,23 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Search
 
-- [ ] **SRCH-01**: Home page displays a search input for entering player ID
-- [ ] **SRCH-02**: Submitting a player ID navigates to the player dashboard page
-- [ ] **SRCH-03**: Home page shows list of saved players as clickable cards with name, rating, and remove button
+- [x] **SRCH-01**: Home page displays a search input for entering player ID
+- [x] **SRCH-02**: Submitting a player ID navigates to the player dashboard page
+- [x] **SRCH-03**: Home page shows list of saved players as clickable cards with name, rating, and remove button
 
 ### Dashboard
 
-- [ ] **DASH-01**: Player header card shows name, club, birth year, grade badge, and FIDE link (if exists)
-- [ ] **DASH-02**: Metrics row displays 4 cards: current rating (with expected), national rank, tournament count, cumulative rating change
-- [ ] **DASH-03**: Rating history line chart shows rating over time with month labels
-- [ ] **DASH-04**: User can toggle between line chart and bar chart for rating history
-- [ ] **DASH-05**: Tournament table shows last 10 tournaments with date, name, result chips (W/D/L), and rating change
-- [ ] **DASH-06**: Tournament table supports pagination (10 per page with prev/next)
-- [ ] **DASH-07**: Rating change is color-coded: green for positive, red for negative
-- [ ] **DASH-08**: Pending tournaments show "בהמתנה" amber badge instead of rating change
-- [ ] **DASH-09**: Most recent tournament shows "חדש" badge
-- [ ] **DASH-10**: Clicking tournament name opens chess.org.il tournament page in new tab
-- [ ] **DASH-11**: Win/Draw/Loss donut chart shows aggregate W/D/L across all tournaments with percentages
+- [x] **DASH-01**: Player header card shows name, club, birth year, grade badge, and FIDE link (if exists)
+- [x] **DASH-02**: Metrics row displays 4 cards: current rating (with expected), national rank, tournament count, cumulative rating change
+- [x] **DASH-03**: Rating history line chart shows rating over time with month labels
+- [x] **DASH-04**: User can toggle between line chart and bar chart for rating history
+- [x] **DASH-05**: Tournament table shows last 10 tournaments with date, name, result chips (W/D/L), and rating change
+- [x] **DASH-06**: Tournament table supports pagination (10 per page with prev/next)
+- [x] **DASH-07**: Rating change is color-coded: green for positive, red for negative
+- [x] **DASH-08**: Pending tournaments show "בהמתנה" amber badge instead of rating change
+- [x] **DASH-09**: Most recent tournament shows "חדש" badge
+- [x] **DASH-10**: Clicking tournament name opens chess.org.il tournament page in new tab
+- [x] **DASH-11**: Win/Draw/Loss donut chart shows aggregate W/D/L across all tournaments with percentages
 
 ### Compare
 
@@ -59,13 +59,13 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### UI/UX
 
-- [ ] **UI-01**: Entire app uses RTL direction (`dir="rtl"`) with Hebrew labels
-- [ ] **UI-02**: All layouts work on 375px wide screens (mobile-first)
+- [x] **UI-01**: Entire app uses RTL direction (`dir="rtl"`) with Hebrew labels
+- [x] **UI-02**: All layouts work on 375px wide screens (mobile-first)
 - [ ] **UI-03**: Full dark mode support via Tailwind dark: classes
-- [ ] **UI-04**: Color scheme uses Blue (#378ADD) primary, Green (#639922) positive, Red (#E24B4A) negative, Amber (#EF9F27) pending
+- [x] **UI-04**: Color scheme uses Blue (#378ADD) primary, Green (#639922) positive, Red (#E24B4A) negative, Amber (#EF9F27) pending
 - [ ] **UI-05**: Skeleton loaders display while data is being fetched
 - [ ] **UI-06**: Friendly Hebrew error messages display when player not found or scrape fails
-- [ ] **UI-07**: Top navbar with app name "♟ Chess IL", home link, compare link (if 2+ saved), dark mode toggle
+- [x] **UI-07**: Top navbar with app name "♟ Chess IL", home link, compare link (if 2+ saved), dark mode toggle
 
 ### Persistence
 
@@ -75,8 +75,8 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Navigation
 
-- [ ] **NAV-01**: App has client-side routing with pages: `/`, `/player/:id`, `/compare?a=ID1&b=ID2`
-- [ ] **NAV-02**: Navigation works with browser back/forward buttons
+- [x] **NAV-01**: App has client-side routing with pages: `/`, `/player/:id`, `/compare?a=ID1&b=ID2`
+- [x] **NAV-02**: Navigation works with browser back/forward buttons
 
 ## v2 Requirements
 
@@ -126,26 +126,26 @@ Which phases cover which requirements. Updated during roadmap creation.
 | API-01 | Phase 1 | Pending |
 | API-02 | Phase 1 | Pending |
 | API-03 | Phase 1 | Pending |
-| SRCH-01 | Phase 2 | Pending |
-| SRCH-02 | Phase 2 | Pending |
-| SRCH-03 | Phase 2 | Pending |
-| NAV-01 | Phase 2 | Pending |
-| NAV-02 | Phase 2 | Pending |
-| UI-01 | Phase 2 | Pending |
-| UI-02 | Phase 2 | Pending |
-| UI-04 | Phase 2 | Pending |
-| UI-07 | Phase 2 | Pending |
-| DASH-01 | Phase 3 | Pending |
-| DASH-02 | Phase 3 | Pending |
-| DASH-03 | Phase 3 | Pending |
-| DASH-04 | Phase 3 | Pending |
-| DASH-05 | Phase 3 | Pending |
-| DASH-06 | Phase 3 | Pending |
-| DASH-07 | Phase 3 | Pending |
-| DASH-08 | Phase 3 | Pending |
-| DASH-09 | Phase 3 | Pending |
-| DASH-10 | Phase 3 | Pending |
-| DASH-11 | Phase 3 | Pending |
+| SRCH-01 | Phase 2 | Complete |
+| SRCH-02 | Phase 2 | Complete |
+| SRCH-03 | Phase 2 | Complete |
+| NAV-01 | Phase 2 | Complete |
+| NAV-02 | Phase 2 | Complete |
+| UI-01 | Phase 2 | Complete |
+| UI-02 | Phase 2 | Complete |
+| UI-04 | Phase 2 | Complete |
+| UI-07 | Phase 2 | Complete |
+| DASH-01 | Phase 3 | Complete |
+| DASH-02 | Phase 3 | Complete |
+| DASH-03 | Phase 3 | Complete |
+| DASH-04 | Phase 3 | Complete |
+| DASH-05 | Phase 3 | Complete |
+| DASH-06 | Phase 3 | Complete |
+| DASH-07 | Phase 3 | Complete |
+| DASH-08 | Phase 3 | Complete |
+| DASH-09 | Phase 3 | Complete |
+| DASH-10 | Phase 3 | Complete |
+| DASH-11 | Phase 3 | Complete |
 | UI-03 | Phase 4 | Pending |
 | UI-05 | Phase 4 | Pending |
 | UI-06 | Phase 4 | Pending |
