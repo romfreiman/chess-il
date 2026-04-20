@@ -2,16 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: executing
-stopped_at: "Completed 01-data-pipeline 01-01-PLAN.md"
-last_updated: "2026-04-20T06:50:17Z"
-last_activity: 2026-04-20 -- Plan 01-01 executed (scraper scaffold + tests)
+status: Ready to execute
+stopped_at: Completed 01-data-pipeline 01-01-PLAN.md
+last_updated: "2026-04-20T06:51:50.458Z"
 progress:
   total_phases: 5
   completed_phases: 0
   total_plans: 3
-  completed_plans: 1
-  percent: 33
+  completed_plans: 0
 ---
 
 # Project State
@@ -21,37 +19,35 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-19)
 
 **Core value:** Any user can enter a player ID and instantly see a beautiful, data-rich dashboard of that player's chess rating history, tournament results, and performance stats.
-**Current focus:** Phase 1 - Data Pipeline
+**Current focus:** Phase 01 — data-pipeline
 
 ## Current Position
 
-Phase: 1 of 5 (Data Pipeline)
-Plan: 2 of 3 in current phase
-Status: Executing
-Last activity: 2026-04-20 -- Plan 01-01 executed (scraper scaffold + tests)
-
-Progress: [###.......] 33%
+Phase: 01 (data-pipeline) — EXECUTING
+Plan: 3 of 3
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 1
-- Average duration: 7min
-- Total execution time: 0.12 hours
+- Total plans completed: 0
+- Average duration: -
+- Total execution time: 0 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-data-pipeline | 1 | 7min | 7min |
+| - | - | - | - |
 
 **Recent Trend:**
 
-- Last 5 plans: 7min
-- Trend: baseline
+- Last 5 plans: -
+- Trend: -
 
 *Updated after each plan completion*
+| Phase 01-data-pipeline P02 | 3min | 1 tasks | 4 files |
+| Phase 01-data-pipeline P01 | 7min | 2 tasks | 15 files |
 
 ## Accumulated Context
 
@@ -63,6 +59,8 @@ Recent decisions affecting current work:
 - Cheerio over Puppeteer for scraping (player pages load via GET, no JS rendering needed)
 - Supabase for caching (managed Postgres with JSONB support)
 - localStorage for saved players (no auth complexity for MVP)
+- [Phase 01-data-pipeline]: Module-scope Supabase client initialization for serverless warm invocation reuse (D-15)
+- [Phase 01-data-pipeline]: vi.hoisted() pattern for Supabase mock in vitest tests
 - [Phase 01-data-pipeline]: Used domhandler Element type for Cheerio 1.x TypeScript compatibility
 - [Phase 01-data-pipeline]: Content-based selectors with Hebrew label matching established as primary scraping pattern
 - [Phase 01-data-pipeline]: children() selector for tournament table to avoid matching parent FormView wrapper
@@ -78,6 +76,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-20T06:50:17Z
+Last session: 2026-04-20T06:51:50.454Z
 Stopped at: Completed 01-data-pipeline 01-01-PLAN.md
-Resume file: .planning/phases/01-data-pipeline/01-02-PLAN.md
+Resume file: None

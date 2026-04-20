@@ -17,11 +17,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Caching
 
-- [ ] **CACH-01**: Scraped player data is stored in Supabase `players` table as JSONB
-- [ ] **CACH-02**: Cached data is returned if updated within last 24 hours
-- [ ] **CACH-03**: Stale or missing cache triggers a fresh scrape
-- [ ] **CACH-04**: If scraping fails, stale cached data is returned with `stale: true` flag
-- [ ] **CACH-05**: User can force re-scrape ignoring cache via refresh button
+- [x] **CACH-01**: Scraped player data is stored in Supabase `players` table as JSONB
+- [x] **CACH-02**: Cached data is returned if updated within last 24 hours
+- [x] **CACH-03**: Stale or missing cache triggers a fresh scrape
+- [x] **CACH-04**: If scraping fails, stale cached data is returned with `stale: true` flag
+- [x] **CACH-05**: User can force re-scrape ignoring cache via refresh button
 
 ### API
 
@@ -118,11 +118,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SCRP-03 | Phase 1 | Complete |
 | SCRP-04 | Phase 1 | Complete |
 | SCRP-05 | Phase 1 | Complete |
-| CACH-01 | Phase 1 | Pending |
-| CACH-02 | Phase 1 | Pending |
-| CACH-03 | Phase 1 | Pending |
-| CACH-04 | Phase 1 | Pending |
-| CACH-05 | Phase 1 | Pending |
+| CACH-01 | Phase 1 | Complete |
+| CACH-02 | Phase 1 | Complete |
+| CACH-03 | Phase 1 | Complete |
+| CACH-04 | Phase 1 | Complete |
+| CACH-05 | Phase 1 | Complete |
 | API-01 | Phase 1 | Pending |
 | API-02 | Phase 1 | Pending |
 | API-03 | Phase 1 | Pending |
