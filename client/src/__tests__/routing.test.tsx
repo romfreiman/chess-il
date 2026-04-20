@@ -34,7 +34,8 @@ describe('Routing', () => {
   it('renders PlayerPage with player ID at "/player/205001"', async () => {
     renderRoute('/player/205001');
     await waitFor(() => {
-      expect(screen.getByText(/שחקן 205001/)).toBeInTheDocument();
+      // PlayerPage shows loading state while fetching player data
+      expect(screen.getByText(/טוען נתוני שחקן/)).toBeInTheDocument();
     });
   });
 

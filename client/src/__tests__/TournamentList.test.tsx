@@ -2,7 +2,6 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { TournamentList } from '../components/dashboard/TournamentList';
 import { mockTournaments } from '../test/fixtures/playerData';
-import type { TournamentEntry } from '@shared/types';
 
 describe('TournamentList', () => {
   it('renders section heading "תוצאות טורנירים"', () => {
