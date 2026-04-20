@@ -9,11 +9,11 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Scraping
 
-- [ ] **SCRP-01**: Backend can fetch HTML from chess.org.il player page given a player ID
-- [ ] **SCRP-02**: Scraper extracts player info fields (name, ID, FIDE ID, club, birth year, rating, expected rating, rank, grade, license expiry)
-- [ ] **SCRP-03**: Scraper extracts tournament history rows (date, update date, tournament name/URL, games, points, performance, result, W/D/L, rating change, pending status)
-- [ ] **SCRP-04**: Scraper sets custom User-Agent header (`ChessIL-Dashboard/1.0`)
-- [ ] **SCRP-05**: Scraper returns structured JSON matching defined TypeScript types
+- [x] **SCRP-01**: Backend can fetch HTML from chess.org.il player page given a player ID
+- [x] **SCRP-02**: Scraper extracts player info fields (name, ID, FIDE ID, club, birth year, rating, expected rating, rank, grade, license expiry)
+- [x] **SCRP-03**: Scraper extracts tournament history rows (date, update date, tournament name/URL, games, points, performance, result, W/D/L, rating change, pending status)
+- [x] **SCRP-04**: Scraper sets custom User-Agent header (`ChessIL-Dashboard/1.0`)
+- [x] **SCRP-05**: Scraper returns structured JSON matching defined TypeScript types
 
 ### Caching
 
@@ -113,11 +113,11 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SCRP-01 | Phase 1 | Pending |
-| SCRP-02 | Phase 1 | Pending |
-| SCRP-03 | Phase 1 | Pending |
-| SCRP-04 | Phase 1 | Pending |
-| SCRP-05 | Phase 1 | Pending |
+| SCRP-01 | Phase 1 | Complete |
+| SCRP-02 | Phase 1 | Complete |
+| SCRP-03 | Phase 1 | Complete |
+| SCRP-04 | Phase 1 | Complete |
+| SCRP-05 | Phase 1 | Complete |
 | CACH-01 | Phase 1 | Pending |
 | CACH-02 | Phase 1 | Pending |
 | CACH-03 | Phase 1 | Pending |
