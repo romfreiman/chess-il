@@ -43,7 +43,7 @@ describe('MetricCards', () => {
   it('cumulative change positive value has text-positive class', () => {
     renderMetricCards();
     const changeEl = screen.getByText('+62');
-    expect(changeEl.closest('[class*="text-positive"]') || changeEl.className).toContain('text-positive');
+    expect(changeEl).toHaveClass('text-positive');
   });
 
   it('cumulative change negative value has text-negative class', () => {
@@ -66,7 +66,7 @@ describe('MetricCards', () => {
     ];
     renderMetricCards(undefined, negTournaments);
     const changeEl = screen.getByText('-25');
-    expect(changeEl.closest('[class*="text-negative"]') || changeEl.className).toContain('text-negative');
+    expect(changeEl).toHaveClass('text-negative');
   });
 
   it('renders "\u05D3\u05D9\u05E8\u05D5\u05D2 \u05E0\u05D5\u05DB\u05D7\u05D9" label', () => {

@@ -1,0 +1,89 @@
+import { TrendingUp, TrendingDown, Medal, Calendar, ArrowUpDown } from 'lucide-react';
+import type { PlayerInfo, TournamentEntry } from '@shared/types';
+
+interface MetricCardsProps {
+  player: PlayerInfo;
+  tournaments: TournamentEntry[];
+}
+
+export function MetricCards({ player, tournaments }: MetricCardsProps) {
+  // Calculate cumulative change from non-pending tournaments (D-14)
+  const cumulativeChange = tournaments
+    .filter((t) => !t.isPending)
+    .reduce((sum, t) => sum + t.ratingChange, 0);
+
+  const formattedChange =
+    cumulativeChange > 0
+      ? `+${cumulativeChange}`
+      : cumulativeChange < 0
+        ? String(cumulativeChange)
+        : '0';
+
+  const changeColorClass =
+    cumulativeChange > 0
+      ? 'text-positive'
+      : cumulativeChange < 0
+        ? 'text-negative'
+        : 'text-gray-500 dark:text-gray-400';
+
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      {/* Current Rating */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4">
+        <TrendingUp className="w-5 h-5 text-primary" />
+        <div className="text-2xl font-bold text-gray-900 dark:text-gray-50 mt-2">
+          {player.rating}
+        </div>
+        {player.expectedRating !== null && (
+          <div className="text-sm text-gray-500 dark:text-gray-400">
+            {'\u05E6\u05E4\u05D5\u05D9: '}{player.expectedRating}
+          </div>
+        )}
+        <div className="text-sm text-gray-500 dark:text-gray-400">
+          {'\u05D3\u05D9\u05E8\u05D5\u05D2 \u05E0\u05D5\u05DB\u05D7\u05D9'}
+        </div>
+      </div>
+
+      {/* National Rank */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4">
+        <Medal className="w-5 h-5 text-primary" />
+        <div className="text-2xl font-bold text-gray-900 dark:text-gray-50 mt-2">
+          {player.rank !== null ? `#${player.rank}` : '\u2014'}
+        </div>
+        <div className="text-sm text-gray-500 dark:text-gray-400">
+          {'\u05D3\u05D9\u05E8\u05D5\u05D2 \u05D0\u05E8\u05E6\u05D9'}
+        </div>
+      </div>
+
+      {/* Tournament Count */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4">
+        <Calendar className="w-5 h-5 text-primary" />
+        <div className="text-2xl font-bold text-gray-900 dark:text-gray-50 mt-2">
+          {tournaments.length}
+        </div>
+        <div className="text-sm text-gray-500 dark:text-gray-400">
+          {'\u05D8\u05D5\u05E8\u05E0\u05D9\u05E8\u05D9\u05DD'}
+        </div>
+      </div>
+
+      {/* Cumulative Change */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4">
+        <ArrowUpDown className="w-5 h-5 text-primary" />
+        <div className="flex items-center gap-1 mt-2">
+          <span className={`text-2xl font-bold ${changeColorClass}`}>
+            {formattedChange}
+          </span>
+          {cumulativeChange > 0 && (
+            <TrendingUp className="w-3.5 h-3.5 text-positive" />
+          )}
+          {cumulativeChange < 0 && (
+            <TrendingDown className="w-3.5 h-3.5 text-negative" />
+          )}
+        </div>
+        <div className="text-sm text-gray-500 dark:text-gray-400">
+          {'\u05E9\u05D9\u05E0\u05D5\u05D9 \u05DE\u05E6\u05D8\u05D1\u05E8'}
+        </div>
+      </div>
+    </div>
+  );
+}
