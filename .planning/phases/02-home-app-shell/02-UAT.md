@@ -1,5 +1,5 @@
 ---
-status: complete
+status: diagnosed
 phase: 02-home-app-shell
 source: [02-01-SUMMARY.md, 02-02-SUMMARY.md]
 started: 2026-04-20T11:30:00Z
@@ -70,12 +70,27 @@ blocked: 0
   reason: "User reported: the icons on the dark theme are too dark and almost invisible"
   severity: major
   test: 5
-  artifacts: []
-  missing: []
+  root_cause: "Lucide-react icons inherit currentColor but Navbar links and ThemeToggle button have no explicit text color or dark: variant. Icons render in inherited dark/black color, invisible on dark:bg-gray-800."
+  artifacts:
+    - path: "client/src/components/layout/Navbar.tsx"
+      issue: "Home and BarChart3 icon Links missing text-gray-600 dark:text-gray-300"
+    - path: "client/src/components/layout/ThemeToggle.tsx"
+      issue: "Button missing text-gray-600 dark:text-gray-300"
+    - path: "client/src/components/players/EmptyState.tsx"
+      issue: "Search icon text-gray-400 needs dark:text-gray-500 for better visibility"
+  missing:
+    - "Add text-gray-600 dark:text-gray-300 to Navbar icon Links"
+    - "Add text-gray-600 dark:text-gray-300 to ThemeToggle button"
+    - "Add dark:text-gray-500 to EmptyState Search icon"
 - truth: "Non-numeric input should show a validation message to the user"
   status: failed
   reason: "User reported: better to add alert that only numeric number is accepted"
   severity: minor
   test: 6
-  artifacts: []
-  missing: []
+  root_cause: "HeroSearch validation is gate-based only (disabled button). No visible error message when user types non-numeric characters. Input accepts any character but provides zero feedback about why button stays disabled."
+  artifacts:
+    - path: "client/src/components/search/HeroSearch.tsx"
+      issue: "Missing inline validation error message for non-numeric input"
+  missing:
+    - "Add hasNonNumeric derived state: query.length > 0 && !/^\\d+$/.test(query)"
+    - "Add Hebrew error message below form: מספר שחקן חייב להכיל ספרות בלבד"
