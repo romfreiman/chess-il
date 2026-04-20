@@ -64,12 +64,12 @@ Plans:
   3. Rating history chart renders with data points over time, and user can toggle between line and bar views
   4. Tournament table shows paginated results (10 per page) with color-coded rating changes, pending badges, and clickable tournament links
   5. Win/Draw/Loss donut chart displays aggregate percentages across all tournaments
-**Plans**: TBD
-**UI hint**: yes
+**Plans**: 3 plans
 
 Plans:
-- [ ] 03-01: TBD
-- [ ] 03-02: TBD
+- [ ] 03-01-PLAN.md — Install Recharts, usePlayer hook, mock fixtures, PlayerHeader and MetricCards with tests
+- [ ] 03-02-PLAN.md — RatingChart (line/bar toggle, gradient, tooltips) and WinLossChart (donut) with tests
+- [ ] 03-03-PLAN.md — TournamentList (responsive table/cards, pagination, badges) and PlayerPage wiring
 
 ### Phase 4: Polish & Persistence
 **Goal**: The app feels polished with dark mode, loading feedback, graceful error handling, and the ability to save and manage followed players
@@ -112,6 +112,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 |-------|----------------|--------|-----------|
 | 1. Data Pipeline | 1/3 | In Progress | - |
 | 2. Home & App Shell | 2/3 | In Progress |  |
-| 3. Player Dashboard | 0/0 | Not started | - |
+| 3. Player Dashboard | 0/3 | Planned | - |
 | 4. Polish & Persistence | 0/0 | Not started | - |
 | 5. Player Comparison | 0/0 | Not started | - |
