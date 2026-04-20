@@ -12,19 +12,18 @@ Any user can enter a player ID and instantly see a beautiful, data-rich dashboar
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] Home page with player ID search and saved players list — Validated in Phase 2: Home & App Shell
+- [x] RTL Hebrew interface throughout — Validated in Phase 2: Home & App Shell
+- [x] Mobile-first responsive design (375px minimum) — Validated in Phase 2: Home & App Shell
+- [x] Dark mode support — Validated in Phase 2: Home & App Shell
 
 ### Active
 
 - [ ] Scrape chess.org.il player pages and extract structured data (player info + tournament history)
 - [ ] Cache scraped data in Supabase with 24-hour freshness window
 - [ ] Serve player data via REST API (`GET /api/player/:id`)
-- [ ] Home page with player ID search and saved players list
 - [ ] Player dashboard with header card, metrics row, rating chart, tournament table, and win/loss donut
 - [ ] Compare page for side-by-side player comparison
-- [ ] RTL Hebrew interface throughout
-- [ ] Mobile-first responsive design (375px minimum)
-- [ ] Dark mode support
 - [ ] Save/follow players via localStorage (max 10)
 - [ ] Tournament table pagination (10 per page)
 - [ ] Force refresh button to re-scrape ignoring cache
@@ -84,4 +83,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-19 after initialization*
+*Last updated: 2026-04-20 after Phase 2 completion*
