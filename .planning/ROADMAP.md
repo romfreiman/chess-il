@@ -34,8 +34,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 Plans:
 - [x] 01-01-PLAN.md — Project scaffold, shared types, and scraper (fetch + parse + validate) with tests
-- [ ] 01-02-PLAN.md — Supabase caching layer (getCachedPlayer, isStale, upsertPlayer) with tests
-- [ ] 01-03-PLAN.md — Express API route, Netlify Function entry point, full pipeline wiring
+- [x] 01-02-PLAN.md — Supabase caching layer (getCachedPlayer, isStale, upsertPlayer) with tests
+- [x] 01-03-PLAN.md — Express API route, Netlify Function entry point, full pipeline wiring
 
 ### Phase 2: Home & App Shell
 **Goal**: Users can navigate the app, search for a player by ID, and see a properly structured RTL Hebrew interface
