@@ -16,6 +16,8 @@ Any user can enter a player ID and instantly see a beautiful, data-rich dashboar
 - [x] RTL Hebrew interface throughout — Validated in Phase 2: Home & App Shell
 - [x] Mobile-first responsive design (375px minimum) — Validated in Phase 2: Home & App Shell
 - [x] Dark mode support — Validated in Phase 2: Home & App Shell
+- [x] Skeleton loading states and Hebrew error messages — Validated in Phase 4: Polish & Persistence
+- [x] Save/follow players via localStorage (max 10) — Validated in Phase 4: Polish & Persistence
 
 ### Active
 
@@ -24,10 +26,8 @@ Any user can enter a player ID and instantly see a beautiful, data-rich dashboar
 - [ ] Serve player data via REST API (`GET /api/player/:id`)
 - [ ] Player dashboard with header card, metrics row, rating chart, tournament table, and win/loss donut
 - [ ] Compare page for side-by-side player comparison
-- [ ] Save/follow players via localStorage (max 10)
 - [ ] Tournament table pagination (10 per page)
 - [ ] Force refresh button to re-scrape ignoring cache
-- [ ] Skeleton loading states and Hebrew error messages
 - [ ] Stale data fallback when scraping fails
 
 ### Out of Scope
@@ -83,4 +83,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-20 after Phase 3 completion — player dashboard with all data visualization components built*
+*Last updated: 2026-04-20 after Phase 4 completion — dark mode audit, skeleton loaders, error states, and saved players persistence added*
