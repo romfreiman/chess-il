@@ -61,17 +61,17 @@ Requirements for initial release. Each maps to roadmap phases.
 
 - [x] **UI-01**: Entire app uses RTL direction (`dir="rtl"`) with Hebrew labels
 - [x] **UI-02**: All layouts work on 375px wide screens (mobile-first)
-- [ ] **UI-03**: Full dark mode support via Tailwind dark: classes
+- [x] **UI-03**: Full dark mode support via Tailwind dark: classes
 - [x] **UI-04**: Color scheme uses Blue (#378ADD) primary, Green (#639922) positive, Red (#E24B4A) negative, Amber (#EF9F27) pending
-- [ ] **UI-05**: Skeleton loaders display while data is being fetched
-- [ ] **UI-06**: Friendly Hebrew error messages display when player not found or scrape fails
+- [x] **UI-05**: Skeleton loaders display while data is being fetched
+- [x] **UI-06**: Friendly Hebrew error messages display when player not found or scrape fails
 - [x] **UI-07**: Top navbar with app name "♟ Chess IL", home link, compare link (if 2+ saved), dark mode toggle
 
 ### Persistence
 
-- [ ] **PERS-01**: User can save/unsave a player from the dashboard page
-- [ ] **PERS-02**: Saved players stored in localStorage as array of `{id, name, rating}`
-- [ ] **PERS-03**: Maximum 10 saved players enforced
+- [x] **PERS-01**: User can save/unsave a player from the dashboard page
+- [x] **PERS-02**: Saved players stored in localStorage as array of `{id, name, rating}`
+- [x] **PERS-03**: Maximum 10 saved players enforced
 
 ### Navigation
 
@@ -146,12 +146,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DASH-09 | Phase 3 | Complete |
 | DASH-10 | Phase 3 | Complete |
 | DASH-11 | Phase 3 | Complete |
-| UI-03 | Phase 4 | Pending |
-| UI-05 | Phase 4 | Pending |
-| UI-06 | Phase 4 | Pending |
-| PERS-01 | Phase 4 | Pending |
-| PERS-02 | Phase 4 | Pending |
-| PERS-03 | Phase 4 | Pending |
+| UI-03 | Phase 4 | Complete |
+| UI-05 | Phase 4 | Complete |
+| UI-06 | Phase 4 | Complete |
+| PERS-01 | Phase 4 | Complete |
+| PERS-02 | Phase 4 | Complete |
+| PERS-03 | Phase 4 | Complete |
 | COMP-01 | Phase 5 | Pending |
 | COMP-02 | Phase 5 | Pending |
 | COMP-03 | Phase 5 | Pending |

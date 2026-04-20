@@ -1,11 +1,10 @@
 import { HeroSearch } from '../components/search/HeroSearch';
 import { PlayerGrid } from '../components/players/PlayerGrid';
 import { EmptyState } from '../components/players/EmptyState';
-import type { SavedPlayer } from '../lib/types';
+import { useSavedPlayersContext } from '../context/SavedPlayersContext';
 
 export function HomePage() {
-  // Phase 4 will wire this to localStorage via useSavedPlayers hook
-  const savedPlayers: SavedPlayer[] = [];
+  const { savedPlayers, removePlayer } = useSavedPlayersContext();
 
   return (
     <div className="max-w-5xl mx-auto px-4">
@@ -13,7 +12,7 @@ export function HomePage() {
         <HeroSearch />
       </div>
       {savedPlayers.length > 0 ? (
-        <PlayerGrid players={savedPlayers} />
+        <PlayerGrid players={savedPlayers} onRemove={removePlayer} />
       ) : (
         <EmptyState />
       )}

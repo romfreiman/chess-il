@@ -1,23 +1,42 @@
-import { RefreshCw, ExternalLink } from 'lucide-react';
+import { RefreshCw, ExternalLink, Bookmark, BookmarkCheck } from 'lucide-react';
 import type { PlayerInfo } from '@shared/types';
 
 interface PlayerHeaderProps {
   player: PlayerInfo;
   onRefresh: () => void;
   isRefreshing?: boolean;
+  isSaved: boolean;
+  isFull: boolean;
+  onSave: () => void;
+  onUnsave: () => void;
 }
 
-export function PlayerHeader({ player, onRefresh, isRefreshing }: PlayerHeaderProps) {
+export function PlayerHeader({ player, onRefresh, isRefreshing, isSaved, isFull, onSave, onUnsave }: PlayerHeaderProps) {
   return (
     <div className="relative bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4 md:p-6">
-      {/* Refresh button - top end corner (RTL-safe) */}
-      <button
-        onClick={onRefresh}
-        aria-label={'\u05E8\u05E2\u05E0\u05DF \u05E0\u05EA\u05D5\u05E0\u05D9\u05DD'}
-        className="absolute top-4 end-4 text-gray-400 hover:text-primary transition-colors"
-      >
-        <RefreshCw className={`w-5 h-5 ${isRefreshing ? 'animate-spin' : ''}`} />
-      </button>
+      {/* Action buttons - top end corner (RTL-safe) */}
+      <div className="absolute top-4 end-4 flex gap-2">
+        <button
+          onClick={isSaved ? onUnsave : onSave}
+          aria-label={isSaved ? 'הסר שמירה' : 'שמור שחקן'}
+          className={
+            isSaved
+              ? 'text-primary transition-colors'
+              : isFull
+                ? 'text-gray-300 dark:text-gray-600 cursor-not-allowed transition-colors'
+                : 'text-gray-400 hover:text-primary transition-colors'
+          }
+        >
+          {isSaved ? <BookmarkCheck className="w-5 h-5" /> : <Bookmark className="w-5 h-5" />}
+        </button>
+        <button
+          onClick={onRefresh}
+          aria-label="רענן נתונים"
+          className="text-gray-400 hover:text-primary transition-colors"
+        >
+          <RefreshCw className={`w-5 h-5 ${isRefreshing ? 'animate-spin' : ''}`} />
+        </button>
+      </div>
 
       {/* Line 1: Name + grade badge */}
       <div className="flex items-center flex-wrap gap-3">
@@ -38,7 +57,7 @@ export function PlayerHeader({ player, onRefresh, isRefreshing }: PlayerHeaderPr
         )}
         {player.birthYear !== null && (
           <span className="text-sm text-gray-500 dark:text-gray-400">
-            {'\u05E9\u05E0\u05EA \u05DC\u05D9\u05D3\u05D4: '}{player.birthYear}
+            שנת לידה: {player.birthYear}
           </span>
         )}
       </div>
