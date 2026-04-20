@@ -74,4 +74,27 @@ describe('HeroSearch', () => {
     const input = screen.getByPlaceholderText('הזינו מספר שחקן');
     expect(input).toHaveAttribute('inputMode', 'numeric');
   });
+
+  it('shows validation error message when input contains non-numeric characters', async () => {
+    const user = userEvent.setup();
+    renderHeroSearch();
+    const input = screen.getByPlaceholderText('הזינו מספר שחקן');
+
+    await user.type(input, 'abc');
+    expect(screen.getByRole('alert')).toHaveTextContent('מספר שחקן חייב להכיל ספרות בלבד');
+  });
+
+  it('does not show validation error when input is empty', () => {
+    renderHeroSearch();
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  });
+
+  it('does not show validation error when input is valid numeric', async () => {
+    const user = userEvent.setup();
+    renderHeroSearch();
+    const input = screen.getByPlaceholderText('הזינו מספר שחקן');
+
+    await user.type(input, '12345');
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  });
 });

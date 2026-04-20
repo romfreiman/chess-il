@@ -12,6 +12,7 @@ export function HeroSearch() {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const isValid = /^\d+$/.test(query) && parseInt(query, 10) > 0;
+  const hasNonNumeric = query.length > 0 && !/^\d+$/.test(query);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -52,6 +53,11 @@ export function HeroSearch() {
           חפש
         </button>
       </form>
+      {hasNonNumeric && (
+        <p className="text-sm text-red-500 dark:text-red-400 mt-2 text-start" role="alert">
+          מספר שחקן חייב להכיל ספרות בלבד
+        </p>
+      )}
       <RecentSuggestions
         suggestions={searches}
         onSelect={handleSelect}
