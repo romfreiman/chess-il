@@ -6,7 +6,16 @@ import type { PlayerInfo } from '@shared/types';
 
 function renderHeader(overrides?: Partial<PlayerInfo>, onRefresh = vi.fn()) {
   const player = { ...mockPlayerInfo, ...overrides };
-  return { onRefresh, ...render(<PlayerHeader player={player} onRefresh={onRefresh} />) };
+  return { onRefresh, ...render(
+    <PlayerHeader
+      player={player}
+      onRefresh={onRefresh}
+      isSaved={false}
+      isFull={false}
+      onSave={vi.fn()}
+      onUnsave={vi.fn()}
+    />
+  ) };
 }
 
 describe('PlayerHeader', () => {

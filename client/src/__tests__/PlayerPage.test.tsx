@@ -8,7 +8,12 @@ import { mockApiResponse } from '../test/fixtures/playerData';
 vi.mock('../hooks/usePlayer');
 import { usePlayer } from '../hooks/usePlayer';
 
+// Mock SavedPlayersContext
+vi.mock('../context/SavedPlayersContext');
+import { useSavedPlayersContext } from '../context/SavedPlayersContext';
+
 const mockUsePlayer = usePlayer as Mock;
+const mockSavedPlayersContext = useSavedPlayersContext as Mock;
 
 function renderPlayerPage(id = '205001') {
   const router = createMemoryRouter(
@@ -21,6 +26,13 @@ function renderPlayerPage(id = '205001') {
 describe('PlayerPage', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    mockSavedPlayersContext.mockReturnValue({
+      savedPlayers: [],
+      savePlayer: vi.fn(),
+      removePlayer: vi.fn(),
+      isSaved: vi.fn().mockReturnValue(false),
+      isFull: false,
+    });
   });
 
   it('shows loading message while data is loading', () => {

@@ -1,12 +1,13 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { createMemoryRouter, RouterProvider } from 'react-router-dom';
+import { vi } from 'vitest';
 import { EmptyState } from '../components/players/EmptyState';
 import { PlayerGrid } from '../components/players/PlayerGrid';
 import type { SavedPlayer } from '../lib/types';
 
 const mockPlayers: SavedPlayer[] = [
-  { id: 205001, name: 'אנדי פריימן', rating: 1500, club: 'חיפה' },
-  { id: 210498, name: 'לני פריימן', rating: 1200, club: null },
+  { id: 205001, name: 'אנדי פריימן', rating: 1500, club: 'חיפה', savedAt: '2026-01-01T00:00:00Z' },
+  { id: 210498, name: 'לני פריימן', rating: 1200, club: null, savedAt: '2026-01-02T00:00:00Z' },
 ];
 
 function renderWithRouter(ui: React.ReactElement) {
@@ -68,5 +69,28 @@ describe('PlayerGrid', () => {
   it('renders section heading "שחקנים שמורים"', () => {
     renderWithRouter(<PlayerGrid players={mockPlayers} />);
     expect(screen.getByText('שחקנים שמורים')).toBeInTheDocument();
+  });
+
+  it('renders remove button when onRemove is provided', () => {
+    renderWithRouter(<PlayerGrid players={mockPlayers} onRemove={vi.fn()} />);
+    const removeButtons = screen.getAllByLabelText('הסר שחקן');
+    expect(removeButtons).toHaveLength(2);
+  });
+
+  it('calls onRemove with player id when remove button clicked', () => {
+    const onRemove = vi.fn();
+    renderWithRouter(<PlayerGrid players={mockPlayers} onRemove={onRemove} />);
+    const removeButtons = screen.getAllByLabelText('הסר שחקן');
+    fireEvent.click(removeButtons[0]);
+    expect(onRemove).toHaveBeenCalledWith(205001);
+  });
+
+  it('remove button click does not navigate (stopPropagation)', () => {
+    const onRemove = vi.fn();
+    renderWithRouter(<PlayerGrid players={mockPlayers} onRemove={onRemove} />);
+    const removeButtons = screen.getAllByLabelText('הסר שחקן');
+    fireEvent.click(removeButtons[0]);
+    // If navigation occurred, the component would unmount - check we can still find elements
+    expect(screen.getByText('אנדי פריימן')).toBeInTheDocument();
   });
 });
