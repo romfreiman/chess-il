@@ -42,7 +42,7 @@ export function HeroSearch() {
             setTimeout(() => setShowSuggestions(false), 150);
           }}
           placeholder="הזינו מספר שחקן"
-          className="flex-1 px-3 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-lg text-start focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+          className="flex-1 px-3 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-400 text-lg text-start focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
         />
         <button
           type="submit"
