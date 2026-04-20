@@ -1,14 +1,17 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
-// Mock @supabase/supabase-js before importing the module under test
-const mockSingle = vi.fn();
-const mockEq = vi.fn(() => ({ single: mockSingle }));
-const mockSelect = vi.fn(() => ({ eq: mockEq }));
-const mockUpsert = vi.fn();
-const mockFrom = vi.fn((table: string) => ({
-  select: mockSelect,
-  upsert: mockUpsert,
-}));
+// Use vi.hoisted to define mocks that are available when vi.mock factory runs
+const { mockSingle, mockEq, mockSelect, mockUpsert, mockFrom } = vi.hoisted(() => {
+  const mockSingle = vi.fn();
+  const mockEq = vi.fn(() => ({ single: mockSingle }));
+  const mockSelect = vi.fn(() => ({ eq: mockEq }));
+  const mockUpsert = vi.fn();
+  const mockFrom = vi.fn((_table: string) => ({
+    select: mockSelect,
+    upsert: mockUpsert,
+  }));
+  return { mockSingle, mockEq, mockSelect, mockUpsert, mockFrom };
+});
 
 vi.mock('@supabase/supabase-js', () => ({
   createClient: vi.fn(() => ({
