@@ -9,7 +9,7 @@ export function ThemeToggle({ theme, onToggle }: ThemeToggleProps) {
   return (
     <button
       onClick={onToggle}
-      className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+      className="text-gray-600 dark:text-gray-300 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
       aria-label="החלפת מצב תצוגה"
     >
       {theme === 'dark' ? (

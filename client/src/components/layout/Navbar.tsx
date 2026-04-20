@@ -21,14 +21,14 @@ export function Navbar({ savedCount, theme, onThemeToggle }: NavbarProps) {
         <div className="flex items-center gap-2">
           <Link
             to="/"
-            className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+            className="text-gray-600 dark:text-gray-300 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
             aria-label="דף הבית"
           >
             <Home className="h-5 w-5" />
           </Link>
           <Link
             to="/compare"
-            className={`p-2 rounded-lg ${
+            className={`text-gray-600 dark:text-gray-300 p-2 rounded-lg ${
               compareDisabled
                 ? 'opacity-40 cursor-not-allowed pointer-events-none'
                 : 'hover:bg-gray-100 dark:hover:bg-gray-700'
