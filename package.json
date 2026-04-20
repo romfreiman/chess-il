@@ -1,0 +1,30 @@
+{
+  "name": "chess-il-dashboard",
+  "version": "1.0.0",
+  "description": "Israeli Chess Federation player statistics dashboard",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run --reporter=verbose",
+    "test:watch": "vitest",
+    "dev": "netlify dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.103.3",
+    "axios": "^1.15.1",
+    "cheerio": "^1.2.0",
+    "express": "^4.22.1",
+    "serverless-http": "^4.0.0"
+  },
+  "devDependencies": {
+    "@netlify/functions": "^5.2.0",
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.6.0",
+    "dotenv": "^17.4.2",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.4"
+  }
+}
