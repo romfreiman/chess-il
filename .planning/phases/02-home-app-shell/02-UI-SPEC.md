@@ -35,6 +35,7 @@ Declared values (all multiples of 4):
 |-------|-------|-------|
 | xs | 4px | Icon gaps, inline spacing between icon and label |
 | sm | 8px | Compact element spacing, gap between nav items |
+| base | 12px | Input padding, search row gap, dropdown item padding |
 | md | 16px | Default element spacing, card internal padding, input padding-x |
 | lg | 24px | Section padding, gap between hero search and saved players section |
 | xl | 32px | Page horizontal padding on mobile (16px each side), card grid gap |
@@ -54,8 +55,8 @@ Exceptions:
 | Role | Size | Weight | Line Height | Tailwind Class |
 |------|------|--------|-------------|----------------|
 | Body | 16px | 400 (regular) | 1.5 | text-base font-normal leading-normal |
-| Label | 14px | 500 (medium) | 1.4 | text-sm font-medium leading-snug |
-| Heading | 20px | 600 (semibold) | 1.3 | text-xl font-semibold leading-tight |
+| Label | 14px | 400 (regular) | 1.4 | text-sm font-normal leading-snug |
+| Heading | 20px | 700 (bold) | 1.3 | text-xl font-bold leading-tight |
 | Display | 28px | 700 (bold) | 1.2 | text-2xl font-bold leading-none sm:text-3xl |
 
 **Font family:** `font-heebo` applied globally via `@layer base` on `html` element.
@@ -66,7 +67,7 @@ Exceptions:
 - **Body:** Search input text, card content (player name, club), empty state body text
 - **Label:** Card rating value, navbar items, empty state subtext, input placeholder
 
-**Note on weights:** The Tailwind config uses `font-medium` (500) for labels as a visual step between regular body and semibold headings. This provides 3 distinct visual weights: 400 for reading text, 500 for labels/metadata, 600-700 for headings/emphasis.
+**Weight rationale:** Two weights only -- 400 (regular) and 700 (bold). Label is distinguished from Body by font size alone (14px vs 16px). Heading is distinguished from Display by font size alone (20px vs 28px). This keeps the typographic system lean and avoids loading unnecessary font weight files.
 
 **Source:** Claude's Discretion (CONTEXT.md grants typography decisions to Claude). Heebo font from D-13.
 
@@ -121,8 +122,10 @@ All copy is in Hebrew. Text direction is RTL.
 | Error: invalid input | (none - button disabled state) | Non-numeric or empty input disables the search button; no error message displayed |
 | Error: navigation fail | שגיאה בטעינת הדף. נסו לרענן. (Error loading page. Try refreshing.) | Fallback error boundary message |
 | Navbar: app name | &#9823; Chess IL | Navbar brand with pawn unicode character |
+| Navbar: home aria-label | דף הבית (Home page) | aria-label on the Home link icon button in navbar |
 | Navbar: compare tooltip | השוואת שחקנים (Player comparison) | Tooltip/aria-label on compare icon |
 | Navbar: compare disabled | שמרו לפחות 2 שחקנים כדי להשוות (Save at least 2 players to compare) | Title attribute on disabled compare link |
+| Navbar: theme toggle aria-label | החלפת מצב תצוגה (Toggle display mode) | aria-label on the dark mode toggle icon button |
 | Recent searches heading | חיפושים אחרונים (Recent searches) | Dropdown heading above recent search suggestions |
 
 **Destructive actions in this phase:** None. The remove button on saved player cards is Phase 4 scope.
@@ -143,15 +146,18 @@ Components this phase introduces, with their visual contract:
 - Shadow: shadow-sm
 - Content max-width: 80rem (max-w-5xl), centered
 - Internal padding: 16px horizontal
-- Items: logo (start), icon group (end) with 12px gap between icons
+- Items: logo (start), icon group (end) with 8px gap between icons
 - Icon button size: 40px (p-2 on 20px icons), meeting 44px touch target with gap spacing
+- Home link: aria-label="דף הבית"
+- Theme toggle: aria-label="החלפת מצב תצוגה"
+- Compare link: aria-label="השוואת שחקנים"
 
 ### HeroSearch
 - Container: centered, max-width 448px (max-w-md), full-width within container
 - Vertical position: 48px from navbar offset (mt-12 from main top)
-- Layout: flex row with 12px gap, reversed in RTL (automatic via flex + dir)
+- Layout: flex row with 12px gap (gap-3), reversed in RTL (automatic via flex + dir)
 - Input: flex-1, 12px padding-x (px-3), 12px padding-y (py-3), rounded-xl, border 1px gray-300 (dark: gray-600), text-lg (18px), focus ring 2px primary blue
-- Button: 24px padding-x (px-6), 12px padding-y (py-3), rounded-xl, bg-primary, white text, font-medium (500), disabled: opacity-50 + cursor-not-allowed
+- Button: 24px padding-x (px-6), 12px padding-y (py-3), rounded-xl, bg-primary, white text, font-normal (400), disabled: opacity-50 + cursor-not-allowed
 - Input mode: numeric (triggers numeric keyboard on mobile)
 
 ### RecentSuggestions
@@ -160,14 +166,14 @@ Components this phase introduces, with their visual contract:
 - Max items: 5 recent searches
 - Each item: 12px padding (px-3 py-2), hover bg-gray-100 (dark: gray-700), cursor-pointer
 - Item text: 14px, gray-700 (dark: gray-300)
-- Heading: 14px, font-medium, gray-500, 8px padding-x, 4px padding-y
+- Heading: 14px, font-normal, gray-500, 8px padding-x, 4px padding-y
 
 ### PlayerCard
 - Background: white (dark: gray-800)
 - Border radius: 12px (rounded-xl per D-14)
 - Shadow: shadow-sm (per D-14)
 - Padding: 16px (p-4)
-- Content: player name (16px, font-semibold), rating (14px, font-medium, gray-600), club name (14px, regular, gray-500)
+- Content: player name (16px, font-bold), rating (14px, font-normal, gray-600), club name (14px, font-normal, gray-500)
 - Hover: subtle border color change to primary blue, transition-colors duration-150
 - Clickable: entire card is a link to /player/:id
 - Min-height: 80px for consistent grid appearance
@@ -180,13 +186,14 @@ Components this phase introduces, with their visual contract:
 ### EmptyState
 - Centered layout: text-center, flex-col items-center
 - Icon: Search icon from lucide-react, 48px (h-12 w-12), gray-400 color
-- Heading: 20px (text-xl), font-semibold, gray-700 (dark: gray-200), 16px margin-top from icon
+- Heading: 20px (text-xl), font-bold, gray-700 (dark: gray-200), 16px margin-top from icon
 - Body: 14px (text-sm), gray-500 (dark: gray-400), 8px margin-top from heading, max-width 320px
 
 ### ThemeToggle
 - Button: 40px (p-2), rounded-lg, hover bg-gray-100 (dark: gray-700)
 - Icon: Sun (light mode) / Moon (dark mode), 20px (h-5 w-5)
 - Transition: icon swap only, no animation (keep it simple)
+- Accessibility: aria-label="החלפת מצב תצוגה"
 
 ### AppLayout
 - Root: min-h-screen, bg-gray-50 (dark: bg-gray-900)
