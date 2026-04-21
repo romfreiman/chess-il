@@ -26,15 +26,22 @@ export interface TournamentEntry {
   ratingChange: number;           // float, positive or negative (per D-11)
 }
 
+export interface RatingHistoryEntry {
+  date: string;    // ISO 8601 "YYYY-MM-DD"
+  rating: number;
+}
+
 export interface PlayerData {
   player: PlayerInfo;
   tournaments: TournamentEntry[];
+  ratingHistory: RatingHistoryEntry[];
   scrapedAt: string;              // ISO 8601 timestamp
 }
 
 export interface ApiResponse {
   player: PlayerInfo;
   tournaments: TournamentEntry[];
+  ratingHistory: RatingHistoryEntry[];
   meta: {
     cached: boolean;
     stale: boolean;

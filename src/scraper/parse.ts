@@ -1,6 +1,6 @@
 import * as cheerio from 'cheerio';
 import type { Element } from 'domhandler';
-import type { PlayerData, PlayerInfo, TournamentEntry } from '../../packages/shared/types.js';
+import type { PlayerData, PlayerInfo, RatingHistoryEntry, TournamentEntry } from '../../packages/shared/types.js';
 
 /**
  * Parse a chess.org.il player page HTML string into structured PlayerData.
@@ -11,10 +11,12 @@ export function parsePlayerPage(html: string): PlayerData {
 
   const player = parsePlayerInfo($);
   const tournaments = parseTournamentTable($);
+  const ratingHistory = parseRatingHistory($);
 
   return {
     player,
     tournaments,
+    ratingHistory,
     scrapedAt: new Date().toISOString(),
   };
 }
@@ -151,6 +153,53 @@ function parseTournamentTable($: cheerio.CheerioAPI): TournamentEntry[] {
   });
 
   return tournaments;
+}
+
+/**
+ * Extract official rating history from the ViewState Chart XML.
+ * The ViewState contains a base64-encoded blob with embedded Chart XML
+ * that has DataPoint elements with ToolTip="DD/MM/YYYY RATING".
+ * Returns [] on any failure (never throws).
+ */
+function parseRatingHistory($: cheerio.CheerioAPI): RatingHistoryEntry[] {
+  try {
+    const viewStateValue = $('input#__VIEWSTATE').attr('value');
+    if (!viewStateValue) return [];
+
+    const decoded = Buffer.from(viewStateValue, 'base64').toString('latin1');
+
+    const chartStart = decoded.indexOf('<Chart');
+    const chartEndTag = '</Chart>';
+    const chartEndIdx = decoded.indexOf(chartEndTag);
+    if (chartStart === -1 || chartEndIdx === -1) return [];
+
+    const chartXml = decoded.substring(chartStart, chartEndIdx + chartEndTag.length);
+    const chart$ = cheerio.load(chartXml, { xml: true });
+
+    const entries: RatingHistoryEntry[] = [];
+    chart$('DataPoint[ToolTip]').each((_: number, el: Element) => {
+      const toolTip = chart$(el).attr('ToolTip');
+      if (!toolTip) return;
+
+      const parts = toolTip.trim().split(/\s+/);
+      if (parts.length < 2) return;
+
+      const date = parseDateDDMMYYYY(parts[0]);
+      const rating = parseInt(parts[1], 10);
+
+      // Skip if date parse failed (returned original string) or rating is NaN
+      if (!date.match(/^\d{4}-\d{2}-\d{2}$/) || isNaN(rating)) return;
+
+      entries.push({ date, rating });
+    });
+
+    // Sort by date ascending (ISO string comparison)
+    entries.sort((a, b) => a.date.localeCompare(b.date));
+
+    return entries;
+  } catch {
+    return [];
+  }
 }
 
 // --- Helper Functions ---

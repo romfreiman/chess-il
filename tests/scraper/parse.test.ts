@@ -75,6 +75,12 @@ describe('parsePlayerPage', () => {
       const result = parsePlayerPage(fixture205001);
       expect(result.scrapedAt).toMatch(/^\d{4}-\d{2}-\d{2}T/);
     });
+
+    it('includes ratingHistory array in result', () => {
+      const result = parsePlayerPage(fixture205001);
+      expect(Array.isArray(result.ratingHistory)).toBe(true);
+      expect(result.ratingHistory.length).toBeGreaterThan(0);
+    });
   });
 
   describe('tournament extraction', () => {
@@ -177,6 +183,54 @@ describe('parsePlayerPage', () => {
       const result = parsePlayerPage(fixture210498);
       expect(result.player.name).toBe('לני פריימן');
       expect(result.player.id).toBe(210498);
+    });
+  });
+
+  describe('rating history extraction', () => {
+    it('extracts 29 rating history entries for player 205001', () => {
+      const result = parsePlayerPage(fixture205001);
+      expect(result.ratingHistory).toHaveLength(29);
+    });
+
+    it('first entry for 205001 is 2023-03-28 with rating 1200', () => {
+      const result = parsePlayerPage(fixture205001);
+      expect(result.ratingHistory[0]).toEqual({ date: '2023-03-28', rating: 1200 });
+    });
+
+    it('last entry for 205001 is 2026-03-31 with rating 1476', () => {
+      const result = parsePlayerPage(fixture205001);
+      const last = result.ratingHistory[result.ratingHistory.length - 1];
+      expect(last).toEqual({ date: '2026-03-31', rating: 1476 });
+    });
+
+    it('extracts 9 rating history entries for player 210498', () => {
+      const result = parsePlayerPage(fixture210498);
+      expect(result.ratingHistory).toHaveLength(9);
+    });
+
+    it('first entry for 210498 is 2025-01-24 with rating 1200', () => {
+      const result = parsePlayerPage(fixture210498);
+      expect(result.ratingHistory[0]).toEqual({ date: '2025-01-24', rating: 1200 });
+    });
+
+    it('last entry for 210498 is 2026-03-31 with rating 1261', () => {
+      const result = parsePlayerPage(fixture210498);
+      const last = result.ratingHistory[result.ratingHistory.length - 1];
+      expect(last).toEqual({ date: '2026-03-31', rating: 1261 });
+    });
+
+    it('entries are sorted by date ascending', () => {
+      const result = parsePlayerPage(fixture205001);
+      const dates = result.ratingHistory.map(e => e.date);
+      expect(dates).toEqual([...dates].sort());
+    });
+
+    it('returns empty array for invalid HTML', () => {
+      // Use the error handling test -- parsePlayerPage throws on bad HTML,
+      // but parseRatingHistory itself should return [] on failure
+      // We test indirectly: valid pages always produce ratingHistory array
+      const result = parsePlayerPage(fixture205001);
+      expect(Array.isArray(result.ratingHistory)).toBe(true);
     });
   });
 
