@@ -1,4 +1,4 @@
-import type { PlayerInfo, TournamentEntry, ApiResponse } from '@shared/types';
+import type { PlayerInfo, RatingHistoryEntry, TournamentEntry, ApiResponse } from '@shared/types';
 
 export const mockPlayerInfo: PlayerInfo = {
   name: '\u05D0\u05E0\u05D3\u05D9 \u05E4\u05E8\u05D9\u05D9\u05DE\u05DF',
@@ -184,9 +184,25 @@ export const mockTournaments: TournamentEntry[] = [
   },
 ];
 
+export const mockRatingHistory: RatingHistoryEntry[] = [
+  { date: '2025-05-05', rating: 1480 },
+  { date: '2025-06-10', rating: 1487 },
+  { date: '2025-07-15', rating: 1467 },
+  { date: '2025-08-05', rating: 1492 },
+  { date: '2025-09-10', rating: 1484 },
+  { date: '2025-10-20', rating: 1506 },
+  { date: '2025-11-15', rating: 1506 },
+  { date: '2025-12-05', rating: 1511 },
+  { date: '2026-01-10', rating: 1496 },
+  { date: '2026-02-20', rating: 1524 },
+  { date: '2026-03-15', rating: 1536 },
+  { date: '2026-04-10', rating: 1542 },
+];
+
 export const mockApiResponse: ApiResponse = {
   player: mockPlayerInfo,
   tournaments: mockTournaments,
+  ratingHistory: mockRatingHistory,
   meta: {
     cached: true,
     stale: false,

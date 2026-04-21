@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import type { TournamentEntry } from '@shared/types';
+import type { RatingHistoryEntry, TournamentEntry } from '@shared/types';
 
 // Mock ResponsiveContainer to render children in jsdom (no layout engine)
 vi.mock('recharts', async () => {
@@ -91,31 +91,38 @@ const mockTournaments: TournamentEntry[] = [
 
 const currentRating = 1500;
 
+const mockRatingHistory: RatingHistoryEntry[] = [
+  { date: '2025-06-05', rating: 1485 },
+  { date: '2025-09-10', rating: 1497 },
+  { date: '2025-12-01', rating: 1492 },
+  { date: '2026-01-15', rating: 1500 },
+];
+
 describe('RatingChart', () => {
   it('renders section heading "היסטוריית דירוג"', () => {
-    render(<RatingChart tournaments={mockTournaments} currentRating={currentRating} />);
+    render(<RatingChart tournaments={mockTournaments} currentRating={currentRating} ratingHistory={mockRatingHistory} />);
     expect(screen.getByText('היסטוריית דירוג')).toBeInTheDocument();
   });
 
   it('renders line chart toggle button with aria-label "תצוגת קו"', () => {
-    render(<RatingChart tournaments={mockTournaments} currentRating={currentRating} />);
+    render(<RatingChart tournaments={mockTournaments} currentRating={currentRating} ratingHistory={mockRatingHistory} />);
     expect(screen.getByLabelText('תצוגת קו')).toBeInTheDocument();
   });
 
   it('renders bar chart toggle button with aria-label "תצוגת עמודות"', () => {
-    render(<RatingChart tournaments={mockTournaments} currentRating={currentRating} />);
+    render(<RatingChart tournaments={mockTournaments} currentRating={currentRating} ratingHistory={mockRatingHistory} />);
     expect(screen.getByLabelText('תצוגת עמודות')).toBeInTheDocument();
   });
 
   it('line toggle button has active styling by default', () => {
-    render(<RatingChart tournaments={mockTournaments} currentRating={currentRating} />);
+    render(<RatingChart tournaments={mockTournaments} currentRating={currentRating} ratingHistory={mockRatingHistory} />);
     const lineButton = screen.getByLabelText('תצוגת קו');
     expect(lineButton.className).toContain('bg-primary/10');
   });
 
   it('clicking bar toggle switches to bar mode', async () => {
     const user = userEvent.setup();
-    render(<RatingChart tournaments={mockTournaments} currentRating={currentRating} />);
+    render(<RatingChart tournaments={mockTournaments} currentRating={currentRating} ratingHistory={mockRatingHistory} />);
     const lineButton = screen.getByLabelText('תצוגת קו');
     const barButton = screen.getByLabelText('תצוגת עמודות');
 
@@ -127,7 +134,21 @@ describe('RatingChart', () => {
 
   it('chart renders with SVG element present', () => {
     const { container } = render(
-      <RatingChart tournaments={mockTournaments} currentRating={currentRating} />,
+      <RatingChart tournaments={mockTournaments} currentRating={currentRating} ratingHistory={mockRatingHistory} />,
+    );
+    expect(container.querySelector('svg')).toBeInTheDocument();
+  });
+
+  it('falls back to buildChartData when ratingHistory is empty', () => {
+    const { container } = render(
+      <RatingChart tournaments={mockTournaments} currentRating={currentRating} ratingHistory={[]} />,
+    );
+    expect(container.querySelector('svg')).toBeInTheDocument();
+  });
+
+  it('uses ratingHistory data when provided', () => {
+    const { container } = render(
+      <RatingChart tournaments={mockTournaments} currentRating={currentRating} ratingHistory={mockRatingHistory} />,
     );
     expect(container.querySelector('svg')).toBeInTheDocument();
   });

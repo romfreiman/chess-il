@@ -40,6 +40,7 @@ const mockPlayerData: PlayerData = {
     licenseExpiry: '2026-12-31',
   },
   tournaments: [],
+  ratingHistory: [],
   scrapedAt: '2026-04-19T10:00:00.000Z',
 };
 

@@ -87,7 +87,7 @@ export function PlayerPage() {
       <MetricCards player={data.player} tournaments={data.tournaments} />
       <div className="flex flex-col md:flex-row gap-6">
         <div className="w-full md:w-[65%]">
-          <RatingChart tournaments={data.tournaments} currentRating={data.player.rating} />
+          <RatingChart tournaments={data.tournaments} currentRating={data.player.rating} ratingHistory={data.ratingHistory ?? []} />
         </div>
         <div className="w-full md:w-[35%]">
           <WinLossChart wins={totalWins} draws={totalDraws} losses={totalLosses} />

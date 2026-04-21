@@ -11,7 +11,7 @@ import {
   CartesianGrid,
 } from 'recharts';
 import { LineChart as LineChartIcon, BarChart3 } from 'lucide-react';
-import type { TournamentEntry } from '@shared/types';
+import type { RatingHistoryEntry, TournamentEntry } from '@shared/types';
 import { COLORS } from '../../lib/constants';
 
 interface ChartDataPoint {
@@ -95,11 +95,20 @@ function ChartTooltip({ active, payload }: any) {
 interface RatingChartProps {
   tournaments: TournamentEntry[];
   currentRating: number;
+  ratingHistory?: RatingHistoryEntry[];
 }
 
-export function RatingChart({ tournaments, currentRating }: RatingChartProps) {
+export function RatingChart({ tournaments, currentRating, ratingHistory = [] }: RatingChartProps) {
   const [chartType, setChartType] = useState<'line' | 'bar'>('line');
-  const chartData = buildChartData(tournaments, currentRating);
+
+  // Use official history when available, fall back to computed
+  const chartData = ratingHistory.length > 0
+    ? ratingHistory.map(entry => ({
+        date: entry.date,
+        rating: entry.rating,
+        tournament: '',  // Official history has no tournament name
+      }))
+    : buildChartData(tournaments, currentRating);
 
   if (tournaments.length === 0) {
     return (

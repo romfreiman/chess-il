@@ -27,6 +27,7 @@ playerRouter.get('/:id', async (req: Request, res: Response) => {
       const response: ApiResponse = {
         player: cached.data.player,
         tournaments: cached.data.tournaments,
+        ratingHistory: cached.data.ratingHistory ?? [],
         meta: {
           cached: true,
           stale: false,
@@ -44,6 +45,7 @@ playerRouter.get('/:id', async (req: Request, res: Response) => {
     const response: ApiResponse = {
       player: data.player,
       tournaments: data.tournaments,
+      ratingHistory: data.ratingHistory ?? [],
       meta: {
         cached: false,
         stale: false,
@@ -58,6 +60,7 @@ playerRouter.get('/:id', async (req: Request, res: Response) => {
       const response: ApiResponse = {
         player: staleCache.data.player,
         tournaments: staleCache.data.tournaments,
+        ratingHistory: staleCache.data.ratingHistory ?? [],
         meta: {
           cached: true,
           stale: true,
