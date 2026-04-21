@@ -2,7 +2,7 @@ import { Router } from 'express';
 import type { Request, Response } from 'express';
 import type { ApiResponse, ApiError } from '../../../packages/shared/types.js';
 import { scrapePlayer } from '../../scraper/index.js';
-import { getCachedPlayer, isStale, upsertPlayer } from '../../db/supabase.js';
+import { getCachedPlayer, isStale, upsertPlayer } from '../../db/index.js';
 
 export const playerRouter = Router();
 
