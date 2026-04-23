@@ -194,8 +194,9 @@ export function RatingChart({ tournaments, currentRating, ratingHistory = [] }: 
       </div>
 
       {chartType === 'line' ? (
+        <div className="-ml-4">
         <ResponsiveContainer width="100%" height={300}>
-          <AreaChart data={chartData}>
+          <AreaChart data={chartData} margin={{ top: 5, right: 0, bottom: 0, left: 0 }}>
             <defs>
               <linearGradient
                 id="ratingGradient"
@@ -243,9 +244,11 @@ export function RatingChart({ tournaments, currentRating, ratingHistory = [] }: 
             />
           </AreaChart>
         </ResponsiveContainer>
+        </div>
       ) : (
+        <div className="-ml-4">
         <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={wdlData}>
+          <BarChart data={wdlData} margin={{ top: 5, right: 0, bottom: 0, left: 0 }}>
             <CartesianGrid
               strokeDasharray="3 3"
               className="stroke-gray-200 dark:stroke-gray-700"
@@ -265,6 +268,7 @@ export function RatingChart({ tournaments, currentRating, ratingHistory = [] }: 
             <Bar dataKey="losses" stackId="wdl" fill={COLORS.negative} radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
+        </div>
       )}
     </div>
   );

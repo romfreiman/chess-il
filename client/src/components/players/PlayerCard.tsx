@@ -35,13 +35,9 @@ export function PlayerCard({ player, onRemove }: PlayerCardProps) {
         </span>
       </div>
       <div className="text-sm text-gray-600 dark:text-gray-400">
-        {player.rating}
+        דירוג נוכחי: {player.rating}
       </div>
-      {player.totalGames != null && (
-        <div className="text-sm text-gray-500 dark:text-gray-400">
-          {player.totalGames} משחקים
-        </div>
-      )}
+
       {player.club && (
         <div className="text-sm text-gray-500 dark:text-gray-400">
           {player.club}
