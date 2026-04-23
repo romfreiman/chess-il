@@ -26,8 +26,13 @@ export function PlayerCard({ player, onRemove }: PlayerCardProps) {
           <X className="w-4 h-4" />
         </button>
       )}
-      <div className="text-base font-bold text-gray-900 dark:text-gray-50">
-        {player.name}
+      <div className="flex items-center gap-2">
+        <span className="text-base font-bold text-gray-900 dark:text-gray-50">
+          {player.name}
+        </span>
+        <span className="text-xs text-gray-400 dark:text-gray-500">
+          #{player.id}
+        </span>
       </div>
       <div className="text-sm text-gray-600 dark:text-gray-400">
         {player.rating}
