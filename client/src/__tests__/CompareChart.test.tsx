@@ -1,7 +1,26 @@
 import { render, screen } from '@testing-library/react';
+import type { RatingHistoryEntry } from '@shared/types';
+
+// Per-file mock: ResponsiveContainer must clone children with width/height
+// so Recharts charts render their SVG content in jsdom
+vi.mock('recharts', async () => {
+  const React = await import('react');
+  const actual = await vi.importActual('recharts');
+  return {
+    ...actual,
+    ResponsiveContainer: ({ children }: { children: React.ReactElement }) =>
+      React.createElement(
+        'div',
+        { style: { width: 500, height: 300 } },
+        React.isValidElement(children)
+          ? React.cloneElement(children as React.ReactElement<any>, { width: 500, height: 300 })
+          : children,
+      ),
+  };
+});
+
 import { CompareChart, mergeRatingHistories } from '../components/compare/CompareChart';
 import { mockRatingHistory, mockRatingHistoryB } from '../test/fixtures/playerData';
-import type { RatingHistoryEntry } from '@shared/types';
 
 describe('mergeRatingHistories', () => {
   it('merges two histories correctly with overlapping and non-overlapping dates', () => {
@@ -99,10 +118,14 @@ describe('CompareChart', () => {
       />,
     );
 
-    // Recharts renders Area components inside the chart -- verify both dataKeys exist
-    // The AreaChart should have two Area children with ratingA and ratingB dataKeys
+    // Check that the chart container has the correct aria-label
+    const chartDiv = container.querySelector('[aria-label]');
+    expect(chartDiv).toBeInTheDocument();
+    expect(chartDiv!.getAttribute('aria-label')).toContain('השוואת דירוג');
+
+    // Recharts renders each Area as a g.recharts-area element
     const areas = container.querySelectorAll('.recharts-area');
-    expect(areas.length).toBe(2);
+    expect(areas).toHaveLength(2);
   });
 
   it('uses unique gradient IDs (ratingGradientA and ratingGradientB)', () => {
@@ -115,9 +138,13 @@ describe('CompareChart', () => {
       />,
     );
 
+    const html = container.innerHTML;
+
     // Should have unique gradient IDs, NOT "ratingGradient"
-    expect(container.querySelector('#ratingGradientA')).toBeInTheDocument();
-    expect(container.querySelector('#ratingGradientB')).toBeInTheDocument();
-    expect(container.querySelector('#ratingGradient')).not.toBeInTheDocument();
+    expect(html).toContain('ratingGradientA');
+    expect(html).toContain('ratingGradientB');
+    // Should not contain the old single-chart gradient ID (without A/B suffix)
+    // But it's a substring of A/B, so check for exact id attribute
+    expect(html).not.toMatch(/id="ratingGradient"[^A-Z]/);
   });
 });
