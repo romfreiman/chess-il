@@ -153,17 +153,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PERS-02 | Phase 4 | Complete |
 | PERS-03 | Phase 4 | Complete |
 | COMP-01 | Phase 5 | Complete |
-<<<<<<< HEAD
-| COMP-02 | Phase 5 | Pending |
-| COMP-03 | Phase 5 | Pending |
+| COMP-02 | Phase 5 | Deferred |
+| COMP-03 | Phase 5 | Deferred |
 | COMP-04 | Phase 5 | Complete |
-| COMP-05 | Phase 5 | Pending |
-=======
-| COMP-02 | Phase 5 | Complete |
-| COMP-03 | Phase 5 | Complete |
-| COMP-04 | Phase 5 | Complete |
-| COMP-05 | Phase 5 | Complete |
->>>>>>> worktree-agent-a68ab8c7
+| COMP-05 | Phase 5 | Deferred |
 
 **Coverage:**
 - v1 requirements: 44 total
