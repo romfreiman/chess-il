@@ -115,14 +115,15 @@ None yet.
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
+| 260423-ksl | Sync saved players across browser tabs and back-navigation | 2026-04-23 | 71fad44 | [260423-ksl-save-saved-players-between-browser-tabs-](./quick/260423-ksl-save-saved-players-between-browser-tabs-/) |
 | 260423-kp3 | Add link to player page from comparison view | 2026-04-23 | a19c088 | - |
 | 260421-ekp | Extract official rating history from ViewState chart XML | 2026-04-21 | ef11803 | [260421-ekp-extract-official-rating-history-from-vie](./quick/260421-ekp-extract-official-rating-history-from-vie/) |
 | 260420-l9q | Fix dark mode text color on HeroSearch input | 2026-04-20 | 93db457 | [260420-l9q-fix-dark-mode-text-color-on-herosearch-i](./quick/260420-l9q-fix-dark-mode-text-color-on-herosearch-i/) |
 
 ## Session Continuity
 
-Last session: 2026-04-23T12:00:00.000Z
-Stopped at: v1.0 milestone audit complete (tech_debt). UAT 7/7 passed. Ready for /gsd:complete-milestone
+Last session: 2026-04-23T12:03:00.000Z
+Stopped at: Completed quick task 260423-ksl (cross-tab saved players sync)
 Resume file: None
 
 ### Active Local Services
