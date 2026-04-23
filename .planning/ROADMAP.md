@@ -89,19 +89,20 @@ Plans:
 - [ ] 04-02-PLAN.md — useSavedPlayers hook, SavedPlayersContext, save/remove buttons, Toast, home page wiring
 
 ### Phase 5: Player Comparison
-**Goal**: Users can compare two players side by side with relative metrics, overlaid rating histories, and shared tournament detection
+**Goal**: Users can view two players side by side with their own stats and a combined rating history chart overlaying both players' data
 **Depends on**: Phase 4
 **Requirements**: COMP-01, COMP-02, COMP-03, COMP-04, COMP-05
 **Success Criteria** (what must be TRUE):
-  1. Compare page shows two player cards side by side with a "vs" label between them
-  2. Comparison bars display relative metrics (rating, cumulative change, max performance, avg change) with visual proportions
-  3. Combined rating chart overlays both players' rating histories as distinguishable line series
-  4. Shared tournaments section lists tournaments where both players participated on the same date
-**Plans**: TBD
+  1. Compare page shows two player pickers from saved players list, rendering selected players side by side
+  2. Combined rating chart overlays both players' rating histories as distinguishable line series (blue + purple)
+  3. Mobile view provides tab UI to switch between players with chart always visible
+  4. Page handles all states: no saved players, one selected, both loading, both loaded, error
+**Plans**: 2 plans
 **UI hint**: yes
 
 Plans:
-- [ ] 05-01: TBD
+- [ ] 05-01-PLAN.md — usePlayer empty-ID guard, PlayerPicker, CompareChart with mergeRatingHistories, second mock fixture, tests
+- [ ] 05-02-PLAN.md — CompareHeader (desktop columns / mobile tabs), ComparePage full wiring with state machine, integration tests, visual checkpoint
 
 ## Progress
 
@@ -114,4 +115,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 2. Home & App Shell | 2/3 | In Progress |  |
 | 3. Player Dashboard | 0/3 | Planned    |  |
 | 4. Polish & Persistence | 0/2 | Planned | - |
-| 5. Player Comparison | 0/0 | Not started | - |
+| 5. Player Comparison | 0/2 | Planned | - |
