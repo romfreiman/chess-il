@@ -51,10 +51,10 @@ Requirements for initial release. Each maps to roadmap phases.
 
 ### Compare
 
-- [ ] **COMP-01**: Compare page shows two players side by side
+- [x] **COMP-01**: Compare page shows two players side by side
 - [ ] **COMP-02**: Header displays both player cards with "מול" (vs) between them
 - [ ] **COMP-03**: Comparison bars show relative metrics (rating, cumulative change, max performance, avg change)
-- [ ] **COMP-04**: Combined rating chart shows both players' rating history as overlaid line series
+- [x] **COMP-04**: Combined rating chart shows both players' rating history as overlaid line series
 - [ ] **COMP-05**: Shared tournaments section lists tournaments where both players participated on same date
 
 ### UI/UX
@@ -152,10 +152,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | PERS-01 | Phase 4 | Complete |
 | PERS-02 | Phase 4 | Complete |
 | PERS-03 | Phase 4 | Complete |
-| COMP-01 | Phase 5 | Pending |
+| COMP-01 | Phase 5 | Complete |
 | COMP-02 | Phase 5 | Pending |
 | COMP-03 | Phase 5 | Pending |
-| COMP-04 | Phase 5 | Pending |
+| COMP-04 | Phase 5 | Complete |
 | COMP-05 | Phase 5 | Pending |
 
 **Coverage:**

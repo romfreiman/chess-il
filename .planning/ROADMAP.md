@@ -101,7 +101,7 @@ Plans:
 **UI hint**: yes
 
 Plans:
-- [ ] 05-01-PLAN.md — usePlayer empty-ID guard, PlayerPicker, CompareChart with mergeRatingHistories, second mock fixture, tests
+- [x] 05-01-PLAN.md — usePlayer empty-ID guard, PlayerPicker, CompareChart with mergeRatingHistories, second mock fixture, tests
 - [ ] 05-02-PLAN.md — CompareHeader (desktop columns / mobile tabs), ComparePage full wiring with state machine, integration tests, visual checkpoint
 
 ## Progress
