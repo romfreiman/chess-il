@@ -115,6 +115,7 @@ None yet.
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
+| 260423-lm8 | Expand rating chart to full card width, add rating label to saved cards, remove misleading games count | 2026-04-23 | 74d660e | - |
 | 260423-lm4 | Move rating chart toggle icons next to title (RTL fix) | 2026-04-23 | f76feef | - |
 | 260423-lly | Fix games count mismatch between donut chart and משחקים metric | 2026-04-23 | 6fcf179 | - |
 | 260423-l00 | Add total games played and player ID to player page and saved cards | 2026-04-23 | b8ee0d8 | [260423-l00-on-saved-players-and-in-player-tile-add-](./quick/260423-l00-on-saved-players-and-in-player-tile-add-/) |
@@ -125,8 +126,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-23T12:13:40.000Z
-Stopped at: Completed quick task 260423-l00 (total games on saved players and MetricCards)
+Last session: 2026-04-23T12:50:00.000Z
+Stopped at: Batch of UI quick tasks — cross-tab sync, player ID display, games count fix, chart layout, saved card labels
 Resume file: None
 
 ### Active Local Services
