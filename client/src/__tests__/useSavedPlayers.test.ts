@@ -113,4 +113,109 @@ describe('useSavedPlayers', () => {
     expect(result.current.savedPlayers).toHaveLength(1);
     expect(result.current.savedPlayers[0].id).toBe(1);
   });
+
+  describe('cross-tab and visibility sync', () => {
+    it('updates state when storage event fires for saved players key', () => {
+      const { result } = renderHook(() => useSavedPlayers());
+      expect(result.current.savedPlayers).toEqual([]);
+
+      const newPlayers = [
+        { id: 42, name: 'Cross-Tab', rating: 1800, club: 'Club A', savedAt: '2026-04-23' },
+      ];
+
+      act(() => {
+        window.dispatchEvent(
+          new StorageEvent('storage', {
+            key: 'chess-il-saved-players',
+            newValue: JSON.stringify(newPlayers),
+          }),
+        );
+      });
+
+      expect(result.current.savedPlayers).toEqual(newPlayers);
+    });
+
+    it('ignores storage events for other keys', () => {
+      const { result } = renderHook(() => useSavedPlayers());
+      act(() => {
+        result.current.savePlayer({ id: 1, name: 'A', rating: 1000, club: null });
+      });
+      const before = result.current.savedPlayers;
+
+      act(() => {
+        window.dispatchEvent(
+          new StorageEvent('storage', {
+            key: 'theme',
+            newValue: 'dark',
+          }),
+        );
+      });
+
+      expect(result.current.savedPlayers).toBe(before);
+    });
+
+    it('resets to empty array when storage event has null newValue', () => {
+      const { result } = renderHook(() => useSavedPlayers());
+      act(() => {
+        result.current.savePlayer({ id: 1, name: 'A', rating: 1000, club: null });
+      });
+      expect(result.current.savedPlayers).toHaveLength(1);
+
+      act(() => {
+        window.dispatchEvent(
+          new StorageEvent('storage', {
+            key: 'chess-il-saved-players',
+            newValue: null,
+          }),
+        );
+      });
+
+      expect(result.current.savedPlayers).toEqual([]);
+    });
+
+    it('re-reads localStorage when document becomes visible', () => {
+      const { result } = renderHook(() => useSavedPlayers());
+      expect(result.current.savedPlayers).toEqual([]);
+
+      // Simulate another tab writing to localStorage directly
+      const updatedPlayers = [
+        { id: 99, name: 'BackNav', rating: 1600, club: null, savedAt: '2026-04-23' },
+      ];
+      localStorageMock.getItem.mockReturnValue(JSON.stringify(updatedPlayers));
+
+      // Simulate tab becoming visible (e.g., back/forward navigation)
+      act(() => {
+        Object.defineProperty(document, 'visibilityState', {
+          value: 'visible',
+          writable: true,
+          configurable: true,
+        });
+        document.dispatchEvent(new Event('visibilitychange'));
+      });
+
+      expect(result.current.savedPlayers).toEqual(updatedPlayers);
+    });
+
+    it('cleans up event listeners on unmount', () => {
+      const addWindowSpy = vi.spyOn(window, 'addEventListener');
+      const removeWindowSpy = vi.spyOn(window, 'removeEventListener');
+      const addDocSpy = vi.spyOn(document, 'addEventListener');
+      const removeDocSpy = vi.spyOn(document, 'removeEventListener');
+
+      const { unmount } = renderHook(() => useSavedPlayers());
+
+      expect(addWindowSpy).toHaveBeenCalledWith('storage', expect.any(Function));
+      expect(addDocSpy).toHaveBeenCalledWith('visibilitychange', expect.any(Function));
+
+      unmount();
+
+      expect(removeWindowSpy).toHaveBeenCalledWith('storage', expect.any(Function));
+      expect(removeDocSpy).toHaveBeenCalledWith('visibilitychange', expect.any(Function));
+
+      addWindowSpy.mockRestore();
+      removeWindowSpy.mockRestore();
+      addDocSpy.mockRestore();
+      removeDocSpy.mockRestore();
+    });
+  });
 });
