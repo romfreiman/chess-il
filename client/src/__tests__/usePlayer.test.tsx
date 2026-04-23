@@ -109,6 +109,16 @@ describe('usePlayer', () => {
     });
   });
 
+  it('returns null data without fetching when id is empty', async () => {
+    const { result } = renderHook(() => usePlayer(''));
+
+    // Should immediately be in idle state without triggering fetch
+    expect(result.current.data).toBeNull();
+    expect(result.current.loading).toBe(false);
+    expect(result.current.error).toBeNull();
+    expect(mockFetch).not.toHaveBeenCalled();
+  });
+
   it('re-fetches when id changes', async () => {
     mockFetch.mockReturnValue(createFetchResponse(mockApiResponse));
 

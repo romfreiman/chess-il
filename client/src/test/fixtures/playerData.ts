@@ -210,3 +210,94 @@ export const mockApiResponse: ApiResponse = {
     cachedAt: '2026-04-20T12:00:00Z',
   },
 };
+
+export const mockPlayerInfoB: PlayerInfo = {
+  name: 'דני כהן',
+  id: 210498,
+  fideId: null,
+  club: 'מכבי חיפה',
+  birthYear: 1985,
+  rating: 1680,
+  expectedRating: 1650,
+  grade: 'מדרג 2',
+  rank: 85,
+  licenseExpiry: '2027-06-01',
+};
+
+export const mockTournamentsB: TournamentEntry[] = [
+  {
+    startDate: '2026-03-15',
+    updateDate: '2026-03-17',
+    isPending: false,
+    tournamentName: 'אליפות חיפה 2026',
+    tournamentUrl: 'https://chess.org.il/Tournament/201',
+    games: 6,
+    points: 4,
+    performance: 1750,
+    wins: 3,
+    losses: 1,
+    draws: 2,
+    ratingChange: 15,
+  },
+  {
+    startDate: '2026-01-10',
+    updateDate: '2026-01-12',
+    isPending: false,
+    tournamentName: 'אליפות באר שבע 2026',
+    tournamentUrl: 'https://chess.org.il/Tournament/202',
+    games: 7,
+    points: 5,
+    performance: 1780,
+    wins: 4,
+    losses: 1,
+    draws: 2,
+    ratingChange: 20,
+  },
+  {
+    startDate: '2025-11-15',
+    updateDate: '2025-11-17',
+    isPending: false,
+    tournamentName: 'אליפות ירושלים 2025',
+    tournamentUrl: 'https://chess.org.il/Tournament/203',
+    games: 5,
+    points: 3,
+    performance: 1700,
+    wins: 2,
+    losses: 1,
+    draws: 2,
+    ratingChange: 8,
+  },
+  {
+    startDate: '2025-09-10',
+    updateDate: '2025-09-12',
+    isPending: false,
+    tournamentName: 'אליפות הצפון 2025',
+    tournamentUrl: 'https://chess.org.il/Tournament/204',
+    games: 6,
+    points: 2,
+    performance: 1580,
+    wins: 1,
+    losses: 3,
+    draws: 2,
+    ratingChange: -12,
+  },
+];
+
+export const mockRatingHistoryB: RatingHistoryEntry[] = [
+  { date: '2025-09-10', rating: 1664 },
+  { date: '2025-11-15', rating: 1652 },
+  { date: '2026-01-10', rating: 1660 },
+  { date: '2026-03-15', rating: 1680 },
+];
+
+export const mockApiResponseB: ApiResponse = {
+  player: mockPlayerInfoB,
+  tournaments: mockTournamentsB,
+  ratingHistory: mockRatingHistoryB,
+  meta: {
+    cached: true,
+    stale: false,
+    scrapedAt: '2026-04-20T14:00:00Z',
+    cachedAt: '2026-04-20T14:00:00Z',
+  },
+};
