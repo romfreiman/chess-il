@@ -18,6 +18,7 @@ Any user can enter a player ID and instantly see a beautiful, data-rich dashboar
 - [x] Dark mode support — Validated in Phase 2: Home & App Shell
 - [x] Skeleton loading states and Hebrew error messages — Validated in Phase 4: Polish & Persistence
 - [x] Save/follow players via localStorage (max 10) — Validated in Phase 4: Polish & Persistence
+- [x] Compare page for side-by-side player viewing — Validated in Phase 5: Player Comparison (COMP-02/03/05 deferred: vs label, comparison bars, shared tournaments)
 
 ### Active
 
@@ -25,7 +26,6 @@ Any user can enter a player ID and instantly see a beautiful, data-rich dashboar
 - [ ] Cache scraped data in Supabase with 24-hour freshness window
 - [ ] Serve player data via REST API (`GET /api/player/:id`)
 - [ ] Player dashboard with header card, metrics row, rating chart, tournament table, and win/loss donut
-- [ ] Compare page for side-by-side player comparison
 - [ ] Tournament table pagination (10 per page)
 - [ ] Force refresh button to re-scrape ignoring cache
 - [ ] Stale data fallback when scraping fails
@@ -83,4 +83,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-20 after Phase 4 completion — dark mode audit, skeleton loaders, error states, and saved players persistence added*
+*Last updated: 2026-04-23 after Phase 5 completion — player comparison page with side-by-side viewing, dual rating chart, responsive layout*
