@@ -21,7 +21,7 @@ interface CompareHeaderProps {
   // Shared
   isSaved: (id: number) => boolean;
   isFull: boolean;
-  onSave: (player: { id: number; name: string; rating: number; club: string | null }) => void;
+  onSave: (player: { id: number; name: string; rating: number; club: string | null; totalGames?: number }) => void;
   onUnsave: (id: number) => void;
   // Selection state (for tab labels)
   selectedA: string;
@@ -36,7 +36,7 @@ function renderPlayerContent(
   isSelected: boolean,
   isSaved: (id: number) => boolean,
   isFull: boolean,
-  onSave: (player: { id: number; name: string; rating: number; club: string | null }) => void,
+  onSave: (player: { id: number; name: string; rating: number; club: string | null; totalGames?: number }) => void,
   onUnsave: (id: number) => void,
 ): JSX.Element | null {
   if (!isSelected) return null;
@@ -62,7 +62,7 @@ function renderPlayerContent(
           onRefresh={refresh}
           isSaved={isSaved(data.player.id)}
           isFull={isFull}
-          onSave={() => onSave({ id: data.player.id, name: data.player.name, rating: data.player.rating, club: data.player.club })}
+          onSave={() => onSave({ id: data.player.id, name: data.player.name, rating: data.player.rating, club: data.player.club, totalGames: data.tournaments.reduce((sum, t) => sum + t.games, 0) })}
           onUnsave={() => onUnsave(data.player.id)}
         />
         <MetricCards player={data.player} tournaments={data.tournaments} />

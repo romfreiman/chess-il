@@ -28,10 +28,11 @@ describe('useSavedPlayers', () => {
   it('savePlayer adds a player with savedAt timestamp', () => {
     const { result } = renderHook(() => useSavedPlayers());
     act(() => {
-      result.current.savePlayer({ id: 205001, name: 'Test', rating: 1500, club: null });
+      result.current.savePlayer({ id: 205001, name: 'Test', rating: 1500, club: null, totalGames: 42 });
     });
     expect(result.current.savedPlayers).toHaveLength(1);
     expect(result.current.savedPlayers[0].id).toBe(205001);
+    expect(result.current.savedPlayers[0].totalGames).toBe(42);
     expect(result.current.savedPlayers[0].savedAt).toBeDefined();
   });
 

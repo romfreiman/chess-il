@@ -62,6 +62,7 @@ export function PlayerPage() {
       name: data.player.name,
       rating: data.player.rating,
       club: data.player.club,
+      totalGames,
     });
   };
 
@@ -69,6 +70,7 @@ export function PlayerPage() {
     removePlayer(data.player.id);
   };
 
+  const totalGames = data.tournaments.reduce((sum, t) => sum + t.games, 0);
   const totalWins = data.tournaments.reduce((sum, t) => sum + t.wins, 0);
   const totalDraws = data.tournaments.reduce((sum, t) => sum + t.draws, 0);
   const totalLosses = data.tournaments.reduce((sum, t) => sum + t.losses, 0);

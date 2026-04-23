@@ -6,8 +6,8 @@ import { PlayerGrid } from '../components/players/PlayerGrid';
 import type { SavedPlayer } from '../lib/types';
 
 const mockPlayers: SavedPlayer[] = [
-  { id: 205001, name: 'אנדי פריימן', rating: 1500, club: 'חיפה', savedAt: '2026-01-01T00:00:00Z' },
-  { id: 210498, name: 'לני פריימן', rating: 1200, club: null, savedAt: '2026-01-02T00:00:00Z' },
+  { id: 205001, name: 'אנדי פריימן', rating: 1500, club: 'חיפה', totalGames: 72, savedAt: '2026-01-01T00:00:00Z' },
+  { id: 210498, name: 'לני פריימן', rating: 1200, club: null, totalGames: 35, savedAt: '2026-01-02T00:00:00Z' },
 ];
 
 function renderWithRouter(ui: React.ReactElement) {

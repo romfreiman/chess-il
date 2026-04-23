@@ -3,5 +3,6 @@ export interface SavedPlayer {
   name: string;
   rating: number;
   club: string | null;
+  totalGames?: number;
   savedAt: string;
 }
