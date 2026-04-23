@@ -3,7 +3,7 @@ import { usePlayer } from '../hooks/usePlayer';
 import { mockApiResponse } from '../test/fixtures/playerData';
 
 const mockFetch = vi.fn();
-global.fetch = mockFetch;
+globalThis.fetch = mockFetch;
 
 function createFetchResponse(data: unknown, ok = true, status = 200) {
   return Promise.resolve({
