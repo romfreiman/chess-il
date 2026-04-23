@@ -4,7 +4,7 @@ milestone: v1.0
 milestone_name: milestone
 status: Milestone complete — audit passed (tech_debt), ready for /gsd:complete-milestone
 stopped_at: v1.0 milestone audit complete, UAT passed 7/7
-last_updated: "2026-04-23T12:00:00.000Z"
+last_updated: "2026-04-23T12:13:40.000Z"
 progress:
   total_phases: 5
   completed_phases: 5
@@ -115,6 +115,7 @@ None yet.
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
+| 260423-l00 | Add total games played to saved player cards and MetricCards | 2026-04-23 | faa54b3 | [260423-l00-on-saved-players-and-in-player-tile-add-](./quick/260423-l00-on-saved-players-and-in-player-tile-add-/) |
 | 260423-ksl | Sync saved players across browser tabs and back-navigation | 2026-04-23 | 71fad44 | [260423-ksl-save-saved-players-between-browser-tabs-](./quick/260423-ksl-save-saved-players-between-browser-tabs-/) |
 | 260423-kp3 | Add link to player page from comparison view | 2026-04-23 | a19c088 | - |
 | 260421-ekp | Extract official rating history from ViewState chart XML | 2026-04-21 | ef11803 | [260421-ekp-extract-official-rating-history-from-vie](./quick/260421-ekp-extract-official-rating-history-from-vie/) |
@@ -122,8 +123,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-23T12:03:00.000Z
-Stopped at: Completed quick task 260423-ksl (cross-tab saved players sync)
+Last session: 2026-04-23T12:13:40.000Z
+Stopped at: Completed quick task 260423-l00 (total games on saved players and MetricCards)
 Resume file: None
 
 ### Active Local Services
