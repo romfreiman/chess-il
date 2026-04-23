@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Ready to plan
-stopped_at: Completed 04-02-PLAN.md
-last_updated: "2026-04-20T20:46:51.060Z"
+stopped_at: Phase 5 context gathered
+last_updated: "2026-04-23T07:46:08.490Z"
 progress:
   total_phases: 5
   completed_phases: 4
@@ -113,6 +113,18 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-21T07:40:29Z
-Stopped at: Completed quick task 260421-ekp
-Resume file: None
+Last session: 2026-04-23T07:46:08.477Z
+Stopped at: Phase 5 context gathered
+Resume file: .planning/phases/05-player-comparison/05-CONTEXT.md
+
+### Active Local Services
+
+- **Frontend:** http://localhost:5173/ (Vite dev server)
+- **API:** http://localhost:3001/ (Express via `npx tsx src/dev-server.ts`)
+- **Note:** `src/dev-server.ts` is a local-only dev entry point (not committed). API proxied from Vite via `client/vite.config.ts`.
+
+### What to Review
+
+- Navigate to http://localhost:5173/player/205001 to see the rating chart with official history from ViewState chart XML (29 data points, March 2023 — March 2026)
+- Player 210498 should show 9 data points (Jan 2025 — March 2026)
+- First load will scrape live from chess.org.il and cache in local SQLite (`chess-cache.db`)
