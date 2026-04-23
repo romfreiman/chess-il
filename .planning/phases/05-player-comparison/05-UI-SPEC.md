@@ -48,9 +48,11 @@ Exceptions: Tab touch targets use 44px minimum height for accessibility (py-3 on
 | Role | Size | Weight | Line Height |
 |------|------|--------|-------------|
 | Body | 14px (text-sm) | 400 (normal) | 1.5 |
-| Label | 16px (text-base) | 600 (semibold) | 1.5 |
+| Label | 16px (text-base) | 700 (bold) | 1.5 |
 | Heading | 20px (text-xl) | 700 (bold) | 1.2 |
 | Display | 24px (text-2xl) | 700 (bold) | 1.2 |
+
+Two weights only: 400 (normal) and 700 (bold). All previously semibold (600) elements now use bold (700).
 
 Source: Established in Phases 2-4. Player name uses text-2xl bold, metric values use text-2xl bold, section headings use text-xl bold, body labels use text-sm.
 
@@ -74,13 +76,19 @@ Player B color (`#A855F7`) reserved for: Player B chart line, Player B chart gra
 
 ---
 
+## Visual Focal Point
+
+The **Combined Rating Chart** is the primary visual anchor of the comparison page. It is the largest element, spans the full content width, and is the destination the entire picker-and-tab flow leads toward. All layout decisions funnel attention downward to this chart: pickers and stat cards sit above it as supporting context, and on mobile the chart remains permanently visible below the tab-switched content.
+
+---
+
 ## Component Inventory
 
 ### New Components (Phase 5)
 
 | Component | File | Purpose |
 |-----------|------|---------|
-| `ComparePage` | `client/src/pages/ComparePage.tsx` | Full page — replaces existing stub |
+| `ComparePage` | `client/src/pages/ComparePage.tsx` | Full page -- replaces existing stub |
 | `PlayerPicker` | `client/src/components/compare/PlayerPicker.tsx` | Dropdown selector to choose a saved player |
 | `CompareHeader` | `client/src/components/compare/CompareHeader.tsx` | Two player pickers + headers side by side (desktop) or tabbed (mobile) |
 | `CompareChart` | `client/src/components/compare/CompareChart.tsx` | Dual-line AreaChart with shared Y-axis |
@@ -141,7 +149,7 @@ Player B color (`#A855F7`) reserved for: Player B chart line, Player B chart gra
 ```
 
 - Tab bar: Two equal-width buttons, active tab shows primary-colored bottom border (3px)
-- Active tab button: `text-primary border-b-[3px] border-primary font-semibold`
+- Active tab button: `text-primary border-b-[3px] border-primary font-bold`
 - Inactive tab button: `text-gray-500 dark:text-gray-400`
 - Tab bar container: `flex border-b border-gray-200 dark:border-gray-700`
 - Each tab button: `flex-1 py-3 text-center text-base` (44px+ touch target)
@@ -162,7 +170,7 @@ Player B color (`#A855F7`) reserved for: Player B chart line, Player B chart gra
 ### Styling
 - Container: `bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4`
 - Select element: `w-full p-2 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-50 text-base`
-- Label above select: `text-sm font-semibold text-gray-500 dark:text-gray-400 mb-2`
+- Label above select: `text-sm font-bold text-gray-500 dark:text-gray-400 mb-2`
 - Label text: "שחקן A" / "שחקן B"
 
 ---
@@ -223,7 +231,7 @@ Player B color (`#A855F7`) reserved for: Player B chart line, Player B chart gra
 | `error-both` | Both players errored | ErrorState in both columns, no chart |
 
 ### Tab State (mobile only)
-- `activeTab: 'a' | 'b'` — controls which player's header+metrics are visible
+- `activeTab: 'a' | 'b'` -- controls which player's header+metrics are visible
 - Default: `'a'`
 - Chart visibility: always visible regardless of active tab
 
