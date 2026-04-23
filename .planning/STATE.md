@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Ready to execute
-stopped_at: Completed 05-01-PLAN.md
-last_updated: "2026-04-23T08:56:03.311Z"
+status: Phase complete — ready for verification
+stopped_at: Completed 05-02-PLAN.md
+last_updated: "2026-04-23T09:04:24.071Z"
 progress:
   total_phases: 5
   completed_phases: 4
@@ -57,6 +57,7 @@ Plan: 2 of 2
 | Phase 04-polish-persistence P01 | 4min | 2 tasks | 11 files |
 | Phase 04-polish-persistence P02 | 4min | 2 tasks | 16 files |
 | Phase 05-player-comparison P01 | 6min | 2 tasks | 6 files |
+| Phase 05-player-comparison P02 | 4min | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -98,6 +99,8 @@ Recent decisions affecting current work:
 - [Phase 05-player-comparison]: usePlayer empty-ID guard: useState(!!id) for loading initial state to avoid flash
 - [Phase 05-player-comparison]: Per-file Recharts mock with React.cloneElement for width/height injection in chart tests
 - [Phase 05-player-comparison]: CompareChart gradient IDs use A/B suffix to avoid collision with RatingChart ratingGradient
+- [Phase 05-player-comparison]: CompareHeader uses CSS visibility (hidden md:grid / md:hidden) for responsive layout rather than JS media query detection
+- [Phase 05-player-comparison]: resolveChartData fallback: use ratingHistory if available, else buildChartData from tournaments
 
 ### Pending Todos
 
@@ -117,8 +120,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-23T08:56:03.307Z
-Stopped at: Completed 05-01-PLAN.md
+Last session: 2026-04-23T09:04:24.067Z
+Stopped at: Completed 05-02-PLAN.md
 Resume file: None
 
 ### Active Local Services
