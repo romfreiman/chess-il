@@ -10,11 +10,18 @@ interface UsePlayerResult {
 
 export function usePlayer(id: string): UsePlayerResult {
   const [data, setData] = useState<ApiResponse | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(!!id);
   const [error, setError] = useState<string | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
   const fetchPlayer = useCallback(async (force = false) => {
+    if (!id) {
+      setData(null);
+      setLoading(false);
+      setError(null);
+      return;
+    }
+
     // Abort any in-flight request
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
