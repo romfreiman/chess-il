@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import type { ApiResponse } from '@shared/types';
 import { PlayerHeader } from '../dashboard/PlayerHeader';
 import { MetricCards } from '../dashboard/MetricCards';
@@ -65,6 +66,12 @@ function renderPlayerContent(
           onUnsave={() => onUnsave(data.player.id)}
         />
         <MetricCards player={data.player} tournaments={data.tournaments} />
+        <Link
+          to={`/player/${data.player.id}`}
+          className="block text-center text-sm text-primary hover:underline dark:text-blue-400"
+        >
+          {"צפה בדף השחקן המלא"}
+        </Link>
       </>
     );
   }
