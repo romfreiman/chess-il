@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { STORAGE_KEYS, MAX_SAVED_PLAYERS } from '../lib/constants';
 import type { SavedPlayer } from '../lib/types';
 
@@ -10,15 +10,52 @@ export interface UseSavedPlayersResult {
   isFull: boolean;
 }
 
+function readSavedPlayers(): SavedPlayer[] {
+  try {
+    const stored = localStorage.getItem(STORAGE_KEYS.savedPlayers);
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
+}
+
 export function useSavedPlayers(): UseSavedPlayersResult {
-  const [savedPlayers, setSavedPlayers] = useState<SavedPlayer[]>(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEYS.savedPlayers);
-      return stored ? JSON.parse(stored) : [];
-    } catch {
-      return [];
-    }
-  });
+  const [savedPlayers, setSavedPlayers] = useState<SavedPlayer[]>(readSavedPlayers);
+
+  // Sync across browser tabs via storage event, and on back/forward navigation via visibilitychange
+  useEffect(() => {
+    const handleStorageEvent = (e: StorageEvent) => {
+      if (e.key !== STORAGE_KEYS.savedPlayers) return;
+      if (e.newValue === null) {
+        setSavedPlayers([]);
+      } else {
+        try {
+          setSavedPlayers(JSON.parse(e.newValue));
+        } catch {
+          // ignore malformed JSON
+        }
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        setSavedPlayers(prev => {
+          const stored = readSavedPlayers();
+          const prevJson = JSON.stringify(prev);
+          const storedJson = JSON.stringify(stored);
+          return prevJson === storedJson ? prev : stored;
+        });
+      }
+    };
+
+    window.addEventListener('storage', handleStorageEvent);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageEvent);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
 
   const savePlayer = useCallback((player: Omit<SavedPlayer, 'savedAt'>): boolean => {
     let saved = false;
