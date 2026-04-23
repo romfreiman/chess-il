@@ -62,7 +62,7 @@ function renderPlayerContent(
           onRefresh={refresh}
           isSaved={isSaved(data.player.id)}
           isFull={isFull}
-          onSave={() => onSave({ id: data.player.id, name: data.player.name, rating: data.player.rating, club: data.player.club, totalGames: data.tournaments.reduce((sum, t) => sum + t.games, 0) })}
+          onSave={() => onSave({ id: data.player.id, name: data.player.name, rating: data.player.rating, club: data.player.club, totalGames: data.tournaments.reduce((sum, t) => sum + t.wins + t.draws + t.losses, 0) })}
           onUnsave={() => onUnsave(data.player.id)}
         />
         <MetricCards player={data.player} tournaments={data.tournaments} />

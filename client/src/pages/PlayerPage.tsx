@@ -70,10 +70,10 @@ export function PlayerPage() {
     removePlayer(data.player.id);
   };
 
-  const totalGames = data.tournaments.reduce((sum, t) => sum + t.games, 0);
   const totalWins = data.tournaments.reduce((sum, t) => sum + t.wins, 0);
   const totalDraws = data.tournaments.reduce((sum, t) => sum + t.draws, 0);
   const totalLosses = data.tournaments.reduce((sum, t) => sum + t.losses, 0);
+  const totalGames = totalWins + totalDraws + totalLosses;
 
   const oldestStartDate = data.tournaments.length > 0
     ? data.tournaments.reduce((oldest, t) => t.startDate < oldest ? t.startDate : oldest, data.tournaments[0].startDate)

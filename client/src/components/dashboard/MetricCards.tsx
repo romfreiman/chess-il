@@ -7,7 +7,7 @@ interface MetricCardsProps {
 }
 
 export function MetricCards({ player, tournaments }: MetricCardsProps) {
-  const totalGames = tournaments.reduce((sum, t) => sum + t.games, 0);
+  const totalGames = tournaments.reduce((sum, t) => sum + t.wins + t.draws + t.losses, 0);
   const confirmed = tournaments.filter((t) => !t.isPending);
   const cumulativeChange = confirmed.reduce((sum, t) => sum + t.ratingChange, 0);
 

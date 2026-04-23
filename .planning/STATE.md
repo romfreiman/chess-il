@@ -115,6 +115,7 @@ None yet.
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
+| 260423-lly | Fix games count mismatch between donut chart and משחקים metric | 2026-04-23 | - | - |
 | 260423-l00 | Add total games played and player ID to player page and saved cards | 2026-04-23 | b8ee0d8 | [260423-l00-on-saved-players-and-in-player-tile-add-](./quick/260423-l00-on-saved-players-and-in-player-tile-add-/) |
 | 260423-ksl | Sync saved players across browser tabs and back-navigation | 2026-04-23 | 71fad44 | [260423-ksl-save-saved-players-between-browser-tabs-](./quick/260423-ksl-save-saved-players-between-browser-tabs-/) |
 | 260423-kp3 | Add link to player page from comparison view | 2026-04-23 | a19c088 | - |
