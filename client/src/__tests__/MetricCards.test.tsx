@@ -93,4 +93,15 @@ describe('MetricCards', () => {
     renderMetricCards({ rank: null });
     expect(screen.getByText('\u2014')).toBeInTheDocument();
   });
+
+  it('renders total games played count', () => {
+    renderMetricCards();
+    // 7+5+6+7+5+6+5+7+6+5+6+7 = 72
+    expect(screen.getByText('72')).toBeInTheDocument();
+  });
+
+  it('renders "\u05DE\u05E9\u05D7\u05E7\u05D9\u05DD" label', () => {
+    renderMetricCards();
+    expect(screen.getByText('\u05DE\u05E9\u05D7\u05E7\u05D9\u05DD')).toBeInTheDocument();
+  });
 });

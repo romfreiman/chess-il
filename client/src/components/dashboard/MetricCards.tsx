@@ -1,4 +1,4 @@
-import { TrendingUp, TrendingDown, Medal, Calendar, ArrowUpDown } from 'lucide-react';
+import { TrendingUp, TrendingDown, Medal, Calendar, ArrowUpDown, Swords } from 'lucide-react';
 import type { PlayerInfo, TournamentEntry } from '@shared/types';
 
 interface MetricCardsProps {
@@ -7,6 +7,7 @@ interface MetricCardsProps {
 }
 
 export function MetricCards({ player, tournaments }: MetricCardsProps) {
+  const totalGames = tournaments.reduce((sum, t) => sum + t.games, 0);
   const confirmed = tournaments.filter((t) => !t.isPending);
   const cumulativeChange = confirmed.reduce((sum, t) => sum + t.ratingChange, 0);
 
@@ -34,7 +35,7 @@ export function MetricCards({ player, tournaments }: MetricCardsProps) {
         : 'text-gray-500 dark:text-gray-400';
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
       {/* Current Rating */}
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4">
         <TrendingUp className="w-5 h-5 text-primary" />
@@ -76,6 +77,22 @@ export function MetricCards({ player, tournaments }: MetricCardsProps) {
         </div>
         <div className="text-sm text-gray-500 dark:text-gray-400">
           {'\u05D8\u05D5\u05E8\u05E0\u05D9\u05E8\u05D9\u05DD'}
+        </div>
+        {dateLabel && (
+          <div className="text-xs text-gray-400 dark:text-gray-500">
+            {dateLabel}
+          </div>
+        )}
+      </div>
+
+      {/* Total Games */}
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4">
+        <Swords className="w-5 h-5 text-primary" />
+        <div className="text-2xl font-bold text-gray-900 dark:text-gray-50 mt-2">
+          {totalGames}
+        </div>
+        <div className="text-sm text-gray-500 dark:text-gray-400">
+          {'\u05DE\u05E9\u05D7\u05E7\u05D9\u05DD'}
         </div>
         {dateLabel && (
           <div className="text-xs text-gray-400 dark:text-gray-500">
