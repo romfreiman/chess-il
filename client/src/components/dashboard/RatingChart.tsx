@@ -163,7 +163,7 @@ export function RatingChart({ tournaments, currentRating, ratingHistory = [] }: 
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4">
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center gap-3 mb-4">
         <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50">
           היסטוריית דירוג
         </h2>
