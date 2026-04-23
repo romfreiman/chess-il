@@ -73,6 +73,13 @@ export function PlayerPage() {
   const totalDraws = data.tournaments.reduce((sum, t) => sum + t.draws, 0);
   const totalLosses = data.tournaments.reduce((sum, t) => sum + t.losses, 0);
 
+  const oldestStartDate = data.tournaments.length > 0
+    ? data.tournaments.reduce((oldest, t) => t.startDate < oldest ? t.startDate : oldest, data.tournaments[0].startDate)
+    : null;
+  const tournamentDateLabel = oldestStartDate
+    ? `מאז ${oldestStartDate.split('-')[1]}/${oldestStartDate.split('-')[0]}`
+    : null;
+
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 space-y-6">
       <PlayerHeader
@@ -90,7 +97,7 @@ export function PlayerPage() {
           <RatingChart tournaments={data.tournaments} currentRating={data.player.rating} ratingHistory={data.ratingHistory ?? []} />
         </div>
         <div className="w-full md:w-[35%]">
-          <WinLossChart wins={totalWins} draws={totalDraws} losses={totalLosses} />
+          <WinLossChart wins={totalWins} draws={totalDraws} losses={totalLosses} dateLabel={tournamentDateLabel} />
         </div>
       </div>
       <TournamentList tournaments={data.tournaments} />

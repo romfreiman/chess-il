@@ -8,9 +8,10 @@ interface WinLossChartProps {
   wins: number;
   draws: number;
   losses: number;
+  dateLabel?: string | null;
 }
 
-export function WinLossChart({ wins, draws, losses }: WinLossChartProps) {
+export function WinLossChart({ wins, draws, losses, dateLabel }: WinLossChartProps) {
   const data = [
     { name: 'ניצחונות', value: wins },
     { name: 'תיקו', value: draws },
@@ -35,9 +36,15 @@ export function WinLossChart({ wins, draws, losses }: WinLossChartProps) {
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4">
-      <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-4">
+      <h2 className="text-xl font-bold text-gray-900 dark:text-gray-50">
         ניצחונות / תיקו / הפסדים
       </h2>
+      {dateLabel && (
+        <div className="text-xs text-gray-400 dark:text-gray-500 mb-4">
+          {dateLabel}
+        </div>
+      )}
+      {!dateLabel && <div className="mb-4" />}
 
       <div className="relative">
         <ResponsiveContainer width="100%" height={250}>

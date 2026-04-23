@@ -20,6 +20,14 @@ interface ChartDataPoint {
   tournament: string;
 }
 
+interface WdlDataPoint {
+  date: string;
+  tournament: string;
+  wins: number;
+  draws: number;
+  losses: number;
+}
+
 const HEBREW_MONTHS = [
   'ינו',
   'פבר',
@@ -74,7 +82,7 @@ export function buildChartData(
   return points;
 }
 
-function ChartTooltip({ active, payload }: any) {
+function RatingTooltip({ active, payload }: any) {
   if (!active || !payload?.length) return null;
   const data = payload[0].payload as ChartDataPoint;
   return (
@@ -87,6 +95,26 @@ function ChartTooltip({ active, payload }: any) {
       </div>
       <div className="text-sm text-gray-500 dark:text-gray-400">
         {data.tournament}
+      </div>
+    </div>
+  );
+}
+
+function WdlTooltip({ active, payload }: any) {
+  if (!active || !payload?.length) return null;
+  const data = payload[0].payload as WdlDataPoint;
+  return (
+    <div className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-3 border border-gray-200 dark:border-gray-700">
+      <div className="text-sm font-medium text-gray-900 dark:text-gray-50 mb-1">
+        {data.tournament}
+      </div>
+      <div className="text-sm text-gray-500 dark:text-gray-400">
+        {formatMonthYear(data.date)}
+      </div>
+      <div className="flex gap-3 mt-1 text-sm">
+        <span style={{ color: COLORS.positive }}>+{data.wins}</span>
+        <span className="text-gray-400">={data.draws}</span>
+        <span style={{ color: COLORS.negative }}>-{data.losses}</span>
       </div>
     </div>
   );
@@ -106,9 +134,19 @@ export function RatingChart({ tournaments, currentRating, ratingHistory = [] }: 
     ? ratingHistory.map(entry => ({
         date: entry.date,
         rating: entry.rating,
-        tournament: '',  // Official history has no tournament name
+        tournament: '',
       }))
     : buildChartData(tournaments, currentRating);
+
+  const wdlData: WdlDataPoint[] = [...tournaments]
+    .sort((a, b) => a.startDate.localeCompare(b.startDate))
+    .map(t => ({
+      date: t.startDate,
+      tournament: t.tournamentName,
+      wins: t.wins,
+      draws: t.draws,
+      losses: t.losses,
+    }));
 
   if (tournaments.length === 0) {
     return (
@@ -142,7 +180,7 @@ export function RatingChart({ tournaments, currentRating, ratingHistory = [] }: 
             <LineChartIcon size={18} />
           </button>
           <button
-            aria-label="תצוגת עמודות"
+            aria-label="ניצחונות / תיקו / הפסדים"
             onClick={() => setChartType('bar')}
             className={
               chartType === 'bar'
@@ -193,7 +231,7 @@ export function RatingChart({ tournaments, currentRating, ratingHistory = [] }: 
               tick={{ fontSize: 14 }}
               className="text-gray-500"
             />
-            <Tooltip content={<ChartTooltip />} />
+            <Tooltip content={<RatingTooltip />} />
             <Area
               type="monotone"
               dataKey="rating"
@@ -207,7 +245,7 @@ export function RatingChart({ tournaments, currentRating, ratingHistory = [] }: 
         </ResponsiveContainer>
       ) : (
         <ResponsiveContainer width="100%" height={300}>
-          <BarChart data={chartData}>
+          <BarChart data={wdlData}>
             <CartesianGrid
               strokeDasharray="3 3"
               className="stroke-gray-200 dark:stroke-gray-700"
@@ -218,15 +256,13 @@ export function RatingChart({ tournaments, currentRating, ratingHistory = [] }: 
               tick={{ fontSize: 14 }}
             />
             <YAxis
-              domain={['dataMin - 50', 'dataMax + 50']}
+              allowDecimals={false}
               tick={{ fontSize: 14 }}
             />
-            <Tooltip content={<ChartTooltip />} />
-            <Bar
-              dataKey="rating"
-              fill={COLORS.primary}
-              radius={[4, 4, 0, 0]}
-            />
+            <Tooltip content={<WdlTooltip />} />
+            <Bar dataKey="wins" stackId="wdl" fill={COLORS.positive} />
+            <Bar dataKey="draws" stackId="wdl" fill="#9CA3AF" />
+            <Bar dataKey="losses" stackId="wdl" fill={COLORS.negative} radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       )}

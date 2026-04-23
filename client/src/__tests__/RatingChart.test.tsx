@@ -109,9 +109,9 @@ describe('RatingChart', () => {
     expect(screen.getByLabelText('תצוגת קו')).toBeInTheDocument();
   });
 
-  it('renders bar chart toggle button with aria-label "תצוגת עמודות"', () => {
+  it('renders bar chart toggle button with aria-label "ניצחונות / תיקו / הפסדים"', () => {
     render(<RatingChart tournaments={mockTournaments} currentRating={currentRating} ratingHistory={mockRatingHistory} />);
-    expect(screen.getByLabelText('תצוגת עמודות')).toBeInTheDocument();
+    expect(screen.getByLabelText('ניצחונות / תיקו / הפסדים')).toBeInTheDocument();
   });
 
   it('line toggle button has active styling by default', () => {
@@ -124,7 +124,7 @@ describe('RatingChart', () => {
     const user = userEvent.setup();
     render(<RatingChart tournaments={mockTournaments} currentRating={currentRating} ratingHistory={mockRatingHistory} />);
     const lineButton = screen.getByLabelText('תצוגת קו');
-    const barButton = screen.getByLabelText('תצוגת עמודות');
+    const barButton = screen.getByLabelText('ניצחונות / תיקו / הפסדים');
 
     await user.click(barButton);
 

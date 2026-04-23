@@ -7,16 +7,23 @@ interface MetricCardsProps {
 }
 
 export function MetricCards({ player, tournaments }: MetricCardsProps) {
-  // Calculate cumulative change from non-pending tournaments (D-14)
-  const cumulativeChange = tournaments
-    .filter((t) => !t.isPending)
-    .reduce((sum, t) => sum + t.ratingChange, 0);
+  const confirmed = tournaments.filter((t) => !t.isPending);
+  const cumulativeChange = confirmed.reduce((sum, t) => sum + t.ratingChange, 0);
+
+  const oldestStartDate = tournaments.length > 0
+    ? tournaments.reduce((oldest, t) => t.startDate < oldest ? t.startDate : oldest, tournaments[0].startDate)
+    : null;
+  const dateLabel = oldestStartDate
+    ? `מאז ${oldestStartDate.split('-')[1]}/${oldestStartDate.split('-')[0]}`
+    : null;
+
+  const rounded = Math.round(cumulativeChange);
 
   const formattedChange =
-    cumulativeChange > 0
-      ? `+${cumulativeChange}`
-      : cumulativeChange < 0
-        ? String(cumulativeChange)
+    rounded > 0
+      ? `+${rounded}`
+      : rounded < 0
+        ? String(rounded)
         : '0';
 
   const changeColorClass =
@@ -35,7 +42,13 @@ export function MetricCards({ player, tournaments }: MetricCardsProps) {
           {player.rating}
         </div>
         {player.expectedRating !== null && (
-          <div className="text-sm text-gray-500 dark:text-gray-400">
+          <div className={`text-sm ${
+            player.expectedRating > player.rating
+              ? 'text-positive'
+              : player.expectedRating < player.rating
+                ? 'text-negative'
+                : 'text-gray-500 dark:text-gray-400'
+          }`}>
             {'\u05E6\u05E4\u05D5\u05D9: '}{player.expectedRating}
           </div>
         )}
@@ -64,6 +77,11 @@ export function MetricCards({ player, tournaments }: MetricCardsProps) {
         <div className="text-sm text-gray-500 dark:text-gray-400">
           {'\u05D8\u05D5\u05E8\u05E0\u05D9\u05E8\u05D9\u05DD'}
         </div>
+        {dateLabel && (
+          <div className="text-xs text-gray-400 dark:text-gray-500">
+            {dateLabel}
+          </div>
+        )}
       </div>
 
       {/* Cumulative Change */}
@@ -83,6 +101,11 @@ export function MetricCards({ player, tournaments }: MetricCardsProps) {
         <div className="text-sm text-gray-500 dark:text-gray-400">
           {'\u05E9\u05D9\u05E0\u05D5\u05D9 \u05DE\u05E6\u05D8\u05D1\u05E8'}
         </div>
+        {dateLabel && (
+          <div className="text-xs text-gray-400 dark:text-gray-500">
+            {dateLabel}
+          </div>
+        )}
       </div>
     </div>
   );

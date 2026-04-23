@@ -62,9 +62,18 @@ export function PlayerHeader({ player, onRefresh, isRefreshing, isSaved, isFull,
         )}
       </div>
 
-      {/* Line 3: FIDE link (only if fideId exists) */}
-      {player.fideId !== null && (
-        <div className="mt-2">
+      {/* Line 3: External links */}
+      <div className="flex items-center gap-4 mt-2">
+        <a
+          href={`https://www.chess.org.il/Players/Player.aspx?Id=${player.id}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
+        >
+          chess.org.il
+          <ExternalLink className="w-3.5 h-3.5" />
+        </a>
+        {player.fideId !== null && (
           <a
             href={`https://ratings.fide.com/profile/${player.fideId}`}
             target="_blank"
@@ -74,8 +83,8 @@ export function PlayerHeader({ player, onRefresh, isRefreshing, isSaved, isFull,
             FIDE
             <ExternalLink className="w-3.5 h-3.5" />
           </a>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }
