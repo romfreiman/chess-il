@@ -5,14 +5,36 @@ import type { SavedPlayer } from '../../lib/types';
 interface PlayerCardProps {
   player: SavedPlayer;
   onRemove?: (id: number) => void;
+  isSelected?: boolean;
+  onToggleSelect?: (id: number) => void;
+  selectionDisabled?: boolean;
 }
 
-export function PlayerCard({ player, onRemove }: PlayerCardProps) {
+export function PlayerCard({ player, onRemove, isSelected, onToggleSelect, selectionDisabled }: PlayerCardProps) {
   return (
     <Link
       to={`/player/${player.id}`}
-      className="relative block p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-transparent hover:border-primary transition-colors duration-150 min-h-[80px]"
+      className={`relative block p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border transition-colors duration-150 min-h-[80px] ${
+        isSelected ? 'border-[#378ADD] ring-1 ring-[#378ADD]' : 'border-transparent hover:border-primary'
+      }`}
     >
+      {onToggleSelect && (
+        <input
+          type="checkbox"
+          checked={!!isSelected}
+          disabled={selectionDisabled && !isSelected}
+          onChange={() => {/* handled by onClick */}}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            if (!(selectionDisabled && !isSelected)) {
+              onToggleSelect(player.id);
+            }
+          }}
+          aria-label={`בחר ${player.name} להשוואה`}
+          className="absolute top-3 start-3 w-5 h-5 accent-[#378ADD] cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed z-10"
+        />
+      )}
       {onRemove && (
         <button
           onClick={(e) => {
