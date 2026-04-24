@@ -63,3 +63,16 @@ export interface ApiError {
   message: string;
   statusCode: number;
 }
+
+export interface ClubInfo {
+  id: number;       // Club numeric ID from dropdown value (e.g., 6, 24, 2414)
+  name: string;     // Club Hebrew name (e.g., "אליצור ירושלים")
+}
+
+export interface ClubSearchResult {
+  id: number;              // Player ID (from column 1 link href or column 2 text)
+  name: string;            // Player name (column 1)
+  rating: number | null;   // Israeli rating (column 9), null if empty/unparseable
+  club: string;            // Club name (column 6)
+  birthYear: number | null; // Birth year (column 13), null if empty/unparseable
+}
