@@ -150,7 +150,7 @@ Plans:
 **UI hint**: yes
 
 Plans:
-- [ ] 07-01-PLAN.md — Data hooks (useClubList, useClubSearch), ClubCombobox, ClubSearchForm, ErrorState extension
+- [x] 07-01-PLAN.md — Data hooks (useClubList, useClubSearch), ClubCombobox, ClubSearchForm, ErrorState extension
 - [ ] 07-02-PLAN.md — ClubResultsTable (desktop), ClubResultsCards (mobile), checkbox selection, ClubFloatingBar, empty/initial states
 - [ ] 07-03-PLAN.md — HomePage tab wiring, URL state management, selection state, navbar link, visual checkpoint
 

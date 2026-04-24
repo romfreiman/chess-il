@@ -91,9 +91,9 @@ Requirements for Club Player Search & Export milestone.
 
 ### Club Results
 
-- [ ] **CRES-01**: User sees search results in a table showing player name, ID, rating, club, and age
-- [ ] **CRES-02**: User can select individual players via checkboxes
-- [ ] **CRES-03**: User can select/deselect all players with a single checkbox
+- [x] **CRES-01**: User sees search results in a table showing player name, ID, rating, club, and age
+- [x] **CRES-02**: User can select individual players via checkboxes
+- [x] **CRES-03**: User can select/deselect all players with a single checkbox
 
 ### Export
 
@@ -202,9 +202,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CSRCH-02 | Phase 7 | Complete |
 | CSRCH-03 | Phase 7 | Complete |
 | CSRCH-04 | Phase 7 | Pending |
-| CRES-01 | Phase 7 | Pending |
-| CRES-02 | Phase 7 | Pending |
-| CRES-03 | Phase 7 | Pending |
+| CRES-01 | Phase 7 | Complete |
+| CRES-02 | Phase 7 | Complete |
+| CRES-03 | Phase 7 | Complete |
 | EXPORT-01 | Phase 8 | Pending |
 | EXPORT-02 | Phase 8 | Pending |
 | EXPORT-03 | Phase 8 | Pending |
