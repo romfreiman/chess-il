@@ -146,8 +146,13 @@ Plans:
   3. A loading indicator is visible during the search request, and the page handles errors with a Hebrew message
   4. User can select individual players via row checkboxes and toggle all players with a select-all checkbox in the table header
   5. Results table displays player name, ID, rating, club, and age, and renders correctly on mobile (375px)
-**Plans**: TBD
+**Plans**: 3 plans
 **UI hint**: yes
+
+Plans:
+- [ ] 07-01-PLAN.md — Data hooks (useClubList, useClubSearch), ClubCombobox, ClubSearchForm, ErrorState extension
+- [ ] 07-02-PLAN.md — ClubResultsTable (desktop), ClubResultsCards (mobile), checkbox selection, ClubFloatingBar, empty/initial states
+- [ ] 07-03-PLAN.md — HomePage tab wiring, URL state management, selection state, navbar link, visual checkpoint
 
 ### Phase 8: CSV Export
 **Goal**: Users can export selected or all search results to a CSV file that opens correctly in Microsoft Excel with Hebrew characters
@@ -173,5 +178,5 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 4. Polish & Persistence | v1.0 | 0/2 | Not started | - |
 | 5. Player Comparison | v1.0 | 1/2 | In Progress | - |
 | 6. Club Scraping & API | v1.1 | 0/2 | Not started | - |
-| 7. Search UI & Results | v1.1 | 0/? | Not started | - |
+| 7. Search UI & Results | v1.1 | 0/3 | Not started | - |
 | 8. CSV Export | v1.1 | 0/? | Not started | - |
