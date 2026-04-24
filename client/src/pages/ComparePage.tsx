@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { usePlayer } from '../hooks/usePlayer';
 import { useSavedPlayersContext } from '../context/SavedPlayersContext';
 import { PlayerPicker } from '../components/compare/PlayerPicker';
@@ -18,8 +19,9 @@ function resolveChartData(data: ApiResponse): RatingHistoryEntry[] {
 }
 
 export function ComparePage() {
-  const [selectedA, setSelectedA] = useState<string>('');
-  const [selectedB, setSelectedB] = useState<string>('');
+  const [searchParams] = useSearchParams();
+  const [selectedA, setSelectedA] = useState<string>(searchParams.get('a') || '');
+  const [selectedB, setSelectedB] = useState<string>(searchParams.get('b') || '');
   const playerA = usePlayer(selectedA);
   const playerB = usePlayer(selectedB);
   const { savedPlayers, isSaved, isFull, savePlayer, removePlayer } = useSavedPlayersContext();
