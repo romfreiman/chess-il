@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Home, BarChart3 } from 'lucide-react';
+import { Home, BarChart3, Building2 } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 
 interface NavbarProps {
@@ -25,6 +25,13 @@ export function Navbar({ savedCount, theme, onThemeToggle }: NavbarProps) {
             aria-label="דף הבית"
           >
             <Home className="h-5 w-5" />
+          </Link>
+          <Link
+            to="/?tab=clubs"
+            className="text-gray-600 dark:text-gray-300 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+            aria-label="חיפוש מועדון"
+          >
+            <Building2 className="h-5 w-5" />
           </Link>
           <Link
             to="/compare"
