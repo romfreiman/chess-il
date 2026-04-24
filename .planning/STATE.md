@@ -115,6 +115,7 @@ None yet.
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
+| 260424-h8a | Add search by player name on home screen with auto-detect ID vs name | 2026-04-24 | 15c4207 | [260424-h8a-add-search-by-player-name-on-the-home-sc](./quick/260424-h8a-add-search-by-player-name-on-the-home-sc/) |
 | 260424-h1i | Fix player header mobile layout — badge overlap with action buttons | 2026-04-24 | 8ee7881 | [260424-h1i-fix-player-header-mobile-layout-badge-ov](./quick/260424-h1i-fix-player-header-mobile-layout-badge-ov/) |
 | 260424-001 | Change pending label from בהמתנה to בעדכון הבא to match source website | 2026-04-24 | 328b1ba | - |
 | 260424-002 | Make player ID copyable on saved player cards | 2026-04-24 | eecb585 | - |
@@ -130,8 +131,8 @@ None yet.
 
 ## Session Continuity
 
-Last activity: 2026-04-24 - Completed quick task 260424-h1i: Fix player header mobile layout
-Stopped at: Netlify deployment setup (Supabase + Netlify accounts created, code pushed, build fixes applied), pending label fix, copyable player ID
+Last activity: 2026-04-24 - Completed quick task 260424-h8a: Add search by player name on home screen
+Stopped at: Completed quick task 260424-h8a
 Resume file: None
 
 ### Active Local Services
