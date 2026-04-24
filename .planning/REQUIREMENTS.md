@@ -87,7 +87,7 @@ Requirements for Club Player Search & Export milestone.
 - [x] **CSRCH-01**: User can select a club from a searchable dropdown of all Israeli chess clubs
 - [x] **CSRCH-02**: User can set min and max age to filter players by age range
 - [x] **CSRCH-03**: User sees a loading state while search results are being fetched
-- [ ] **CSRCH-04**: User can access the club search page from the main navigation
+- [x] **CSRCH-04**: User can access the club search page from the main navigation
 
 ### Club Results
 
@@ -201,7 +201,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | CSRCH-01 | Phase 7 | Complete |
 | CSRCH-02 | Phase 7 | Complete |
 | CSRCH-03 | Phase 7 | Complete |
-| CSRCH-04 | Phase 7 | Pending |
+| CSRCH-04 | Phase 7 | Complete |
 | CRES-01 | Phase 7 | Complete |
 | CRES-02 | Phase 7 | Complete |
 | CRES-03 | Phase 7 | Complete |
