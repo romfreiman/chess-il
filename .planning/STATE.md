@@ -2,13 +2,13 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Club Player Search & Export
-status: Defining requirements
-stopped_at: Milestone v1.1 started
-last_updated: "2026-04-24T10:00:00.000Z"
+status: Ready to plan
+stopped_at: v1.1 roadmap created (Phases 6-8)
+last_updated: "2026-04-24T12:00:00.000Z"
 progress:
-  total_phases: 5
+  total_phases: 8
   completed_phases: 5
-  total_plans: 13
+  total_plans: 16
   completed_plans: 13
 ---
 
@@ -16,48 +16,52 @@ progress:
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-04-20)
+See: .planning/PROJECT.md (updated 2026-04-24)
 
 **Core value:** Any user can enter a player ID and instantly see a beautiful, data-rich dashboard of that player's chess rating history, tournament results, and performance stats.
-**Current focus:** Milestone v1.1 — Club Player Search & Export
+**Current milestone:** v1.1 Club Player Search & Export
+**Current focus:** Phase 6 - Club Scraping & API
 
 ## Current Position
 
-Phase: Not started (defining requirements)
-Plan: —
+Phase: 6 of 8 (Club Scraping & API)
+Plan: 0 of ? in current phase
+Status: Ready to plan
+Last activity: 2026-04-24 — v1.1 roadmap created (Phases 6-8)
+
+Progress: [██████████░░░░░░] 60%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 0
-- Average duration: -
-- Total execution time: 0 hours
+- Total plans completed: 13
+- Average duration: 4.5 min
+- Total execution time: ~58 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
-
-**Recent Trend:**
-
-- Last 5 plans: -
-- Trend: -
-
-*Updated after each plan completion*
-| Phase 01-data-pipeline P02 | 3min | 1 tasks | 4 files |
 | Phase 01-data-pipeline P01 | 7min | 2 tasks | 15 files |
+| Phase 01-data-pipeline P02 | 3min | 1 tasks | 4 files |
 | Phase 02 P01 | 5min | 3 tasks | 25 files |
 | Phase 02-home-app-shell P02 | 4min | 3 tasks | 11 files |
 | Phase 02-home-app-shell P03 | 2min | 2 tasks | 5 files |
-| Phase 03-player-dashboard P02 | 3min | 2 tasks | 6 files |
 | Phase 03-player-dashboard P01 | 6min | 2 tasks | 10 files |
+| Phase 03-player-dashboard P02 | 3min | 2 tasks | 6 files |
 | Phase 03-player-dashboard P03 | 6min | 2 tasks | 5 files |
 | Phase 04-polish-persistence P01 | 4min | 2 tasks | 11 files |
 | Phase 04-polish-persistence P02 | 4min | 2 tasks | 16 files |
 | Phase 05-player-comparison P01 | 6min | 2 tasks | 6 files |
 | Phase 05-player-comparison P02 | 4min | 2 tasks | 3 files |
+
+**Recent Trend:**
+
+- Last 5 plans: 6min, 3min, 6min, 4min, 4min, 6min, 4min
+- Trend: Stable (~4.5 min average)
+
+*Updated after each plan completion*
 
 ## Accumulated Context
 
@@ -66,41 +70,11 @@ Plan: —
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
-- Cheerio over Puppeteer for scraping (player pages load via GET, no JS rendering needed)
-- Supabase for caching (managed Postgres with JSONB support)
-- localStorage for saved players (no auth complexity for MVP)
-- [Phase 01-data-pipeline]: Module-scope Supabase client initialization for serverless warm invocation reuse (D-15)
-- [Phase 01-data-pipeline]: vi.hoisted() pattern for Supabase mock in vitest tests
-- [Phase 01-data-pipeline]: Used domhandler Element type for Cheerio 1.x TypeScript compatibility
-- [Phase 01-data-pipeline]: Content-based selectors with Hebrew label matching established as primary scraping pattern
-- [Phase 01-data-pipeline]: children() selector for tournament table to avoid matching parent FormView wrapper
-- [Phase 02]: Separate client/package.json for frontend deps isolation from backend
-- [Phase 02]: createBrowserRouter at module scope per React Router 6 best practice
-- [Phase 02]: RTL-safe logical properties (ms-/me-/ps-/pe-) enforced, physical props banned in components
-- [Phase 02]: useDarkMode hook at AppLayout level with FOUC prevention script in index.html
-- [Phase 02-home-app-shell]: SavedPlayer interface in lib/types.ts as shared type contract for card components
-- [Phase 02-home-app-shell]: Empty savedPlayers array as placeholder until Phase 4 wires localStorage persistence
-- [Phase 02-home-app-shell]: Additive dark: Tailwind classes for icon contrast, no structural changes
-- [Phase 02-home-app-shell]: Hebrew validation message with role=alert for screen reader accessibility
-- [Phase 03-player-dashboard]: Inline ResponsiveContainer mock per test file for parallel wave safety
-- [Phase 03-player-dashboard]: AreaChart (not LineChart) for gradient fill under line per Recharts API
-- [Phase 03-player-dashboard]: Absolute-positioned div overlay for donut center text
-- [Phase 03-player-dashboard]: React.createElement in test setup.ts instead of JSX to maintain .ts extension compatibility
-- [Phase 03-player-dashboard]: AbortController ref pattern for usePlayer hook to prevent stale responses on rapid player ID changes
-- [Phase 03-player-dashboard]: Shared mock fixtures (playerData.ts) with 12 tournament entries for all Phase 3 test reuse
-- [Phase 03-player-dashboard]: Dual responsive layout pattern: hidden md:block for desktop table, block md:hidden for mobile cards
-- [Phase 03-player-dashboard]: Duplicate pagination controls in desktop/mobile sections for independent responsive visibility
-- [Phase 04-polish-persistence]: Skeleton blocks use bg-gray-200 dark:bg-gray-700 rounded animate-pulse as standard pattern
-- [Phase 04-polish-persistence]: ErrorState error type detection checks for 'not found' (case-insensitive) in error message string
-- [Phase 04-polish-persistence]: Feedback components directory established at client/src/components/feedback/
-- [Phase 04-polish-persistence]: SavedPlayersProvider wraps AppLayout for single source of truth across all consumers
-- [Phase 04-polish-persistence]: SavedPlayer type extended with savedAt while keeping club for display compatibility
-- [Phase 04-polish-persistence]: AppLayout split into provider wrapper and inner component to consume context within provider scope
-- [Phase 05-player-comparison]: usePlayer empty-ID guard: useState(!!id) for loading initial state to avoid flash
-- [Phase 05-player-comparison]: Per-file Recharts mock with React.cloneElement for width/height injection in chart tests
-- [Phase 05-player-comparison]: CompareChart gradient IDs use A/B suffix to avoid collision with RatingChart ratingGradient
-- [Phase 05-player-comparison]: CompareHeader uses CSS visibility (hidden md:grid / md:hidden) for responsive layout rather than JS media query detection
-- [Phase 05-player-comparison]: resolveChartData fallback: use ratingHistory if available, else buildChartData from tournaments
+- [v1.1 Roadmap]: No new dependencies needed -- all v1.1 work uses existing stack (Cheerio, axios, React, Express)
+- [v1.1 Roadmap]: Club scraper is a separate module from existing search.ts (dedicated 3-step postback flow)
+- [v1.1 Roadmap]: CSV export is client-side via Blob API (no server-side generation)
+- [v1.1 Roadmap]: Search results are ephemeral (no caching in Supabase)
+- [v1.1 Roadmap]: Public page, no auth gating
 
 ### Pending Todos
 
@@ -108,8 +82,9 @@ None yet.
 
 ### Blockers/Concerns
 
-- Chess.org.il HTML structure not yet verified against live site (research confidence: MEDIUM)
-- Scraping fragility: HTML structure changes will break the parser; need robust selectors
+- [Phase 6]: Netlify Function timeout risk -- 3-step ASP.NET flow takes 6-9 seconds, approaching 10-second limit
+- [Phase 6]: Club list source URL needs verification (advanced search dropdown ~200 clubs vs SearchClubs.aspx ~110 clubs)
+- [Phase 6]: Pagination behavior for large clubs (>250 results) needs runtime confirmation
 
 ### Quick Tasks Completed
 
@@ -134,8 +109,8 @@ None yet.
 
 ## Session Continuity
 
-Last activity: 2026-04-24 — Milestone v1.1 started
-Stopped at: Defining requirements for v1.1
+Last activity: 2026-04-24 — v1.1 roadmap created (Phases 6-8)
+Stopped at: Roadmap complete, ready to plan Phase 6
 Resume file: None
 
 ### Active Local Services

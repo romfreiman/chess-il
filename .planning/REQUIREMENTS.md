@@ -196,12 +196,23 @@ Which phases cover which requirements. Updated during roadmap creation.
 | COMP-03 | Phase 5 | Deferred |
 | COMP-04 | Phase 5 | Complete |
 | COMP-05 | Phase 5 | Deferred |
+| CSCRP-01 | Phase 6 | Pending |
+| CSCRP-02 | Phase 6 | Pending |
+| CSRCH-01 | Phase 7 | Pending |
+| CSRCH-02 | Phase 7 | Pending |
+| CSRCH-03 | Phase 7 | Pending |
+| CSRCH-04 | Phase 7 | Pending |
+| CRES-01 | Phase 7 | Pending |
+| CRES-02 | Phase 7 | Pending |
+| CRES-03 | Phase 7 | Pending |
+| EXPORT-01 | Phase 8 | Pending |
+| EXPORT-02 | Phase 8 | Pending |
+| EXPORT-03 | Phase 8 | Pending |
 
 **Coverage:**
-- v1 requirements: 44 total
-- Mapped to phases: 44
-- Unmapped: 0
+- v1 requirements: 44 total, mapped: 44, unmapped: 0
+- v1.1 requirements: 12 total, mapped: 12, unmapped: 0
 
 ---
 *Requirements defined: 2026-04-19*
-*Last updated: 2026-04-24 after v1.1 milestone requirements*
+*Last updated: 2026-04-24 -- v1.1 roadmap phases 6-8 mapped*

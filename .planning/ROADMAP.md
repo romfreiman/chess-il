@@ -1,8 +1,9 @@
 # Roadmap: Chess IL Dashboard
 
-## Overview
+## Milestones
 
-This roadmap delivers a mobile-first Hebrew dashboard for Israeli Chess Federation player statistics. The journey starts with the data pipeline (scraping chess.org.il and caching in Supabase), builds out the home page and app shell with RTL navigation, then delivers the core player dashboard with charts and tables, adds polish and persistence features, and culminates with the player comparison differentiator. Each phase delivers a coherent, verifiable capability that builds on the previous.
+- 🚧 **v1.0 MVP** - Phases 1-5 (in progress)
+- 📋 **v1.1 Club Player Search & Export** - Phases 6-8 (planned)
 
 ## Phases
 
@@ -12,13 +13,27 @@ This roadmap delivers a mobile-first Hebrew dashboard for Israeli Chess Federati
 
 Decimal phases appear between their surrounding integers in numeric order.
 
+<details>
+<summary>v1.0 MVP (Phases 1-5) - IN PROGRESS</summary>
+
 - [ ] **Phase 1: Data Pipeline** - Scrape chess.org.il player data, cache in Supabase, serve via REST API
 - [ ] **Phase 2: Home & App Shell** - Search page, RTL layout, routing, navbar, responsive foundation
 - [ ] **Phase 3: Player Dashboard** - Full player stats page with header, metrics, charts, and tournament table
 - [ ] **Phase 4: Polish & Persistence** - Dark mode, loading states, error handling, save/follow players
 - [ ] **Phase 5: Player Comparison** - Side-by-side comparison page with overlay charts and shared tournaments
 
+</details>
+
+### v1.1 Club Player Search & Export
+
+- [ ] **Phase 6: Club Scraping & API** - Scrape club list and player search from chess.org.il, serve via REST endpoints
+- [ ] **Phase 7: Search UI & Results** - Club search page with dropdown, age filters, results table, and checkboxes
+- [ ] **Phase 8: CSV Export** - Export selected or all search results to Hebrew-compatible CSV
+
 ## Phase Details
+
+<details>
+<summary>v1.0 MVP Phase Details (Phases 1-5)</summary>
 
 ### Phase 1: Data Pipeline
 **Goal**: Any player's data from chess.org.il can be fetched, cached, and served as structured JSON via a REST endpoint
@@ -104,15 +119,55 @@ Plans:
 - [x] 05-01-PLAN.md — usePlayer empty-ID guard, PlayerPicker, CompareChart with mergeRatingHistories, second mock fixture, tests
 - [ ] 05-02-PLAN.md — CompareHeader (desktop columns / mobile tabs), ComparePage full wiring with state machine, integration tests, visual checkpoint
 
+</details>
+
+### Phase 6: Club Scraping & API
+**Goal**: Backend can scrape the full club list and search for players by club and age range from chess.org.il, serving results via two new REST endpoints
+**Depends on**: Phase 5 (v1.0 complete)
+**Requirements**: CSCRP-01, CSCRP-02
+**Success Criteria** (what must be TRUE):
+  1. `GET /api/clubs` returns a JSON array of all Israeli chess clubs with id and name fields, suitable for populating a dropdown
+  2. `GET /api/clubs/search?club=CLUB_ID&minAge=8&maxAge=14` returns a JSON array of matching players with name, ID, rating, club, and birth year
+  3. The 3-step ASP.NET postback flow (GET viewstate, expand advanced panel, POST with filters) completes within the Netlify Function timeout
+  4. Invalid or missing parameters return clear error responses with appropriate HTTP status codes
+**Plans**: TBD
+
+### Phase 7: Search UI & Results
+**Goal**: Users can search for players by selecting a club and age range, view results in a table, and select individual or all players via checkboxes
+**Depends on**: Phase 6
+**Requirements**: CSRCH-01, CSRCH-02, CSRCH-03, CSRCH-04, CRES-01, CRES-02, CRES-03
+**Success Criteria** (what must be TRUE):
+  1. User can navigate to the club search page from the main navbar
+  2. User can select a club from a searchable dropdown and set min/max age, then submit to see matching players in a results table
+  3. A loading indicator is visible during the search request, and the page handles errors with a Hebrew message
+  4. User can select individual players via row checkboxes and toggle all players with a select-all checkbox in the table header
+  5. Results table displays player name, ID, rating, club, and age, and renders correctly on mobile (375px)
+**Plans**: TBD
+**UI hint**: yes
+
+### Phase 8: CSV Export
+**Goal**: Users can export selected or all search results to a CSV file that opens correctly in Microsoft Excel with Hebrew characters
+**Depends on**: Phase 7
+**Requirements**: EXPORT-01, EXPORT-02, EXPORT-03
+**Success Criteria** (what must be TRUE):
+  1. User can click an export button to download a CSV of the currently selected players (name, ID, rating, club, age, rank)
+  2. User can export all search results when no specific selection is made
+  3. The downloaded CSV file opens in Microsoft Excel with Hebrew characters displayed correctly (UTF-8 BOM encoding)
+  4. CSV fields containing commas or double quotes are properly escaped per RFC 4180
+**Plans**: TBD
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 
-| Phase | Plans Complete | Status | Completed |
-|-------|----------------|--------|-----------|
-| 1. Data Pipeline | 1/3 | In Progress | - |
-| 2. Home & App Shell | 2/3 | In Progress |  |
-| 3. Player Dashboard | 0/3 | Planned    |  |
-| 4. Polish & Persistence | 0/2 | Planned | - |
-| 5. Player Comparison | 0/2 | Planned | - |
+| Phase | Milestone | Plans Complete | Status | Completed |
+|-------|-----------|----------------|--------|-----------|
+| 1. Data Pipeline | v1.0 | 3/3 | In Progress | - |
+| 2. Home & App Shell | v1.0 | 3/3 | In Progress | - |
+| 3. Player Dashboard | v1.0 | 2/3 | In Progress | - |
+| 4. Polish & Persistence | v1.0 | 0/2 | Not started | - |
+| 5. Player Comparison | v1.0 | 1/2 | In Progress | - |
+| 6. Club Scraping & API | v1.1 | 0/? | Not started | - |
+| 7. Search UI & Results | v1.1 | 0/? | Not started | - |
+| 8. CSV Export | v1.1 | 0/? | Not started | - |
