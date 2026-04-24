@@ -115,6 +115,7 @@ None yet.
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
+| 260424-004 | Fix checkbox overlap with player name — inline round toggle | 2026-04-24 | 630d159 | - |
 | 260424-hyx | Replace CompareSelector dropdowns with card checkboxes and floating compare button | 2026-04-24 | 5af7f57 | [260424-hyx-replace-compareselector-dropdowns-with-c](./quick/260424-hyx-replace-compareselector-dropdowns-with-c/) |
 | 260424-hqi | Add player comparison selection on home screen with query param pre-selection | 2026-04-24 | f1e4be2 | [260424-hqi-add-player-comparison-selection-home](./quick/260424-hqi-add-player-comparison-selection-home/) |
 | 260424-h8a | Add search by player name on home screen with auto-detect ID vs name | 2026-04-24 | e6ae38e | [260424-h8a-add-search-by-player-name-on-the-home-sc](./quick/260424-h8a-add-search-by-player-name-on-the-home-sc/) |
@@ -133,8 +134,8 @@ None yet.
 
 ## Session Continuity
 
-Last activity: 2026-04-24 - Completed quick task 260424-hyx: Replace CompareSelector with card checkboxes
-Stopped at: Completed quick task 260424-hyx
+Last activity: 2026-04-24 - Fix checkbox overlap with player name — inline round toggle
+Stopped at: Fixed compare checkbox UI (630d159)
 Resume file: None
 
 ### Active Local Services
