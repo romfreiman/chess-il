@@ -39,7 +39,10 @@ export function MetricCards({ player, tournaments }: MetricCardsProps) {
       {/* Current Rating */}
       <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm p-4">
         <TrendingUp className="w-5 h-5 text-primary" />
-        <div className="text-2xl font-bold text-gray-900 dark:text-gray-50 mt-2">
+        <div className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+          {'\u05D3\u05D9\u05E8\u05D5\u05D2 \u05E0\u05D5\u05DB\u05D7\u05D9'}
+        </div>
+        <div className="text-2xl font-bold text-gray-900 dark:text-gray-50">
           {player.rating}
         </div>
         {player.expectedRating !== null && (
@@ -53,9 +56,6 @@ export function MetricCards({ player, tournaments }: MetricCardsProps) {
             {'\u05E6\u05E4\u05D5\u05D9: '}{player.expectedRating}
           </div>
         )}
-        <div className="text-sm text-gray-500 dark:text-gray-400">
-          {'\u05D3\u05D9\u05E8\u05D5\u05D2 \u05E0\u05D5\u05DB\u05D7\u05D9'}
-        </div>
       </div>
 
       {/* National Rank */}
