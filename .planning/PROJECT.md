@@ -8,6 +8,16 @@ A modern, mobile-first web dashboard for viewing Israeli Chess Federation player
 
 Any user can enter a player ID and instantly see a beautiful, data-rich dashboard of that player's chess rating history, tournament results, and performance stats.
 
+## Current Milestone: v1.1 Club Player Search & Export
+
+**Goal:** A public search page where users can find players by club and age range, select them, and export to CSV.
+
+**Target features:**
+- Scrape club list from chess.org.il for a dropdown selector
+- Scrape player search results from chess.org.il by club + age range (min/max age)
+- Display results in a table with select-all / individual checkboxes
+- Export selected players to CSV (name, ID, rating, club, age, rank)
+
 ## Requirements
 
 ### Validated
@@ -83,4 +93,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-23 after Phase 5 completion — player comparison page with side-by-side viewing, dual rating chart, responsive layout*
+*Last updated: 2026-04-24 — Milestone v1.1 started: Club Player Search & Export*

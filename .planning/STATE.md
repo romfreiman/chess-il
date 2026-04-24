@@ -1,10 +1,10 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: milestone
-status: Milestone complete — audit passed (tech_debt), ready for /gsd:complete-milestone
-stopped_at: v1.0 milestone audit complete, UAT passed 7/7
-last_updated: "2026-04-23T12:13:40.000Z"
+milestone: v1.1
+milestone_name: Club Player Search & Export
+status: Defining requirements
+stopped_at: Milestone v1.1 started
+last_updated: "2026-04-24T10:00:00.000Z"
 progress:
   total_phases: 5
   completed_phases: 5
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-20)
 
 **Core value:** Any user can enter a player ID and instantly see a beautiful, data-rich dashboard of that player's chess rating history, tournament results, and performance stats.
-**Current focus:** Phase 05 — player-comparison
+**Current focus:** Milestone v1.1 — Club Player Search & Export
 
 ## Current Position
 
-Phase: 05
-Plan: Not started
+Phase: Not started (defining requirements)
+Plan: —
 
 ## Performance Metrics
 
@@ -134,8 +134,8 @@ None yet.
 
 ## Session Continuity
 
-Last activity: 2026-04-24 - Fix checkbox overlap with player name — inline round toggle
-Stopped at: Fixed compare checkbox UI (630d159)
+Last activity: 2026-04-24 — Milestone v1.1 started
+Stopped at: Defining requirements for v1.1
 Resume file: None
 
 ### Active Local Services
