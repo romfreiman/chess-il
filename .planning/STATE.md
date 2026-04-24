@@ -115,6 +115,9 @@ None yet.
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
+| 260424-001 | Change pending label from בהמתנה to בעדכון הבא to match source website | 2026-04-24 | 328b1ba | - |
+| 260424-002 | Make player ID copyable on saved player cards | 2026-04-24 | eecb585 | - |
+| 260424-003 | Fix top-level await for Netlify CJS bundling + globalThis build fix | 2026-04-24 | 56469bb | - |
 | 260423-lm8 | Expand rating chart to full card width, add rating label to saved cards, remove misleading games count | 2026-04-23 | 74d660e | - |
 | 260423-lm4 | Move rating chart toggle icons next to title (RTL fix) | 2026-04-23 | f76feef | - |
 | 260423-lly | Fix games count mismatch between donut chart and משחקים metric | 2026-04-23 | 6fcf179 | - |
@@ -126,8 +129,8 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-23T12:50:00.000Z
-Stopped at: Batch of UI quick tasks — cross-tab sync, player ID display, games count fix, chart layout, saved card labels
+Last session: 2026-04-24
+Stopped at: Netlify deployment setup (Supabase + Netlify accounts created, code pushed, build fixes applied), pending label fix, copyable player ID
 Resume file: None
 
 ### Active Local Services
