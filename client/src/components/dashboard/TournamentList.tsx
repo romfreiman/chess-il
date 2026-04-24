@@ -30,7 +30,7 @@ function RatingChangeBadge({
       )}
       {isPending ? (
         <span className="text-sm font-bold bg-pending/10 text-pending px-2 py-1 rounded-full">
-          בהמתנה
+          בעדכון הבא
         </span>
       ) : change > 0 ? (
         <span className="inline-flex items-center gap-0.5 text-sm font-bold text-positive">
