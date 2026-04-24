@@ -45,7 +45,7 @@ const noViewstateHtml = `
 `;
 
 beforeEach(() => {
-  vi.restoreAllMocks();
+  vi.clearAllMocks();
 });
 
 describe('scrapeClubList', () => {
