@@ -8,7 +8,7 @@ export function PlayerHeaderSkeleton() {
       </div>
 
       {/* Line 1: Name + badge */}
-      <div className="flex items-center flex-wrap gap-3">
+      <div className="flex items-center flex-wrap gap-3 pe-14">
         <div className="h-7 w-40 bg-gray-200 dark:bg-gray-700 rounded animate-pulse" />
         <div className="h-6 w-16 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
       </div>

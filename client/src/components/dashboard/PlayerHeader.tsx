@@ -39,14 +39,14 @@ export function PlayerHeader({ player, onRefresh, isRefreshing, isSaved, isFull,
       </div>
 
       {/* Line 1: Name + ID + grade badge */}
-      <div className="flex items-center flex-wrap gap-3">
+      <div className="flex items-center flex-wrap gap-3 pe-14">
         <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-50">
           {player.name}
         </h1>
         <span className="text-sm text-gray-400 dark:text-gray-500">
           #{player.id}
         </span>
-        <span className="text-sm font-bold bg-primary/10 text-primary px-2 py-1 rounded-full">
+        <span className="text-sm font-bold bg-primary/10 text-primary px-2 py-1 rounded-full whitespace-nowrap shrink-0">
           {player.grade}
         </span>
       </div>
