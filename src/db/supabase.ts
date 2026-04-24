@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import type { PlayerData } from '../../packages/shared/types.js';
+import type { PlayerData, ClubInfo } from '../../packages/shared/types.js';
 
 const supabaseUrl = process.env.SUPABASE_URL!;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
@@ -54,5 +54,39 @@ export async function upsertPlayer(playerId: number, data: PlayerData): Promise<
       { onConflict: 'player_id' }
     );
 
+  if (error) throw error;
+}
+
+export interface CachedClubsRow {
+  id: number;
+  data: ClubInfo[];
+  updated_at: string;
+}
+
+/**
+ * Retrieves cached club list from Supabase.
+ * Returns the single row (id=1) if found, null otherwise.
+ */
+export async function getCachedClubs(): Promise<CachedClubsRow | null> {
+  const { data, error } = await supabase
+    .from('clubs')
+    .select('*')
+    .eq('id', 1)
+    .single();
+  if (error || !data) return null;
+  return data as CachedClubsRow;
+}
+
+/**
+ * Stores or updates the club list in Supabase.
+ * Uses upsert with onConflict on id for idempotent writes.
+ */
+export async function upsertClubs(clubs: ClubInfo[]): Promise<void> {
+  const { error } = await supabase
+    .from('clubs')
+    .upsert(
+      { id: 1, data: clubs, updated_at: new Date().toISOString() },
+      { onConflict: 'id' }
+    );
   if (error) throw error;
 }
