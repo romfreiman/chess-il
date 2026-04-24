@@ -78,6 +78,34 @@ Requirements for initial release. Each maps to roadmap phases.
 - [x] **NAV-01**: App has client-side routing with pages: `/`, `/player/:id`, `/compare?a=ID1&b=ID2`
 - [x] **NAV-02**: Navigation works with browser back/forward buttons
 
+## v1.1 Requirements
+
+Requirements for Club Player Search & Export milestone.
+
+### Club Search
+
+- [ ] **CSRCH-01**: User can select a club from a searchable dropdown of all Israeli chess clubs
+- [ ] **CSRCH-02**: User can set min and max age to filter players by age range
+- [ ] **CSRCH-03**: User sees a loading state while search results are being fetched
+- [ ] **CSRCH-04**: User can access the club search page from the main navigation
+
+### Club Results
+
+- [ ] **CRES-01**: User sees search results in a table showing player name, ID, rating, club, and age
+- [ ] **CRES-02**: User can select individual players via checkboxes
+- [ ] **CRES-03**: User can select/deselect all players with a single checkbox
+
+### Export
+
+- [ ] **EXPORT-01**: User can export selected players to a CSV file (name, ID, rating, club, age, rank)
+- [ ] **EXPORT-02**: User can export all search results (not just selected) to CSV
+- [ ] **EXPORT-03**: CSV file opens correctly in Excel with Hebrew characters (UTF-8 BOM encoding)
+
+### Club Scraping
+
+- [ ] **CSCRP-01**: Backend scrapes club list from chess.org.il
+- [ ] **CSCRP-02**: Backend scrapes player search results using ASP.NET postback flow with club and age filters
+
 ## v2 Requirements
 
 Deferred to future release. Tracked but not in current roadmap.
@@ -85,10 +113,18 @@ Deferred to future release. Tracked but not in current roadmap.
 ### Advanced Features
 
 - **ADV-01**: Nemesis/client rival tagging based on opponent win/loss patterns
-- **ADV-02**: Player name search (requires scraping chess.org.il search pages)
-- **ADV-03**: Club leaderboard aggregation
-- **ADV-04**: Rating prediction/extrapolation from trend data
-- **ADV-05**: Export stats as shareable image
+- **ADV-02**: Club leaderboard aggregation
+- **ADV-03**: Rating prediction/extrapolation from trend data
+- **ADV-04**: Export stats as shareable image
+
+### Advanced Filters
+
+- **AFLT-01**: User can filter by additional criteria (city, rating range, active status)
+- **AFLT-02**: User can save search presets for reuse
+
+### Pagination
+
+- **PAGE-01**: User can paginate through results beyond 250-row server limit
 
 ### Notifications
 
@@ -106,6 +142,9 @@ Explicitly excluded. Documented to prevent scope creep.
 | Real-time rating updates | chess.org.il updates ratings periodically, not real-time |
 | Push notifications | Requires backend workers and notification infrastructure |
 | Server-side saved players | Would require auth; localStorage sufficient for v1 |
+| Server-side pagination beyond 250 rows | Requires `__doPostBack` complexity; 250 covers most club/age combos |
+| Caching search results | Search results are ephemeral; no need to persist |
+| Authentication/admin gating | Page is public per user decision |
 
 ## Traceability
 
@@ -165,4 +204,4 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 ---
 *Requirements defined: 2026-04-19*
-*Last updated: 2026-04-19 after roadmap creation*
+*Last updated: 2026-04-24 after v1.1 milestone requirements*
