@@ -1,5 +1,6 @@
 import { HeroSearch } from '../components/search/HeroSearch';
 import { PlayerGrid } from '../components/players/PlayerGrid';
+import { CompareSelector } from '../components/players/CompareSelector';
 import { EmptyState } from '../components/players/EmptyState';
 import { useSavedPlayersContext } from '../context/SavedPlayersContext';
 
@@ -12,7 +13,12 @@ export function HomePage() {
         <HeroSearch />
       </div>
       {savedPlayers.length > 0 ? (
-        <PlayerGrid players={savedPlayers} onRemove={removePlayer} />
+        <>
+          <PlayerGrid players={savedPlayers} onRemove={removePlayer} />
+          <div className="mt-6">
+            <CompareSelector players={savedPlayers} />
+          </div>
+        </>
       ) : (
         <EmptyState />
       )}
