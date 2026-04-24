@@ -101,8 +101,8 @@ export async function searchPlayers(query: string): Promise<SearchResult[]> {
         return; // Skip rows without a valid ID
       }
 
-      // Column 8 (index 7): Club
-      const clubText = cells.eq(7).text().trim();
+      // Column 7 (index 6): Club
+      const clubText = cells.eq(6).text().replace(/\s+/g, ' ').trim();
       const club = clubText || null;
 
       // Column 10 (index 9): Israeli rating
