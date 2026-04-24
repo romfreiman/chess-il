@@ -115,6 +115,7 @@ None yet.
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
+| 260424-h1i | Fix player header mobile layout — badge overlap with action buttons | 2026-04-24 | 8ee7881 | [260424-h1i-fix-player-header-mobile-layout-badge-ov](./quick/260424-h1i-fix-player-header-mobile-layout-badge-ov/) |
 | 260424-001 | Change pending label from בהמתנה to בעדכון הבא to match source website | 2026-04-24 | 328b1ba | - |
 | 260424-002 | Make player ID copyable on saved player cards | 2026-04-24 | eecb585 | - |
 | 260424-003 | Fix top-level await for Netlify CJS bundling + globalThis build fix | 2026-04-24 | 56469bb | - |
@@ -129,7 +130,7 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-24
+Last activity: 2026-04-24 - Completed quick task 260424-h1i: Fix player header mobile layout
 Stopped at: Netlify deployment setup (Supabase + Netlify accounts created, code pushed, build fixes applied), pending label fix, copyable player ID
 Resume file: None
 
