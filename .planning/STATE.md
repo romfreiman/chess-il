@@ -115,6 +115,7 @@ None yet.
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
+| 260424-hyx | Replace CompareSelector dropdowns with card checkboxes and floating compare button | 2026-04-24 | 5af7f57 | [260424-hyx-replace-compareselector-dropdowns-with-c](./quick/260424-hyx-replace-compareselector-dropdowns-with-c/) |
 | 260424-001 | Change pending label from בהמתנה to בעדכון הבא to match source website | 2026-04-24 | 328b1ba | - |
 | 260424-002 | Make player ID copyable on saved player cards | 2026-04-24 | eecb585 | - |
 | 260424-003 | Fix top-level await for Netlify CJS bundling + globalThis build fix | 2026-04-24 | 56469bb | - |
@@ -130,7 +131,7 @@ None yet.
 ## Session Continuity
 
 Last session: 2026-04-24
-Stopped at: Netlify deployment setup (Supabase + Netlify accounts created, code pushed, build fixes applied), pending label fix, copyable player ID
+Stopped at: Completed quick-260424-hyx (replace CompareSelector with card checkboxes)
 Resume file: None
 
 ### Active Local Services
