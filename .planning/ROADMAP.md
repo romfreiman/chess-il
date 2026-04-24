@@ -130,7 +130,11 @@ Plans:
   2. `GET /api/clubs/search?club=CLUB_ID&minAge=8&maxAge=14` returns a JSON array of matching players with name, ID, rating, club, and birth year
   3. The 3-step ASP.NET postback flow (GET viewstate, expand advanced panel, POST with filters) completes within the Netlify Function timeout
   4. Invalid or missing parameters return clear error responses with appropriate HTTP status codes
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 06-01-PLAN.md — Shared types (ClubInfo, ClubSearchResult), club scraper module (2-step club list + 3-step player search), test fixtures and unit tests
+- [ ] 06-02-PLAN.md — Club cache layer (Supabase + SQLite, 7-day TTL), Express router for /api/clubs endpoints, entry point registration, route tests
 
 ### Phase 7: Search UI & Results
 **Goal**: Users can search for players by selecting a club and age range, view results in a table, and select individual or all players via checkboxes
@@ -168,6 +172,6 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 3. Player Dashboard | v1.0 | 2/3 | In Progress | - |
 | 4. Polish & Persistence | v1.0 | 0/2 | Not started | - |
 | 5. Player Comparison | v1.0 | 1/2 | In Progress | - |
-| 6. Club Scraping & API | v1.1 | 0/? | Not started | - |
+| 6. Club Scraping & API | v1.1 | 0/2 | Not started | - |
 | 7. Search UI & Results | v1.1 | 0/? | Not started | - |
 | 8. CSV Export | v1.1 | 0/? | Not started | - |
