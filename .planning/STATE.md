@@ -2,16 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: MVP
-status: planning
-stopped_at: Phase 6 context gathered
-last_updated: "2026-04-24T11:29:05.619Z"
-last_activity: 2026-04-24 — v1.1 roadmap created (Phases 6-8)
+status: Ready to plan
+stopped_at: Completed 06-02-PLAN.md
+last_updated: "2026-04-24T12:11:26.561Z"
+last_activity: 2026-04-24
 progress:
-  total_phases: 8
-  completed_phases: 5
-  total_plans: 13
-  completed_plans: 13
-  percent: 60
+  total_phases: 3
+  completed_phases: 1
+  total_plans: 2
+  completed_plans: 2
 ---
 
 # Project State
@@ -22,16 +21,12 @@ See: .planning/PROJECT.md (updated 2026-04-24)
 
 **Core value:** Any user can enter a player ID and instantly see a beautiful, data-rich dashboard of that player's chess rating history, tournament results, and performance stats.
 **Current milestone:** v1.1 Club Player Search & Export
-**Current focus:** Phase 6 - Club Scraping & API
+**Current focus:** Phase 06 — club-scraping-api
 
 ## Current Position
 
-Phase: 6 of 8 (Club Scraping & API)
-Plan: 0 of ? in current phase
-Status: Ready to plan
-Last activity: 2026-04-24 — v1.1 roadmap created (Phases 6-8)
-
-Progress: [██████████░░░░░░] 60%
+Phase: 7
+Plan: Not started
 
 ## Performance Metrics
 
@@ -64,6 +59,8 @@ Progress: [██████████░░░░░░] 60%
 - Trend: Stable (~4.5 min average)
 
 *Updated after each plan completion*
+| Phase 06-club-scraping-api P01 | 3min | 2 tasks | 5 files |
+| Phase 06 P02 | 4min | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -77,6 +74,9 @@ Recent decisions affecting current work:
 - [v1.1 Roadmap]: CSV export is client-side via Blob API (no server-side generation)
 - [v1.1 Roadmap]: Search results are ephemeral (no caching in Supabase)
 - [v1.1 Roadmap]: Public page, no auth gating
+- [Phase 06-club-scraping-api]: Extracted extractViewState and expandAdvancedPanel as shared helpers to avoid duplicating GET+expand steps between scrapeClubList and searchClubPlayers
+- [Phase 06]: Club list cached as single row (id=1) with JSONB data column — same pattern for Supabase and SQLite
+- [Phase 06]: Search results are ephemeral (no caching) per D-09 — only club list gets 7-day cache TTL
 
 ### Pending Todos
 
@@ -111,9 +111,9 @@ None yet.
 
 ## Session Continuity
 
-Last activity: 2026-04-24 — v1.1 roadmap created (Phases 6-8)
-Stopped at: Phase 6 context gathered
-Resume file: .planning/phases/06-club-scraping-api/06-CONTEXT.md
+Last activity: 2026-04-24
+Stopped at: Completed 06-02-PLAN.md
+Resume file: None
 
 ### Active Local Services
 

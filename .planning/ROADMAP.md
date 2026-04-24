@@ -133,7 +133,7 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 06-01-PLAN.md — Shared types (ClubInfo, ClubSearchResult), club scraper module (2-step club list + 3-step player search), test fixtures and unit tests
+- [x] 06-01-PLAN.md — Shared types (ClubInfo, ClubSearchResult), club scraper module (2-step club list + 3-step player search), test fixtures and unit tests
 - [ ] 06-02-PLAN.md — Club cache layer (Supabase + SQLite, 7-day TTL), Express router for /api/clubs endpoints, entry point registration, route tests
 
 ### Phase 7: Search UI & Results
