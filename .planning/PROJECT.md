@@ -29,6 +29,9 @@ Any user can enter a player ID and instantly see a beautiful, data-rich dashboar
 - [x] Skeleton loading states and Hebrew error messages — Validated in Phase 4: Polish & Persistence
 - [x] Save/follow players via localStorage (max 10) — Validated in Phase 4: Polish & Persistence
 - [x] Compare page for side-by-side player viewing — Validated in Phase 5: Player Comparison (COMP-02/03/05 deferred: vs label, comparison bars, shared tournaments)
+- [x] Scrape club list and player search from chess.org.il — Validated in Phase 6: Club Scraping & API
+- [x] Club list caching in Supabase with 7-day TTL — Validated in Phase 6: Club Scraping & API
+- [x] Serve club data via REST API (`GET /api/clubs`, `GET /api/clubs/search`) — Validated in Phase 6: Club Scraping & API
 
 ### Active
 
@@ -93,4 +96,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-24 — Milestone v1.1 started: Club Player Search & Export*
+*Last updated: 2026-04-24 — Phase 6 complete: Club Scraping & API*
