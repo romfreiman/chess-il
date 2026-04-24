@@ -32,6 +32,10 @@ Any user can enter a player ID and instantly see a beautiful, data-rich dashboar
 - [x] Scrape club list and player search from chess.org.il — Validated in Phase 6: Club Scraping & API
 - [x] Club list caching in Supabase with 7-day TTL — Validated in Phase 6: Club Scraping & API
 - [x] Serve club data via REST API (`GET /api/clubs`, `GET /api/clubs/search`) — Validated in Phase 6: Club Scraping & API
+- [x] Club search UI with searchable dropdown and age filter — Validated in Phase 7: Search UI & Results
+- [x] Results table with player name, ID, rating, club, age — Validated in Phase 7: Search UI & Results
+- [x] Individual and select-all checkbox selection — Validated in Phase 7: Search UI & Results
+- [x] Mobile-responsive results (table on desktop, cards on mobile) — Validated in Phase 7: Search UI & Results
 
 ### Active
 
@@ -96,4 +100,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-24 — Phase 6 complete: Club Scraping & API*
+*Last updated: 2026-04-24 — Phase 7 complete: Search UI & Results*
