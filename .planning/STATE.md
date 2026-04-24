@@ -115,6 +115,7 @@ None yet.
 
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
+| 260424-hyx | Replace CompareSelector dropdowns with card checkboxes and floating compare button | 2026-04-24 | 5af7f57 | [260424-hyx-replace-compareselector-dropdowns-with-c](./quick/260424-hyx-replace-compareselector-dropdowns-with-c/) |
 | 260424-hqi | Add player comparison selection on home screen with query param pre-selection | 2026-04-24 | f1e4be2 | [260424-hqi-add-player-comparison-selection-home](./quick/260424-hqi-add-player-comparison-selection-home/) |
 | 260424-h8a | Add search by player name on home screen with auto-detect ID vs name | 2026-04-24 | e6ae38e | [260424-h8a-add-search-by-player-name-on-the-home-sc](./quick/260424-h8a-add-search-by-player-name-on-the-home-sc/) |
 | 260424-h1i | Fix player header mobile layout — badge overlap with action buttons | 2026-04-24 | 8ee7881 | [260424-h1i-fix-player-header-mobile-layout-badge-ov](./quick/260424-h1i-fix-player-header-mobile-layout-badge-ov/) |
@@ -132,8 +133,8 @@ None yet.
 
 ## Session Continuity
 
-Last activity: 2026-04-24 - Completed quick task 260424-hqi: Add player comparison selection on home screen
-Stopped at: Completed quick task 260424-hqi
+Last activity: 2026-04-24 - Completed quick task 260424-hyx: Replace CompareSelector with card checkboxes
+Stopped at: Completed quick task 260424-hyx
 Resume file: None
 
 ### Active Local Services
