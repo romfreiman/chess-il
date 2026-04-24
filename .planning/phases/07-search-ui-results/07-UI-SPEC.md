@@ -56,7 +56,7 @@ Notes:
 - Tab labels use `text-base font-bold` when active, `text-base font-normal` when inactive (matches CompareHeader tab pattern).
 - Result count text uses `text-sm font-bold` for the number, `text-sm font-normal` for surrounding copy.
 - Table header cells use `text-xs font-bold` uppercase-style.
-- Floating action bar text uses `text-lg font-medium` (matches existing compare button).
+- Floating action bar text uses `text-base font-bold`.
 
 ---
 
@@ -133,7 +133,7 @@ Single max-age number input.
 
 | Property | Value |
 |----------|-------|
-| Style | `px-6 py-3 rounded-xl bg-primary text-white font-normal text-lg` (matches HeroSearch) |
+| Style | `px-6 py-3 rounded-xl bg-primary text-white font-normal text-base` |
 | Disabled | `disabled:opacity-50 disabled:cursor-not-allowed` when no club selected |
 | Icon | `Search` from Lucide, `h-5 w-5`, inline before text |
 | Label | `"חיפוש"` |
@@ -220,7 +220,7 @@ Appears when 1+ players are selected. Export button is placeholder for Phase 8.
 | Position | `fixed bottom-6 left-1/2 -translate-x-1/2 z-50` (matches existing compare button) |
 | Style | `bg-primary text-white rounded-full px-8 py-3 shadow-lg` |
 | Animation | `animate-[bounce_0.5s_ease-in-out_1]` on appearance (matches compare button) |
-| Text | `"נבחרו {N} שחקנים"` — `text-lg font-medium` |
+| Text | `"נבחרו {N} שחקנים"` — `text-base font-bold` |
 | Export button | Disabled placeholder: `"ייצוא CSV"` with `Download` icon, `opacity-50 cursor-not-allowed` (enabled in Phase 8) |
 | Layout | Flex row: count text on start, export button on end, gap-4 |
 | Disappears | When selection count drops to 0 |
