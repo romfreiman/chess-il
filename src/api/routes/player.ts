@@ -3,8 +3,25 @@ import type { Request, Response } from 'express';
 import type { ApiResponse, ApiError } from '../../../packages/shared/types.js';
 import { scrapePlayer } from '../../scraper/index.js';
 import { getCachedPlayer, isStale, upsertPlayer } from '../../db/index.js';
+import { searchPlayers } from '../../scraper/search.js';
 
 export const playerRouter = Router();
+
+// Search route MUST be before /:id to prevent Express matching "search" as an ID
+playerRouter.get('/search', async (req: Request, res: Response) => {
+  const q = (req.query.q as string || '').trim();
+
+  if (!q || q.length < 2) {
+    return res.json([]);
+  }
+
+  try {
+    const results = await searchPlayers(q);
+    return res.json(results);
+  } catch {
+    return res.json([]);
+  }
+});
 
 playerRouter.get('/:id', async (req: Request, res: Response) => {
   const idParam = req.params.id as string;

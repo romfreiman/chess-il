@@ -2,7 +2,9 @@ import { useState, FormEvent, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import { RecentSuggestions } from './RecentSuggestions';
+import { SearchResults } from './SearchResults';
 import { useRecentSearches } from '../../hooks/useRecentSearches';
+import { usePlayerSearch } from '../../hooks/usePlayerSearch';
 
 export function HeroSearch() {
   const [query, setQuery] = useState('');
@@ -11,8 +13,11 @@ export function HeroSearch() {
   const { searches, addSearch } = useRecentSearches();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const isValid = /^\d+$/.test(query) && parseInt(query, 10) > 0;
-  const hasNonNumeric = query.length > 0 && !/^\d+$/.test(query);
+  const isIdMode = /^\d+$/.test(query);
+  const isNameMode = query.length > 0 && !isIdMode;
+  const isValid = isIdMode && parseInt(query, 10) > 0;
+
+  const { results, loading: searchLoading } = usePlayerSearch(query);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -28,12 +33,19 @@ export function HeroSearch() {
     navigate(`/player/${id}`);
   };
 
+  const handleSearchSelect = (id: number) => {
+    const idStr = String(id);
+    setQuery(idStr);
+    setShowSuggestions(false);
+    addSearch(idStr);
+    navigate(`/player/${id}`);
+  };
+
   return (
     <div ref={containerRef} className="relative w-full max-w-md mx-auto">
       <form onSubmit={handleSubmit} className="flex gap-3">
         <input
           type="text"
-          inputMode="numeric"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onFocus={() => setShowSuggestions(true)}
@@ -41,7 +53,7 @@ export function HeroSearch() {
             // Delay to allow click on suggestion
             setTimeout(() => setShowSuggestions(false), 150);
           }}
-          placeholder="הזינו מספר שחקן"
+          placeholder={"\u05D7\u05E4\u05E9\u05D5 \u05DC\u05E4\u05D9 \u05E9\u05DD \u05D0\u05D5 \u05DE\u05E1\u05E4\u05E8 \u05E9\u05D7\u05E7\u05DF"}
           className="flex-1 px-3 py-3 rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 dark:text-gray-100 dark:placeholder-gray-400 text-lg text-start focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
         />
         <button
@@ -50,14 +62,15 @@ export function HeroSearch() {
           className="px-6 py-3 rounded-xl bg-primary text-white font-normal disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-600 transition-colors flex items-center gap-2"
         >
           <Search className="h-5 w-5" />
-          חפש
+          {"\u05D7\u05E4\u05E9"}
         </button>
       </form>
-      {hasNonNumeric && (
-        <p className="text-sm text-red-500 dark:text-red-400 mt-2 text-start" role="alert">
-          מספר שחקן חייב להכיל ספרות בלבד
-        </p>
-      )}
+      <SearchResults
+        results={results}
+        loading={searchLoading}
+        visible={isNameMode && showSuggestions}
+        onSelect={handleSearchSelect}
+      />
       <RecentSuggestions
         suggestions={searches}
         onSelect={handleSelect}

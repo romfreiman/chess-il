@@ -50,6 +50,14 @@ export interface ApiResponse {
   };
 }
 
+export interface SearchResult {
+  id: number;
+  name: string;
+  rating: number | null;
+  club: string | null;
+  grade: string | null;
+}
+
 export interface ApiError {
   error: string;
   message: string;
