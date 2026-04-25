@@ -93,11 +93,11 @@ export function CompareChart({ playerAName, playerBName, dataA, dataB }: Compare
         <div className="flex justify-end gap-4 mb-2">
           <div className="flex items-center gap-1">
             <span className="w-2 h-2 rounded-full" style={{ backgroundColor: COLORS.primary }} />
-            <span className="text-sm">{playerAName}</span>
+            <span className="text-sm text-gray-700 dark:text-gray-300">{playerAName}</span>
           </div>
           <div className="flex items-center gap-1">
             <span className="w-2 h-2 rounded-full" style={{ backgroundColor: '#A855F7' }} />
-            <span className="text-sm">{playerBName}</span>
+            <span className="text-sm text-gray-700 dark:text-gray-300">{playerBName}</span>
           </div>
         </div>
       </div>

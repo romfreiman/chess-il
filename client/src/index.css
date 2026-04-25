@@ -6,4 +6,8 @@
   html {
     font-family: 'Heebo', sans-serif;
   }
+
+  .dark .recharts-cartesian-axis-tick text {
+    fill: #d1d5db;
+  }
 }
