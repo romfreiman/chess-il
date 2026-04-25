@@ -127,9 +127,12 @@ export function HomePage() {
     if (tab === 'player') {
       setSearchParams({}, { replace: true });
     } else {
-      setSearchParams({ tab: 'clubs' }, { replace: true });
+      const params: Record<string, string> = { tab: 'clubs' };
+      if (searchClubId !== null) params.club = String(searchClubId);
+      if (searchMaxAge !== null) params.maxAge = String(searchMaxAge);
+      setSearchParams(params, { replace: true });
     }
-  }, [setSearchParams]);
+  }, [setSearchParams, searchClubId, searchMaxAge]);
 
   // --- Render ---
 
@@ -199,6 +202,8 @@ export function HomePage() {
             clubs={clubs}
             clubsLoading={clubsLoading}
             onSearch={handleClubSearch}
+            initialClubId={urlClubId ? parseInt(urlClubId, 10) : null}
+            initialMaxAge={urlMaxAge ? parseInt(urlMaxAge, 10) : null}
           />
 
           {/* Results area */}

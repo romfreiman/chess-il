@@ -1,4 +1,4 @@
-import { useState, FormEvent } from 'react';
+import { useState, useEffect, FormEvent } from 'react';
 import { Search } from 'lucide-react';
 import type { ClubInfo } from '@shared/types';
 import { ClubCombobox } from './ClubCombobox';
@@ -7,11 +7,20 @@ interface ClubSearchFormProps {
   clubs: ClubInfo[];
   clubsLoading: boolean;
   onSearch: (clubId: number, maxAge: number | null) => void;
+  initialClubId?: number | null;
+  initialMaxAge?: number | null;
 }
 
-export function ClubSearchForm({ clubs, clubsLoading, onSearch }: ClubSearchFormProps) {
+export function ClubSearchForm({ clubs, clubsLoading, onSearch, initialClubId, initialMaxAge }: ClubSearchFormProps) {
   const [selectedClub, setSelectedClub] = useState<ClubInfo | null>(null);
-  const [maxAge, setMaxAge] = useState('');
+  const [maxAge, setMaxAge] = useState(initialMaxAge ? String(initialMaxAge) : '');
+
+  useEffect(() => {
+    if (initialClubId && clubs.length > 0 && !selectedClub) {
+      const match = clubs.find((c) => c.id === initialClubId);
+      if (match) setSelectedClub(match);
+    }
+  }, [initialClubId, clubs, selectedClub]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
