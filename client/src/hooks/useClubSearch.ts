@@ -1,6 +1,12 @@
 import { useState, useRef, useCallback } from 'react';
 import type { ClubSearchResult } from '@shared/types';
 
+const searchCache = new Map<string, ClubSearchResult[]>();
+
+function cacheKey(clubId: number, maxAge: number | null): string {
+  return `${clubId}:${maxAge ?? ''}`;
+}
+
 interface UseClubSearchResult {
   results: ClubSearchResult[];
   loading: boolean;
@@ -17,7 +23,14 @@ export function useClubSearch(clubId: number | null, maxAge: number | null): Use
   const search = useCallback(async () => {
     if (clubId === null) return;
 
-    // Abort any in-flight request
+    const key = cacheKey(clubId, maxAge);
+    const cached = searchCache.get(key);
+    if (cached) {
+      setResults(cached);
+      setError(null);
+      return;
+    }
+
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
     }
@@ -47,10 +60,11 @@ export function useClubSearch(clubId: number | null, maxAge: number | null): Use
       }
 
       const data: ClubSearchResult[] = await res.json();
+      searchCache.set(key, data);
       setResults(data);
     } catch (e) {
       if (e instanceof Error && e.name === 'AbortError') {
-        return; // Ignore aborted requests
+        return;
       }
       setError('שגיאה בחיפוש');
       setResults([]);
