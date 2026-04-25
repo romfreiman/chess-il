@@ -48,11 +48,10 @@ export function generateFilename(clubName: string): string {
 }
 
 async function saveWithPicker(blob: Blob, suggestedName: string): Promise<boolean> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const picker = (window as any).showSaveFilePicker;
-  if (typeof picker !== 'function') return false;
+  if (!('showSaveFilePicker' in window)) return false;
   try {
-    const handle = await picker({
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handle = await (window as any).showSaveFilePicker({
       suggestedName,
       types: [{ description: 'CSV', accept: { 'text/csv': ['.csv'] } }],
     });
@@ -60,8 +59,9 @@ async function saveWithPicker(blob: Blob, suggestedName: string): Promise<boolea
     await writable.write(blob);
     await writable.close();
     return true;
-  } catch {
-    return true;
+  } catch (e: unknown) {
+    if (e instanceof DOMException && e.name === 'AbortError') return true;
+    return false;
   }
 }
 
