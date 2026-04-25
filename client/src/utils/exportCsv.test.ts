@@ -17,18 +17,18 @@ describe('generateCsvContent', () => {
     const lines = csv.split('\r\n');
     // Remove BOM from first line
     const header = lines[0].replace(/^﻿/, '');
-    expect(header).toBe('שם,מספר שחקן,דירוג,מועדון,גיל,מיקום');
+    expect(header).toBe('שם,מספר שחקן,דירוג,מועדון,גיל');
   });
 
-  it('data rows contain correct values with calculated age and 1-based rank', () => {
+  it('data rows contain correct values with calculated age', () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date('2026-04-25T14:30:00'));
 
     const csv = generateCsvContent(singlePlayer);
     const lines = csv.split('\r\n');
     const dataRow = lines[1];
-    // age = 2026 - 1985 = 41, rank = 1
-    expect(dataRow).toBe('אנדי פריימן,205001,1476,מכבי ירושלים,41,1');
+    // age = 2026 - 1985 = 41
+    expect(dataRow).toBe('אנדי פריימן,205001,1476,מכבי ירושלים,41');
 
     vi.useRealTimers();
   });
@@ -44,8 +44,8 @@ describe('generateCsvContent', () => {
     const csv = generateCsvContent(players);
     const lines = csv.split('\r\n');
     const dataRow = lines[1];
-    // rating is empty between commas: name,id,,club,age,rank
-    expect(dataRow).toBe('שחקן,100,,מועדון,26,1');
+    // rating is empty between commas: name,id,,club,age
+    expect(dataRow).toBe('שחקן,100,,מועדון,26');
 
     vi.useRealTimers();
   });
@@ -58,8 +58,8 @@ describe('generateCsvContent', () => {
     const csv = generateCsvContent(players);
     const lines = csv.split('\r\n');
     const dataRow = lines[1];
-    // age is empty between commas: name,id,rating,club,,rank
-    expect(dataRow).toBe('שחקן,100,1500,מועדון,,1');
+    // age is empty: name,id,rating,club,
+    expect(dataRow).toBe('שחקן,100,1500,מועדון,');
   });
 
   it('field containing comma is wrapped in double quotes', () => {
@@ -94,7 +94,7 @@ describe('generateCsvContent', () => {
     vi.useRealTimers();
   });
 
-  it('multiple players produce multiple data rows with sequential rank', () => {
+  it('multiple players produce multiple data rows', () => {
     const players: ClubSearchResult[] = [
       { id: 1, name: 'אחד', rating: 1500, club: 'מועדון', birthYear: 2000 },
       { id: 2, name: 'שניים', rating: 1400, club: 'מועדון', birthYear: 1990 },
@@ -108,14 +108,9 @@ describe('generateCsvContent', () => {
     const lines = csv.split('\r\n');
     // Header + 3 data rows + trailing empty string after final \r\n
     expect(lines.length).toBeGreaterThanOrEqual(4);
-    expect(lines[1]).toContain(',1'); // rank 1 at end
-    expect(lines[2]).toContain(',2'); // rank 2 at end
-    expect(lines[3]).toContain(',3'); // rank 3 at end
-
-    // Verify exact rank values at end of each line
-    expect(lines[1].endsWith(',1')).toBe(true);
-    expect(lines[2].endsWith(',2')).toBe(true);
-    expect(lines[3].endsWith(',3')).toBe(true);
+    expect(lines[1]).toBe('אחד,1,1500,מועדון,26');
+    expect(lines[2]).toBe('שניים,2,1400,מועדון,36');
+    expect(lines[3]).toBe('שלוש,3,1300,מועדון,46');
 
     vi.useRealTimers();
   });

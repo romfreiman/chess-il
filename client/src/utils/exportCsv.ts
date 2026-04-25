@@ -1,7 +1,7 @@
 import type { ClubSearchResult } from '@shared/types';
 
 const BOM = '﻿';
-const HEADER = 'שם,מספר שחקן,דירוג,מועדון,גיל,מיקום';
+const HEADER = 'שם,מספר שחקן,דירוג,מועדון,גיל';
 
 /**
  * Escape a CSV field per RFC 4180:
@@ -21,14 +21,13 @@ function escapeCsvField(value: string): string {
  */
 export function generateCsvContent(players: ClubSearchResult[]): string {
   const currentYear = new Date().getFullYear();
-  const rows = players.map((player, index) => {
+  const rows = players.map((player) => {
     const name = escapeCsvField(player.name);
     const id = String(player.id);
     const rating = player.rating !== null ? String(player.rating) : '';
     const club = escapeCsvField(player.club);
     const age = player.birthYear !== null ? String(currentYear - player.birthYear) : '';
-    const rank = String(index + 1);
-    return [name, id, rating, club, age, rank].join(',');
+    return [name, id, rating, club, age].join(',');
   });
 
   return BOM + [HEADER, ...rows].join('\r\n') + '\r\n';
