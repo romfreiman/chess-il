@@ -1,103 +1,62 @@
 ---
 gsd_state_version: 1.0
-milestone: v1.0
-milestone_name: MVP
-status: Milestone complete
-stopped_at: Completed 08-01-PLAN.md
-last_updated: "2026-04-25T08:03:13.597Z"
+milestone: v1.1
+milestone_name: Club Player Search & Export
+status: Milestone archived
+stopped_at: v1.1 milestone completed and archived
+last_updated: "2026-04-25T17:15:00.000Z"
 last_activity: 2026-04-25
 progress:
-  total_phases: 3
-  completed_phases: 3
-  total_plans: 6
-  completed_plans: 6
+  total_phases: 8
+  completed_phases: 8
+  total_plans: 19
+  completed_plans: 19
 ---
 
 # Project State
 
 ## Project Reference
 
-See: .planning/PROJECT.md (updated 2026-04-24)
+See: .planning/PROJECT.md (updated 2026-04-25)
 
 **Core value:** Any user can enter a player ID and instantly see a beautiful, data-rich dashboard of that player's chess rating history, tournament results, and performance stats.
-**Current milestone:** v1.1 Club Player Search & Export
-**Current focus:** Phase 08 — csv-export
+**Current focus:** Planning next milestone
 
 ## Current Position
 
-Phase: 08
-Plan: Not started
+Phase: None (between milestones)
+Plan: None
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 13
-- Average duration: 4.5 min
-- Total execution time: ~58 min
+- Total plans completed: 19 (13 v1.0 + 6 v1.1)
+- Average duration: ~4 min
+- Total execution time: ~76 min
 
-**By Phase:**
+**By Milestone:**
 
-| Phase | Plans | Total | Avg/Plan |
-|-------|-------|-------|----------|
-| Phase 01-data-pipeline P01 | 7min | 2 tasks | 15 files |
-| Phase 01-data-pipeline P02 | 3min | 1 tasks | 4 files |
-| Phase 02 P01 | 5min | 3 tasks | 25 files |
-| Phase 02-home-app-shell P02 | 4min | 3 tasks | 11 files |
-| Phase 02-home-app-shell P03 | 2min | 2 tasks | 5 files |
-| Phase 03-player-dashboard P01 | 6min | 2 tasks | 10 files |
-| Phase 03-player-dashboard P02 | 3min | 2 tasks | 6 files |
-| Phase 03-player-dashboard P03 | 6min | 2 tasks | 5 files |
-| Phase 04-polish-persistence P01 | 4min | 2 tasks | 11 files |
-| Phase 04-polish-persistence P02 | 4min | 2 tasks | 16 files |
-| Phase 05-player-comparison P01 | 6min | 2 tasks | 6 files |
-| Phase 05-player-comparison P02 | 4min | 2 tasks | 3 files |
-
-**Recent Trend:**
-
-- Last 5 plans: 6min, 3min, 6min, 4min, 4min, 6min, 4min
-- Trend: Stable (~4.5 min average)
-
-*Updated after each plan completion*
-| Phase 06-club-scraping-api P01 | 3min | 2 tasks | 5 files |
-| Phase 06 P02 | 4min | 2 tasks | 7 files |
-| Phase 07-search-ui-results P01 | 3min | 2 tasks | 5 files |
-| Phase 07 P02 | 3min | 2 tasks | 4 files |
-| Phase 07-search-ui-results P03 | 2min | 1 tasks | 2 files |
-| Phase 08-csv-export P01 | 3min | 2 tasks | 4 files |
+| Milestone | Phases | Plans | Tasks | Avg/Plan | Timeline |
+|-----------|--------|-------|-------|----------|----------|
+| v1.0 MVP | 5 | 13 | ~26 | ~4.5 min | 2026-04-19 → 2026-04-23 |
+| v1.1 Club Search | 3 | 6 | 11 | ~3 min | 2026-04-24 → 2026-04-25 |
 
 ## Accumulated Context
 
 ### Decisions
 
 Decisions are logged in PROJECT.md Key Decisions table.
-Recent decisions affecting current work:
-
-- [v1.1 Roadmap]: No new dependencies needed -- all v1.1 work uses existing stack (Cheerio, axios, React, Express)
-- [v1.1 Roadmap]: Club scraper is a separate module from existing search.ts (dedicated 3-step postback flow)
-- [v1.1 Roadmap]: CSV export is client-side via Blob API (no server-side generation)
-- [v1.1 Roadmap]: Search results are ephemeral (no caching in Supabase)
-- [v1.1 Roadmap]: Public page, no auth gating
-- [Phase 06-club-scraping-api]: Extracted extractViewState and expandAdvancedPanel as shared helpers to avoid duplicating GET+expand steps between scrapeClubList and searchClubPlayers
-- [Phase 06]: Club list cached as single row (id=1) with JSONB data column — same pattern for Supabase and SQLite
-- [Phase 06]: Search results are ephemeral (no caching) per D-09 — only club list gets 7-day cache TTL
-- [Phase 07-search-ui-results]: useClubSearch uses explicit search() trigger rather than auto-fetch on param change
-- [Phase 07-search-ui-results]: ClubCombobox uses onMouseDown preventDefault to prevent blur before dropdown click registers
-- [Phase 07]: calculateAge helper defined locally in Table and Cards components -- trivial logic, keeps components self-contained
-- [Phase 07-search-ui-results]: useSearchParams as single source of truth for tab state and club search filters (D-04)
-- [Phase 07-search-ui-results]: Selection state resets on new search to prevent stale selections (Pitfall 6)
-- [Phase 08-csv-export]: Pure utility function for CSV generation (not React hook) — no state/effects needed
-- [Phase 08-csv-export]: Blob API with programmatic anchor click for CSV download — no server-side generation
+All v1.0 and v1.1 decisions archived. See RETROSPECTIVE.md for lessons learned.
 
 ### Pending Todos
 
-None yet.
+None.
 
 ### Blockers/Concerns
 
-- [Phase 6]: Netlify Function timeout risk -- 3-step ASP.NET flow takes 6-9 seconds, approaching 10-second limit
-- [Phase 6]: Club list source URL needs verification (advanced search dropdown ~200 clubs vs SearchClubs.aspx ~110 clubs)
-- [Phase 6]: Pagination behavior for large clubs (>250 results) needs runtime confirmation
+- Backend API test mock path stale: 4/10 tests fail due to mock path drift (tech debt from v1.0)
+- Netlify Function timeout risk for club search (6-9 seconds for 3-step ASP.NET flow)
 
 ### Quick Tasks Completed
 
@@ -123,17 +82,5 @@ None yet.
 ## Session Continuity
 
 Last activity: 2026-04-25
-Stopped at: Completed 08-01-PLAN.md
+Stopped at: v1.1 milestone completed and archived
 Resume file: None
-
-### Active Local Services
-
-- **Frontend:** http://localhost:5173/ (Vite dev server)
-- **API:** http://localhost:3001/ (Express via `npx tsx src/dev-server.ts`)
-- **Note:** `src/dev-server.ts` is a local-only dev entry point (not committed). API proxied from Vite via `client/vite.config.ts`.
-
-### What to Review
-
-- Navigate to http://localhost:5173/player/205001 to see the rating chart with official history from ViewState chart XML (29 data points, March 2023 — March 2026)
-- Player 210498 should show 9 data points (Jan 2025 — March 2026)
-- First load will scrape live from chess.org.il and cache in local SQLite (`chess-cache.db`)

@@ -2,51 +2,53 @@
 
 ## What This Is
 
-A modern, mobile-first web dashboard for viewing Israeli Chess Federation player statistics. It scrapes player data from chess.org.il (which has no public API), caches it in Supabase, and presents rich stats, charts, and comparison tools in a clean RTL Hebrew interface.
+A modern, mobile-first web dashboard for viewing Israeli Chess Federation player statistics and club rosters. It scrapes player data and club information from chess.org.il (which has no public API), caches it in Supabase, and presents rich stats, charts, comparison tools, club player search, and CSV export in a clean RTL Hebrew interface.
 
 ## Core Value
 
 Any user can enter a player ID and instantly see a beautiful, data-rich dashboard of that player's chess rating history, tournament results, and performance stats.
 
-## Current Milestone: v1.1 Club Player Search & Export
+## Current State
 
-**Goal:** A public search page where users can find players by club and age range, select them, and export to CSV.
-
-**Target features:**
-- Scrape club list from chess.org.il for a dropdown selector
-- Scrape player search results from chess.org.il by club + age range (min/max age)
-- Display results in a table with select-all / individual checkboxes
-- Export selected players to CSV (name, ID, rating, club, age)
+**Shipped:** v1.0 MVP + v1.1 Club Player Search & Export
+**Next milestone:** Not yet planned — run `/gsd:new-milestone` to start
 
 ## Requirements
 
 ### Validated
 
-- [x] Home page with player ID search and saved players list — Validated in Phase 2: Home & App Shell
-- [x] RTL Hebrew interface throughout — Validated in Phase 2: Home & App Shell
-- [x] Mobile-first responsive design (375px minimum) — Validated in Phase 2: Home & App Shell
-- [x] Dark mode support — Validated in Phase 2: Home & App Shell
-- [x] Skeleton loading states and Hebrew error messages — Validated in Phase 4: Polish & Persistence
-- [x] Save/follow players via localStorage (max 10) — Validated in Phase 4: Polish & Persistence
-- [x] Compare page for side-by-side player viewing — Validated in Phase 5: Player Comparison (COMP-02/03/05 deferred: vs label, comparison bars, shared tournaments)
-- [x] Scrape club list and player search from chess.org.il — Validated in Phase 6: Club Scraping & API
-- [x] Club list caching in Supabase with 7-day TTL — Validated in Phase 6: Club Scraping & API
-- [x] Serve club data via REST API (`GET /api/clubs`, `GET /api/clubs/search`) — Validated in Phase 6: Club Scraping & API
-- [x] Club search UI with searchable dropdown and age filter — Validated in Phase 7: Search UI & Results
-- [x] Results table with player name, ID, rating, club, age — Validated in Phase 7: Search UI & Results
-- [x] Individual and select-all checkbox selection — Validated in Phase 7: Search UI & Results
-- [x] Mobile-responsive results (table on desktop, cards on mobile) — Validated in Phase 7: Search UI & Results
+- ✓ Home page with player ID search and saved players list — v1.0
+- ✓ RTL Hebrew interface throughout — v1.0
+- ✓ Mobile-first responsive design (375px minimum) — v1.0
+- ✓ Dark mode support — v1.0
+- ✓ Skeleton loading states and Hebrew error messages — v1.0
+- ✓ Save/follow players via localStorage (max 10) — v1.0
+- ✓ Compare page for side-by-side player viewing — v1.0 (COMP-02/03/05 deferred)
+- ✓ Scrape chess.org.il player pages and extract structured data — v1.0
+- ✓ Cache scraped data in Supabase with 24-hour freshness window — v1.0
+- ✓ Serve player data via REST API (`GET /api/player/:id`) — v1.0
+- ✓ Player dashboard with header card, metrics row, rating chart, tournament table, and win/loss donut — v1.0
+- ✓ Tournament table pagination (10 per page) — v1.0
+- ✓ Force refresh button to re-scrape ignoring cache — v1.0
+- ✓ Stale data fallback when scraping fails — v1.0
+- ✓ Scrape club list and player search from chess.org.il — v1.1
+- ✓ Club list caching in Supabase with 7-day TTL — v1.1
+- ✓ Serve club data via REST API (`GET /api/clubs`, `GET /api/clubs/search`) — v1.1
+- ✓ Club search UI with searchable dropdown and age filter — v1.1
+- ✓ Results table with player name, ID, rating, club, age — v1.1
+- ✓ Individual and select-all checkbox selection — v1.1
+- ✓ Mobile-responsive results (table on desktop, cards on mobile) — v1.1
+- ✓ Export selected players to CSV with UTF-8 BOM encoding — v1.1
 
 ### Active
 
-- [x] Export selected players to CSV with UTF-8 BOM encoding — Validated in Phase 8: CSV Export
-- [ ] Scrape chess.org.il player pages and extract structured data (player info + tournament history)
-- [ ] Cache scraped data in Supabase with 24-hour freshness window
-- [ ] Serve player data via REST API (`GET /api/player/:id`)
-- [ ] Player dashboard with header card, metrics row, rating chart, tournament table, and win/loss donut
-- [ ] Tournament table pagination (10 per page)
-- [ ] Force refresh button to re-scrape ignoring cache
-- [ ] Stale data fallback when scraping fails
+(None — next milestone not yet defined)
+
+### Deferred from v1.0
+
+- COMP-02: "vs" label between player comparison cards — user chose side-by-side approach instead
+- COMP-03: Comparison bars for relative metrics — deferred to future milestone
+- COMP-05: Shared tournaments section — deferred to future milestone
 
 ### Out of Scope
 
@@ -60,10 +62,14 @@ Any user can enter a player ID and instantly see a beautiful, data-rich dashboar
 
 - chess.org.il is an ASP.NET WebForms site with Hebrew RTL layout
 - Player pages load via GET at `chess.org.il/Players/Player.aspx?Id={id}`
+- Club search uses 3-step ASP.NET postback flow (GET viewstate → expand panel → POST filters)
 - No public API exists; HTML scraping is the only data access method
 - The scraper must use a custom User-Agent header to avoid blocks
-- Rate limiting: max one scrape per player per 24 hours
+- Rate limiting: max one scrape per player per 24 hours; club list cached 7 days
 - Test players: 205001 (Andy Freiman, ~1476 rating), 210498 (Lenny Freiman, ~1253 rating)
+- Shipped v1.0 (Phases 1-5) + v1.1 (Phases 6-8) with ~4,500 LOC TypeScript
+- Tech stack: React + Tailwind + Recharts (frontend), Express + Cheerio (backend), Supabase + SQLite (cache)
+- 163 frontend tests passing, 6/10 backend tests passing (4 fail due to stale mock path — tech debt)
 
 ## Constraints
 
@@ -78,10 +84,13 @@ Any user can enter a player ID and instantly see a beautiful, data-rich dashboar
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Cheerio over Puppeteer for scraping | Player pages load via GET, no JS rendering needed; Cheerio is lighter and faster | — Pending |
-| Supabase for caching | Provides managed Postgres with JSONB support; simple setup | — Pending |
-| localStorage for saved players | No auth complexity for MVP; user preferences are device-local | — Pending |
-| Skip __doPostBack data | Detailed game history requires complex ASP.NET form simulation; not worth the effort for v1 | — Pending |
+| Cheerio over Puppeteer for scraping | Player pages load via GET, no JS rendering needed; Cheerio is lighter and faster | ✓ Good — works for both player pages and club search |
+| Supabase for caching | Provides managed Postgres with JSONB support; simple setup | ✓ Good — SQLite fallback added for local dev |
+| localStorage for saved players | No auth complexity for MVP; user preferences are device-local | ✓ Good — cross-tab sync added via storage events |
+| Skip __doPostBack data | Detailed game history requires complex ASP.NET form simulation; not worth the effort for v1 | ✓ Good — club search uses similar 3-step postback without __doPostBack |
+| CSV export is client-side via Blob API | No server-side generation needed; simpler, no dependencies | ✓ Good — BOM encoding handles Hebrew in Excel |
+| Search results are ephemeral (no caching) | Club search results change frequently; caching adds complexity with no user value | ✓ Good — only club list is cached (7-day TTL) |
+| Shared scraper helpers (extractViewState, expandAdvancedPanel) | Avoids duplicating ASP.NET GET+expand steps between club list and player search | ✓ Good — clean separation between shared and specific logic |
 
 ## Evolution
 
@@ -101,4 +110,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-25 — Phase 8 complete: CSV Export*
+*Last updated: 2026-04-25 after v1.1 milestone*
