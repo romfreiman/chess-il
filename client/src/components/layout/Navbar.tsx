@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Home, BarChart3, Building2 } from 'lucide-react';
+import { Home, BarChart3, Building2, Github } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 
 interface NavbarProps {
@@ -47,6 +47,15 @@ export function Navbar({ savedCount, theme, onThemeToggle }: NavbarProps) {
           >
             <BarChart3 className="h-5 w-5" />
           </Link>
+          <a
+            href="https://github.com/rfreiman/chess-il"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-600 dark:text-gray-300 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+            aria-label="GitHub"
+          >
+            <Github className="h-5 w-5" />
+          </a>
           <ThemeToggle theme={theme} onToggle={onThemeToggle} />
         </div>
       </div>
