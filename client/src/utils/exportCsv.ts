@@ -47,26 +47,45 @@ export function generateFilename(clubName: string): string {
   return `${clubName}-${yyyy}-${mm}-${dd}-${hh}${min}.csv`;
 }
 
-/**
- * Export selected players from search results to a CSV file download.
- * Filters allResults to only players whose id is in selectedIds,
- * preserving the original order from allResults.
- */
-export function exportPlayersCsv(
-  allResults: ClubSearchResult[],
-  selectedIds: Set<number>,
-  clubName: string,
-): void {
-  const filtered = allResults.filter((r) => selectedIds.has(r.id));
-  const csvContent = generateCsvContent(filtered);
-  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
+async function saveWithPicker(blob: Blob, suggestedName: string): Promise<boolean> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const picker = (window as any).showSaveFilePicker;
+  if (typeof picker !== 'function') return false;
+  try {
+    const handle = await picker({
+      suggestedName,
+      types: [{ description: 'CSV', accept: { 'text/csv': ['.csv'] } }],
+    });
+    const writable = await handle.createWritable();
+    await writable.write(blob);
+    await writable.close();
+    return true;
+  } catch {
+    return true;
+  }
+}
 
+function saveWithAnchor(blob: Blob, filename: string): void {
+  const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = generateFilename(clubName);
+  a.download = filename;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+}
+
+export async function exportPlayersCsv(
+  allResults: ClubSearchResult[],
+  selectedIds: Set<number>,
+  clubName: string,
+): Promise<void> {
+  const filtered = allResults.filter((r) => selectedIds.has(r.id));
+  const csvContent = generateCsvContent(filtered);
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
+  const filename = generateFilename(clubName);
+
+  const saved = await saveWithPicker(blob, filename);
+  if (!saved) saveWithAnchor(blob, filename);
 }
