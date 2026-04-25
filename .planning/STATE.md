@@ -78,6 +78,7 @@ None.
 | 260423-kp3 | Add link to player page from comparison view | 2026-04-23 | a19c088 | - |
 | 260421-ekp | Extract official rating history from ViewState chart XML | 2026-04-21 | ef11803 | [260421-ekp-extract-official-rating-history-from-vie](./quick/260421-ekp-extract-official-rating-history-from-vie/) |
 | 260420-l9q | Fix dark mode text color on HeroSearch input | 2026-04-20 | 93db457 | [260420-l9q-fix-dark-mode-text-color-on-herosearch-i](./quick/260420-l9q-fix-dark-mode-text-color-on-herosearch-i/) |
+| 260425-sfd | Add GitHub icon link to navbar for code reference | 2026-04-25 | 077572a | [260425-sfd-add-url-and-icon-of-github-on-the-main-p](./quick/260425-sfd-add-url-and-icon-of-github-on-the-main-p/) |
 
 ## Session Continuity
 
