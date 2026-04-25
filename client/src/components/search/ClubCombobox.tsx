@@ -148,7 +148,7 @@ export function ClubCombobox({ clubs, value, onChange }: ClubComboboxProps) {
                 e.preventDefault();
               }}
               onClick={() => handleSelect(club)}
-              className={`w-full text-start px-3 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-sm ${
+              className={`w-full text-start px-3 py-2 text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer text-sm ${
                 idx === activeIndex
                   ? 'bg-gray-100 dark:bg-gray-700 font-bold'
                   : ''
