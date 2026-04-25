@@ -16,6 +16,15 @@ export default {
       borderRadius: {
         card: '12px',
       },
+      keyframes: {
+        slideUp: {
+          from: { opacity: '0', transform: 'translateY(1rem)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        'slide-up': 'slideUp 0.3s ease-out',
+      },
     },
   },
   plugins: [],

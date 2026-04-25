@@ -12,7 +12,7 @@ export function ClubFloatingBar({ count, onExport }: ClubFloatingBarProps) {
     <div
       role="status"
       aria-live="polite"
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#378ADD] text-white rounded-full px-8 py-3 shadow-lg animate-[bounce_0.5s_ease-in-out_1] flex items-center gap-4"
+      className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#378ADD] text-white rounded-full px-8 py-3 shadow-lg animate-slide-up flex items-center gap-4"
     >
       <span className="text-base font-bold">נבחרו {count} שחקנים</span>
       <button
