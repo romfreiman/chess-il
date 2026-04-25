@@ -47,45 +47,21 @@ export function generateFilename(clubName: string): string {
   return `${clubName}-${yyyy}-${mm}-${dd}-${hh}${min}.csv`;
 }
 
-async function saveWithPicker(blob: Blob, suggestedName: string): Promise<boolean> {
-  if (!('showSaveFilePicker' in window)) return false;
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const handle = await (window as any).showSaveFilePicker({
-      suggestedName,
-      types: [{ description: 'CSV', accept: { 'text/csv': ['.csv'] } }],
-    });
-    const writable = await handle.createWritable();
-    await writable.write(blob);
-    await writable.close();
-    return true;
-  } catch (e: unknown) {
-    if (e instanceof DOMException && e.name === 'AbortError') return true;
-    return false;
-  }
-}
-
-function saveWithAnchor(blob: Blob, filename: string): void {
+export function exportPlayersCsv(
+  allResults: ClubSearchResult[],
+  selectedIds: Set<number>,
+  clubName: string,
+): void {
+  const filtered = allResults.filter((r) => selectedIds.has(r.id));
+  const csvContent = generateCsvContent(filtered);
+  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
   const url = URL.createObjectURL(blob);
+
   const a = document.createElement('a');
   a.href = url;
-  a.download = filename;
+  a.download = generateFilename(clubName);
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-}
-
-export async function exportPlayersCsv(
-  allResults: ClubSearchResult[],
-  selectedIds: Set<number>,
-  clubName: string,
-): Promise<void> {
-  const filtered = allResults.filter((r) => selectedIds.has(r.id));
-  const csvContent = generateCsvContent(filtered);
-  const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8' });
-  const filename = generateFilename(clubName);
-
-  const saved = await saveWithPicker(blob, filename);
-  if (!saved) saveWithAnchor(blob, filename);
 }
