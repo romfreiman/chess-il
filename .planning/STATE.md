@@ -82,5 +82,13 @@ None.
 ## Session Continuity
 
 Last activity: 2026-04-25
-Stopped at: v1.1 milestone completed and archived
+Stopped at: v1.1 milestone archived, floating bar animation fixed (c18a28b)
 Resume file: None
+
+### Session Summary
+
+- Completed v1.1 milestone archival (2b079e1): MILESTONES.md, RETROSPECTIVE.md, PROJECT.md evolved, ROADMAP.md reorganized, REQUIREMENTS.md archived and deleted, phase dirs moved to milestones/v1.1-phases/
+- Git tag v1.1 created (local only, not pushed)
+- Fixed CSV export floating bar bounce → slide-up animation (c18a28b)
+- 9 pre-existing test failures (HeroSearch 7, PlayerGrid 1, TournamentList 1) — unrelated to this session's changes
+- Next step: `/gsd:new-milestone` to plan next milestone
