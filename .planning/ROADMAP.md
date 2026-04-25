@@ -163,7 +163,10 @@ Plans:
   2. User can export all search results when no specific selection is made
   3. The downloaded CSV file opens in Microsoft Excel with Hebrew characters displayed correctly (UTF-8 BOM encoding)
   4. CSV fields containing commas or double quotes are properly escaped per RFC 4180
-**Plans**: TBD
+**Plans**: 1 plan
+
+Plans:
+- [ ] 08-01-PLAN.md — CSV export utility (BOM encoding, RFC 4180 escaping, Hebrew headers) and ClubFloatingBar export button wiring
 
 ## Progress
 
@@ -179,4 +182,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5 → 6 → 7 → 8
 | 5. Player Comparison | v1.0 | 1/2 | In Progress | - |
 | 6. Club Scraping & API | v1.1 | 0/2 | Not started | - |
 | 7. Search UI & Results | v1.1 | 0/3 | Not started | - |
-| 8. CSV Export | v1.1 | 0/? | Not started | - |
+| 8. CSV Export | v1.1 | 0/1 | Not started | - |
