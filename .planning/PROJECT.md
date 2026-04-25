@@ -16,7 +16,7 @@ Any user can enter a player ID and instantly see a beautiful, data-rich dashboar
 - Scrape club list from chess.org.il for a dropdown selector
 - Scrape player search results from chess.org.il by club + age range (min/max age)
 - Display results in a table with select-all / individual checkboxes
-- Export selected players to CSV (name, ID, rating, club, age, rank)
+- Export selected players to CSV (name, ID, rating, club, age)
 
 ## Requirements
 
@@ -39,6 +39,7 @@ Any user can enter a player ID and instantly see a beautiful, data-rich dashboar
 
 ### Active
 
+- [x] Export selected players to CSV with UTF-8 BOM encoding — Validated in Phase 8: CSV Export
 - [ ] Scrape chess.org.il player pages and extract structured data (player info + tournament history)
 - [ ] Cache scraped data in Supabase with 24-hour freshness window
 - [ ] Serve player data via REST API (`GET /api/player/:id`)
@@ -100,4 +101,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-24 — Phase 7 complete: Search UI & Results*
+*Last updated: 2026-04-25 — Phase 8 complete: CSV Export*
