@@ -1,10 +1,52 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import { ChevronUp, ChevronDown } from 'lucide-react';
 import type { ClubSearchResult } from '../../../../packages/shared/types';
 
 function calculateAge(birthYear: number | null): number | null {
   if (birthYear === null) return null;
   return new Date().getFullYear() - birthYear;
+}
+
+type SortKey = 'name' | 'id' | 'rating' | 'club' | 'age';
+type SortDir = 'asc' | 'desc';
+
+function sortResults(results: ClubSearchResult[], key: SortKey, dir: SortDir): ClubSearchResult[] {
+  const sorted = [...results].sort((a, b) => {
+    let cmp = 0;
+    switch (key) {
+      case 'name':
+        cmp = a.name.localeCompare(b.name, 'he');
+        break;
+      case 'id':
+        cmp = a.id - b.id;
+        break;
+      case 'rating': {
+        const ra = a.rating ?? -1;
+        const rb = b.rating ?? -1;
+        cmp = ra - rb;
+        break;
+      }
+      case 'club':
+        cmp = a.club.localeCompare(b.club, 'he');
+        break;
+      case 'age': {
+        const aa = calculateAge(a.birthYear) ?? 999;
+        const ab = calculateAge(b.birthYear) ?? 999;
+        cmp = aa - ab;
+        break;
+      }
+    }
+    return cmp;
+  });
+  return dir === 'desc' ? sorted.reverse() : sorted;
+}
+
+function SortIcon({ active, dir }: { active: boolean; dir: SortDir }) {
+  if (!active) return <ChevronDown className="inline h-3 w-3 opacity-0 group-hover:opacity-40" />;
+  return dir === 'asc'
+    ? <ChevronUp className="inline h-3 w-3 text-primary" />
+    : <ChevronDown className="inline h-3 w-3 text-primary" />;
 }
 
 interface ClubResultsTableProps {
@@ -16,12 +58,27 @@ interface ClubResultsTableProps {
 
 export function ClubResultsTable({ results, selected, onToggle, onToggleAll }: ClubResultsTableProps) {
   const selectAllRef = useRef<HTMLInputElement>(null);
+  const [sortKey, setSortKey] = useState<SortKey>('rating');
+  const [sortDir, setSortDir] = useState<SortDir>('desc');
 
   useEffect(() => {
     if (selectAllRef.current) {
       selectAllRef.current.indeterminate = selected.size > 0 && selected.size < results.length;
     }
   }, [selected.size, results.length]);
+
+  const sorted = useMemo(() => sortResults(results, sortKey, sortDir), [results, sortKey, sortDir]);
+
+  const handleSort = (key: SortKey) => {
+    if (sortKey === key) {
+      setSortDir((d) => (d === 'asc' ? 'desc' : 'asc'));
+    } else {
+      setSortKey(key);
+      setSortDir(key === 'rating' ? 'desc' : 'asc');
+    }
+  };
+
+  const thClass = 'text-xs font-bold text-gray-500 dark:text-gray-400 px-4 py-3 text-start cursor-pointer select-none group hover:text-gray-700 dark:hover:text-gray-200 transition-colors';
 
   return (
     <div className="hidden sm:block w-full bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 overflow-hidden">
@@ -38,15 +95,25 @@ export function ClubResultsTable({ results, selected, onToggle, onToggleAll }: C
                 className="w-4 h-4 rounded accent-[#378ADD]"
               />
             </th>
-            <th className="text-xs font-bold text-gray-500 dark:text-gray-400 px-4 py-3 text-start">שם</th>
-            <th className="text-xs font-bold text-gray-500 dark:text-gray-400 px-4 py-3 text-start w-20">מס' שחקן</th>
-            <th className="text-xs font-bold text-gray-500 dark:text-gray-400 px-4 py-3 text-start w-16">דירוג</th>
-            <th className="text-xs font-bold text-gray-500 dark:text-gray-400 px-4 py-3 text-start">מועדון</th>
-            <th className="text-xs font-bold text-gray-500 dark:text-gray-400 px-4 py-3 text-start w-12">גיל</th>
+            <th className={thClass} onClick={() => handleSort('name')}>
+              שם <SortIcon active={sortKey === 'name'} dir={sortDir} />
+            </th>
+            <th className={`${thClass} w-20`} onClick={() => handleSort('id')}>
+              מס' שחקן <SortIcon active={sortKey === 'id'} dir={sortDir} />
+            </th>
+            <th className={`${thClass} w-16`} onClick={() => handleSort('rating')}>
+              דירוג <SortIcon active={sortKey === 'rating'} dir={sortDir} />
+            </th>
+            <th className={thClass} onClick={() => handleSort('club')}>
+              מועדון <SortIcon active={sortKey === 'club'} dir={sortDir} />
+            </th>
+            <th className={`${thClass} w-12`} onClick={() => handleSort('age')}>
+              גיל <SortIcon active={sortKey === 'age'} dir={sortDir} />
+            </th>
           </tr>
         </thead>
         <tbody>
-          {results.map((player) => (
+          {sorted.map((player) => (
             <tr
               key={player.id}
               className={
