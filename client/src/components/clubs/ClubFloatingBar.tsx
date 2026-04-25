@@ -2,9 +2,10 @@ import { Download } from 'lucide-react';
 
 interface ClubFloatingBarProps {
   count: number;
+  onExport: () => void;
 }
 
-export function ClubFloatingBar({ count }: ClubFloatingBarProps) {
+export function ClubFloatingBar({ count, onExport }: ClubFloatingBarProps) {
   if (count === 0) return null;
 
   return (
@@ -15,8 +16,9 @@ export function ClubFloatingBar({ count }: ClubFloatingBarProps) {
     >
       <span className="text-base font-bold">נבחרו {count} שחקנים</span>
       <button
-        disabled
-        className="flex items-center gap-1 opacity-50 cursor-not-allowed text-sm"
+        onClick={onExport}
+        aria-label="ייצוא שחקנים נבחרים לקובץ CSV"
+        className="flex items-center gap-1 text-sm hover:bg-white/20 active:bg-white/30 focus:outline-none focus:ring-2 focus:ring-white/50 rounded-lg px-2 py-1 transition-colors"
       >
         <Download className="h-4 w-4" />
         ייצוא CSV

@@ -12,6 +12,7 @@ import { ClubResultsCards } from '../components/clubs/ClubResultsCards';
 import { ClubResultsEmpty, ClubResultsInitial } from '../components/clubs/ClubResultsEmpty';
 import { ClubFloatingBar } from '../components/clubs/ClubFloatingBar';
 import { ErrorState } from '../components/feedback/ErrorState';
+import { exportPlayersCsv } from '../utils/exportCsv';
 
 export function HomePage() {
   const { savedPlayers, removePlayer } = useSavedPlayersContext();
@@ -121,6 +122,11 @@ export function HomePage() {
       prev.size === results.length ? new Set() : new Set(results.map((r) => r.id))
     );
   }, [results]);
+
+  const handleExport = useCallback(() => {
+    const clubName = clubs.find((c) => c.id === searchClubId)?.name ?? 'export';
+    exportPlayersCsv(results, selected, clubName);
+  }, [results, selected, clubs, searchClubId]);
 
   // Tab switching handler
   const handleTabSwitch = useCallback((tab: 'player' | 'clubs') => {
@@ -242,7 +248,7 @@ export function HomePage() {
             </>
           )}
 
-          <ClubFloatingBar count={selected.size} />
+          <ClubFloatingBar count={selected.size} onExport={handleExport} />
         </div>
       )}
     </div>
