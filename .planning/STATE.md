@@ -79,11 +79,12 @@ None.
 | 260421-ekp | Extract official rating history from ViewState chart XML | 2026-04-21 | ef11803 | [260421-ekp-extract-official-rating-history-from-vie](./quick/260421-ekp-extract-official-rating-history-from-vie/) |
 | 260420-l9q | Fix dark mode text color on HeroSearch input | 2026-04-20 | 93db457 | [260420-l9q-fix-dark-mode-text-color-on-herosearch-i](./quick/260420-l9q-fix-dark-mode-text-color-on-herosearch-i/) |
 | 260425-sfd | Add GitHub icon link to navbar for code reference | 2026-04-25 | 077572a | [260425-sfd-add-url-and-icon-of-github-on-the-main-p](./quick/260425-sfd-add-url-and-icon-of-github-on-the-main-p/) |
+| 260426-jqu | Fix 404 on clubs table query (PGRST205) - add SQL migration | 2026-04-26 | 3675b86 | [260426-jqu-fix-404-on-clubs-table-query-pgrst205-ta](./quick/260426-jqu-fix-404-on-clubs-table-query-pgrst205-ta/) |
 
 ## Session Continuity
 
-Last activity: 2026-04-25
-Stopped at: v1.1 milestone archived, floating bar animation fixed (c18a28b)
+Last activity: 2026-04-26
+Stopped at: Completed quick/260426-jqu (clubs table migration)
 Resume file: None
 
 ### Session Summary
