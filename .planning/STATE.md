@@ -83,7 +83,7 @@ None.
 
 ## Session Continuity
 
-Last activity: 2026-04-26
+Last activity: 2026-04-26 - Completed quick task 260426-jqu: Fix 404 on clubs table query - PGRST205 table not found in Supabase
 Stopped at: Completed quick/260426-jqu (clubs table migration)
 Resume file: None
 
