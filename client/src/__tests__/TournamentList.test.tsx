@@ -122,7 +122,7 @@ describe('TournamentList', () => {
   it('pending tournament shows "בהמתנה" badge', () => {
     render(<TournamentList tournaments={mockTournaments} />);
     // mockTournaments[2] is pending
-    expect(screen.getAllByText('בהמתנה').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText('בעדכון הבא').length).toBeGreaterThanOrEqual(1);
   });
 
   it('most recent tournament (index 0) shows "חדש" badge', () => {

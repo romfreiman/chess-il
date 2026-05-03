@@ -7,14 +7,14 @@ vi.mock('../../src/scraper/index.js', () => ({
   scrapePlayer: vi.fn(),
 }));
 
-vi.mock('../../src/db/supabase.js', () => ({
+vi.mock('../../src/db/index.js', () => ({
   getCachedPlayer: vi.fn(),
   isStale: vi.fn(),
   upsertPlayer: vi.fn(),
 }));
 
 import { scrapePlayer } from '../../src/scraper/index.js';
-import { getCachedPlayer, isStale, upsertPlayer } from '../../src/db/supabase.js';
+import { getCachedPlayer, isStale, upsertPlayer } from '../../src/db/index.js';
 
 const mockScrapePlayer = vi.mocked(scrapePlayer);
 const mockGetCachedPlayer = vi.mocked(getCachedPlayer);

@@ -42,7 +42,7 @@ describe('PlayerGrid', () => {
   it('each card shows player name, rating, and club', () => {
     renderWithRouter(<PlayerGrid players={mockPlayers} />);
     expect(screen.getByText('אנדי פריימן')).toBeInTheDocument();
-    expect(screen.getByText('1500')).toBeInTheDocument();
+    expect(screen.getByText(/1500/)).toBeInTheDocument();
     expect(screen.getByText('חיפה')).toBeInTheDocument();
   });
 

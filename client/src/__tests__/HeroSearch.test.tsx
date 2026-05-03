@@ -19,9 +19,9 @@ describe('HeroSearch', () => {
     localStorage.clear();
   });
 
-  it('renders search input with placeholder "הזינו מספר שחקן"', () => {
+  it('renders search input with placeholder "חפשו לפי שם או מספר שחקן"', () => {
     renderHeroSearch();
-    expect(screen.getByPlaceholderText('הזינו מספר שחקן')).toBeInTheDocument();
+    expect(screen.getByPlaceholderText('חפשו לפי שם או מספר שחקן')).toBeInTheDocument();
   });
 
   it('renders search button with text "חפש"', () => {
@@ -38,7 +38,7 @@ describe('HeroSearch', () => {
   it('search button is disabled when input is non-numeric', async () => {
     const user = userEvent.setup();
     renderHeroSearch();
-    const input = screen.getByPlaceholderText('הזינו מספר שחקן');
+    const input = screen.getByPlaceholderText('חפשו לפי שם או מספר שחקן');
     const button = screen.getByRole('button', { name: /חפש/ });
 
     await user.type(input, 'abc');
@@ -48,7 +48,7 @@ describe('HeroSearch', () => {
   it('search button is enabled when input is a valid numeric ID', async () => {
     const user = userEvent.setup();
     renderHeroSearch();
-    const input = screen.getByPlaceholderText('הזינו מספר שחקן');
+    const input = screen.getByPlaceholderText('חפשו לפי שם או מספר שחקן');
     const button = screen.getByRole('button', { name: /חפש/ });
 
     await user.type(input, '205001');
@@ -58,7 +58,7 @@ describe('HeroSearch', () => {
   it('submitting valid ID navigates to /player/:id', async () => {
     const user = userEvent.setup();
     const { router } = renderHeroSearch();
-    const input = screen.getByPlaceholderText('הזינו מספר שחקן');
+    const input = screen.getByPlaceholderText('חפשו לפי שם או מספר שחקן');
     const button = screen.getByRole('button', { name: /חפש/ });
 
     await user.type(input, '205001');
@@ -69,32 +69,9 @@ describe('HeroSearch', () => {
     });
   });
 
-  it('input has inputMode="numeric"', () => {
+  it('input accepts text for name search', () => {
     renderHeroSearch();
-    const input = screen.getByPlaceholderText('הזינו מספר שחקן');
-    expect(input).toHaveAttribute('inputMode', 'numeric');
-  });
-
-  it('shows validation error message when input contains non-numeric characters', async () => {
-    const user = userEvent.setup();
-    renderHeroSearch();
-    const input = screen.getByPlaceholderText('הזינו מספר שחקן');
-
-    await user.type(input, 'abc');
-    expect(screen.getByRole('alert')).toHaveTextContent('מספר שחקן חייב להכיל ספרות בלבד');
-  });
-
-  it('does not show validation error when input is empty', () => {
-    renderHeroSearch();
-    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
-  });
-
-  it('does not show validation error when input is valid numeric', async () => {
-    const user = userEvent.setup();
-    renderHeroSearch();
-    const input = screen.getByPlaceholderText('הזינו מספר שחקן');
-
-    await user.type(input, '12345');
-    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+    const input = screen.getByPlaceholderText('חפשו לפי שם או מספר שחקן');
+    expect(input).toHaveAttribute('type', 'text');
   });
 });
