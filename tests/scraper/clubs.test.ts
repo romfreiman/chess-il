@@ -6,7 +6,7 @@ import { resolve } from 'path';
 vi.mock('axios');
 
 import axios from 'axios';
-import { scrapeClubList, searchClubPlayers } from '../../src/scraper/clubs';
+import { scrapeClubList, searchClubPlayers, searchMultipleClubPlayers } from '../../src/scraper/clubs';
 
 const mockedAxios = vi.mocked(axios, true);
 
@@ -201,5 +201,84 @@ describe('searchClubPlayers', () => {
     const results = await searchClubPlayers(6);
 
     expect(results).toEqual([]);
+  });
+});
+
+describe('searchMultipleClubPlayers', () => {
+  it('delegates to searchClubPlayers for single club', async () => {
+    mockedAxios.get.mockResolvedValueOnce({ status: 200, data: initialPageHtml });
+    mockedAxios.post.mockResolvedValueOnce({ status: 200, data: advancedFixture });
+    mockedAxios.post.mockResolvedValueOnce({ status: 200, data: resultsFixture });
+
+    const results = await searchMultipleClubPlayers([6]);
+
+    expect(results).toHaveLength(2);
+  });
+
+  it('merges results from multiple clubs', async () => {
+    mockedAxios.get.mockResolvedValueOnce({ status: 200, data: initialPageHtml });
+    mockedAxios.post.mockResolvedValueOnce({ status: 200, data: advancedFixture });
+    mockedAxios.post.mockResolvedValueOnce({ status: 200, data: resultsFixture });
+
+    mockedAxios.get.mockResolvedValueOnce({ status: 200, data: initialPageHtml });
+    mockedAxios.post.mockResolvedValueOnce({ status: 200, data: advancedFixture });
+    mockedAxios.post.mockResolvedValueOnce({ status: 200, data: resultsFixture });
+
+    const results = await searchMultipleClubPlayers([6, 24]);
+
+    expect(results.length).toBeGreaterThan(0);
+  });
+
+  it('deduplicates players appearing in multiple clubs', async () => {
+    const sharedPlayer = { id: 999, name: 'Duplicate', rating: 1600, club: 'Club A', birthYear: 2000 };
+
+    mockedAxios.get.mockResolvedValueOnce({ status: 200, data: initialPageHtml });
+    mockedAxios.post.mockResolvedValueOnce({ status: 200, data: advancedFixture });
+    mockedAxios.post.mockResolvedValueOnce({ status: 200, data: resultsFixture });
+
+    vi.spyOn(global.console, 'error').mockImplementation(() => {});
+    mockedAxios.get.mockRejectedValueOnce(new Error('Network error'));
+
+    const results = await searchMultipleClubPlayers([6, 6]);
+
+    const idCounts = results.reduce((acc, r) => {
+      acc[r.id] = (acc[r.id] || 0) + 1;
+      return acc;
+    }, {} as Record<number, number>);
+
+    for (const id in idCounts) {
+      expect(idCounts[id]).toBe(1);
+    }
+  });
+
+  it('throws error when more than 5 clubs provided', async () => {
+    await expect(searchMultipleClubPlayers([1, 2, 3, 4, 5, 6]))
+      .rejects.toThrow('Max 5 clubs allowed');
+  });
+
+  it('returns partial results when some clubs fail', async () => {
+    mockedAxios.get.mockResolvedValueOnce({ status: 200, data: initialPageHtml });
+    mockedAxios.post.mockResolvedValueOnce({ status: 200, data: advancedFixture });
+    mockedAxios.post.mockResolvedValueOnce({ status: 200, data: resultsFixture });
+
+    mockedAxios.get.mockRejectedValueOnce(new Error('Network error'));
+
+    const results = await searchMultipleClubPlayers([6, 24]);
+
+    expect(results.length).toBeGreaterThan(0);
+  });
+
+  it('passes age filters to underlying calls', async () => {
+    mockedAxios.get.mockResolvedValueOnce({ status: 200, data: initialPageHtml });
+    mockedAxios.post.mockResolvedValueOnce({ status: 200, data: advancedFixture });
+    mockedAxios.post.mockResolvedValueOnce({ status: 200, data: resultsFixture });
+
+    await searchMultipleClubPlayers([6], 8, 14);
+
+    expect(mockedAxios.post).toHaveBeenCalledTimes(2);
+    const step3Call = mockedAxios.post.mock.calls[1];
+    const formBody = step3Call[1] as string;
+    expect(formBody).toContain('AgeFromTB=8');
+    expect(formBody).toContain('AgeTillTB=14');
   });
 });

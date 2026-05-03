@@ -126,6 +126,40 @@ export async function scrapeClubList(): Promise<ClubInfo[]> {
  * Returns up to 250 ClubSearchResult objects (server-side limit).
  * On any error, returns empty array (graceful degradation).
  */
+export async function searchMultipleClubPlayers(
+  clubIds: number[],
+  minAge?: number,
+  maxAge?: number
+): Promise<ClubSearchResult[]> {
+  if (clubIds.length > 5) {
+    throw new Error('Max 5 clubs allowed');
+  }
+
+  if (clubIds.length === 1) {
+    return searchClubPlayers(clubIds[0], minAge, maxAge);
+  }
+
+  const results = await Promise.allSettled(
+    clubIds.map((id) => searchClubPlayers(id, minAge, maxAge))
+  );
+
+  const seen = new Set<number>();
+  const merged: ClubSearchResult[] = [];
+
+  for (const result of results) {
+    if (result.status === 'fulfilled') {
+      for (const player of result.value) {
+        if (!seen.has(player.id)) {
+          seen.add(player.id);
+          merged.push(player);
+        }
+      }
+    }
+  }
+
+  return merged;
+}
+
 export async function searchClubPlayers(
   clubId: number,
   minAge?: number,

@@ -1,13 +1,8 @@
 import type { ClubSearchResult } from '@shared/types';
 
-const BOM = '﻿';
+const BOM = '\uFEFF';
 const HEADER = 'שם,מספר שחקן,דירוג,מועדון,גיל';
 
-/**
- * Escape a CSV field per RFC 4180:
- * If the field contains a comma, double quote, or newline, wrap it in double quotes
- * and double any internal double quotes.
- */
 function escapeCsvField(value: string): string {
   if (value.includes(',') || value.includes('"') || value.includes('\n') || value.includes('\r')) {
     return '"' + value.replace(/"/g, '""') + '"';
@@ -15,10 +10,6 @@ function escapeCsvField(value: string): string {
   return value;
 }
 
-/**
- * Generate CSV content string from an array of players.
- * Returns UTF-8 BOM-prefixed string with Hebrew column headers.
- */
 export function generateCsvContent(players: ClubSearchResult[]): string {
   const currentYear = new Date().getFullYear();
   const rows = players.map((player) => {
@@ -33,24 +24,22 @@ export function generateCsvContent(players: ClubSearchResult[]): string {
   return BOM + [HEADER, ...rows].join('\r\n') + '\r\n';
 }
 
-/**
- * Generate a filename for the CSV export.
- * Format: {clubName}-YYYY-MM-DD-HHmm.csv
- */
-export function generateFilename(clubName: string): string {
+export function generateFilename(clubNames: string[]): string {
   const now = new Date();
   const yyyy = now.getFullYear();
   const mm = String(now.getMonth() + 1).padStart(2, '0');
   const dd = String(now.getDate()).padStart(2, '0');
   const hh = String(now.getHours()).padStart(2, '0');
   const min = String(now.getMinutes()).padStart(2, '0');
-  return `${clubName}-${yyyy}-${mm}-${dd}-${hh}${min}.csv`;
+
+  const prefix = clubNames.length === 1 ? clubNames[0] : 'clubs-export';
+  return `${prefix}-${yyyy}-${mm}-${dd}-${hh}${min}.csv`;
 }
 
 export function exportPlayersCsv(
   allResults: ClubSearchResult[],
   selectedIds: Set<number>,
-  clubName: string,
+  clubNames: string[],
 ): void {
   const filtered = allResults.filter((r) => selectedIds.has(r.id));
   const csvContent = generateCsvContent(filtered);
@@ -59,7 +48,7 @@ export function exportPlayersCsv(
 
   const a = document.createElement('a');
   a.href = url;
-  a.download = generateFilename(clubName);
+  a.download = generateFilename(clubNames);
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);

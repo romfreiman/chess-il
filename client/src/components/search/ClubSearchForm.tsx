@@ -1,41 +1,47 @@
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, useEffect, useRef, FormEvent } from 'react';
 import { Search } from 'lucide-react';
 import type { ClubInfo } from '@shared/types';
-import { ClubCombobox } from './ClubCombobox';
+import { ClubMultiCombobox } from './ClubMultiCombobox';
 
 interface ClubSearchFormProps {
   clubs: ClubInfo[];
   clubsLoading: boolean;
-  onSearch: (clubId: number, maxAge: number | null) => void;
-  initialClubId?: number | null;
+  onSearch: (clubIds: number[], maxAge: number | null) => void;
+  initialClubIds?: number[];
   initialMaxAge?: number | null;
 }
 
-export function ClubSearchForm({ clubs, clubsLoading, onSearch, initialClubId, initialMaxAge }: ClubSearchFormProps) {
-  const [selectedClub, setSelectedClub] = useState<ClubInfo | null>(null);
+export function ClubSearchForm({ clubs, clubsLoading, onSearch, initialClubIds, initialMaxAge }: ClubSearchFormProps) {
+  const [selectedClubs, setSelectedClubs] = useState<ClubInfo[]>([]);
   const [maxAge, setMaxAge] = useState(initialMaxAge ? String(initialMaxAge) : '');
+  const initializedRef = useRef(false);
 
   useEffect(() => {
-    if (initialClubId && clubs.length > 0 && !selectedClub) {
-      const match = clubs.find((c) => c.id === initialClubId);
-      if (match) setSelectedClub(match);
+    if (initialClubIds && initialClubIds.length > 0 && !initializedRef.current && clubs.length > 0) {
+      const matched = initialClubIds
+        .map((id) => clubs.find((c) => c.id === id))
+        .filter((c): c is ClubInfo => c !== undefined);
+      if (matched.length > 0) {
+        setSelectedClubs(matched);
+        initializedRef.current = true;
+      }
     }
-  }, [initialClubId, clubs, selectedClub]);
+  }, [initialClubIds, clubs]);
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (!selectedClub) return;
-    onSearch(selectedClub.id, maxAge ? parseInt(maxAge, 10) : null);
+    if (selectedClubs.length === 0) return;
+    onSearch(selectedClubs.map((c) => c.id), maxAge ? parseInt(maxAge, 10) : null);
   };
 
   return (
     <form onSubmit={handleSubmit} className="mt-8 mb-6">
-      {/* Desktop layout: single row */}
-      <div className="hidden sm:flex items-end gap-3">
-        <ClubCombobox
+      <div className="hidden sm:flex items-end gap-3 flex-nowrap">
+        <ClubMultiCombobox
           clubs={clubs}
-          value={selectedClub}
-          onChange={setSelectedClub}
+          selected={selectedClubs}
+          onChange={setSelectedClubs}
+          maxSelect={5}
         />
         <div>
           <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">
@@ -53,7 +59,7 @@ export function ClubSearchForm({ clubs, clubsLoading, onSearch, initialClubId, i
         </div>
         <button
           type="submit"
-          disabled={selectedClub === null || clubsLoading}
+          disabled={selectedClubs.length === 0 || clubsLoading}
           className="px-6 py-3 rounded-xl bg-primary text-white font-normal text-base disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-600 transition-colors flex items-center gap-2"
         >
           <Search className="h-5 w-5" />
@@ -61,12 +67,12 @@ export function ClubSearchForm({ clubs, clubsLoading, onSearch, initialClubId, i
         </button>
       </div>
 
-      {/* Mobile layout: stacked */}
       <div className="sm:hidden flex flex-col gap-4">
-        <ClubCombobox
+        <ClubMultiCombobox
           clubs={clubs}
-          value={selectedClub}
-          onChange={setSelectedClub}
+          selected={selectedClubs}
+          onChange={setSelectedClubs}
+          maxSelect={5}
         />
         <div className="flex items-end gap-3">
           <div>
@@ -85,7 +91,7 @@ export function ClubSearchForm({ clubs, clubsLoading, onSearch, initialClubId, i
           </div>
           <button
             type="submit"
-            disabled={selectedClub === null || clubsLoading}
+            disabled={selectedClubs.length === 0 || clubsLoading}
             className="px-6 py-3 rounded-xl bg-primary text-white font-normal text-base disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-600 transition-colors flex items-center gap-2"
           >
             <Search className="h-5 w-5" />

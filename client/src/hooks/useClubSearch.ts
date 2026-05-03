@@ -3,8 +3,9 @@ import type { ClubSearchResult } from '@shared/types';
 
 const searchCache = new Map<string, ClubSearchResult[]>();
 
-function cacheKey(clubId: number, maxAge: number | null): string {
-  return `${clubId}:${maxAge ?? ''}`;
+function cacheKey(clubIds: number[], maxAge: number | null): string {
+  const sorted = [...clubIds].sort((a, b) => a - b).join(',');
+  return `${sorted}:${maxAge ?? ''}`;
 }
 
 interface UseClubSearchResult {
@@ -14,16 +15,16 @@ interface UseClubSearchResult {
   search: () => void;
 }
 
-export function useClubSearch(clubId: number | null, maxAge: number | null): UseClubSearchResult {
+export function useClubSearch(clubIds: number[], maxAge: number | null): UseClubSearchResult {
   const [results, setResults] = useState<ClubSearchResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
 
   const search = useCallback(async () => {
-    if (clubId === null) return;
+    if (clubIds.length === 0) return;
 
-    const key = cacheKey(clubId, maxAge);
+    const key = cacheKey(clubIds, maxAge);
     const cached = searchCache.get(key);
     if (cached) {
       setResults(cached);
@@ -44,7 +45,7 @@ export function useClubSearch(clubId: number | null, maxAge: number | null): Use
 
     try {
       const params = new URLSearchParams();
-      params.set('club', String(clubId));
+      clubIds.forEach((id) => params.append('club', String(id)));
 
       if (maxAge !== null) {
         params.set('minAge', '0');
@@ -71,7 +72,7 @@ export function useClubSearch(clubId: number | null, maxAge: number | null): Use
     } finally {
       setLoading(false);
     }
-  }, [clubId, maxAge]);
+  }, [clubIds, maxAge]);
 
   return { results, loading, error, search };
 }

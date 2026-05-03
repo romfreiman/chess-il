@@ -5,6 +5,7 @@ import request from 'supertest';
 vi.mock('../../src/scraper/clubs.js', () => ({
   scrapeClubList: vi.fn(),
   searchClubPlayers: vi.fn(),
+  searchMultipleClubPlayers: vi.fn(),
 }));
 
 vi.mock('../../src/db/index.js', () => ({
@@ -13,11 +14,12 @@ vi.mock('../../src/db/index.js', () => ({
   isClubsCacheStale: vi.fn(),
 }));
 
-import { scrapeClubList, searchClubPlayers } from '../../src/scraper/clubs.js';
+import { scrapeClubList, searchClubPlayers, searchMultipleClubPlayers } from '../../src/scraper/clubs.js';
 import { getCachedClubs, upsertClubs, isClubsCacheStale } from '../../src/db/index.js';
 
 const mockScrapeClubList = vi.mocked(scrapeClubList);
 const mockSearchClubPlayers = vi.mocked(searchClubPlayers);
+const mockSearchMultipleClubPlayers = vi.mocked(searchMultipleClubPlayers);
 const mockGetCachedClubs = vi.mocked(getCachedClubs);
 const mockUpsertClubs = vi.mocked(upsertClubs);
 const mockIsClubsCacheStale = vi.mocked(isClubsCacheStale);
@@ -128,13 +130,37 @@ describe('GET /api/clubs/search', () => {
   });
 
   it('returns results for valid club param', async () => {
-    mockSearchClubPlayers.mockResolvedValue(testSearchResults);
+    mockSearchMultipleClubPlayers.mockResolvedValue(testSearchResults);
 
     const res = await request(app).get('/api/clubs/search?club=6');
 
     expect(res.status).toBe(200);
     expect(res.body).toEqual(testSearchResults);
-    expect(mockSearchClubPlayers).toHaveBeenCalledWith(6, undefined, undefined);
+    expect(mockSearchMultipleClubPlayers).toHaveBeenCalledWith([6], undefined, undefined);
+  });
+
+  it('returns results for comma-separated club param', async () => {
+    const merged = [
+      ...testSearchResults,
+      { id: 300001, name: 'שחקן שלישי', rating: 1500, club: 'מכבי ראשון לציון', birthYear: 2010 },
+    ];
+    mockSearchMultipleClubPlayers.mockResolvedValue(merged);
+
+    const res = await request(app).get('/api/clubs/search?club=6,24');
+
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual(merged);
+    expect(mockSearchMultipleClubPlayers).toHaveBeenCalledWith([6, 24], undefined, undefined);
+  });
+
+  it('returns results for multiple club params', async () => {
+    mockSearchMultipleClubPlayers.mockResolvedValue(testSearchResults);
+
+    const res = await request(app).get('/api/clubs/search?club=6&club=24');
+
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual(testSearchResults);
+    expect(mockSearchMultipleClubPlayers).toHaveBeenCalledWith([6, 24], undefined, undefined);
   });
 
   it('returns 400 without club param', async () => {
@@ -152,21 +178,38 @@ describe('GET /api/clubs/search', () => {
     expect(res.body.error).toBe('INVALID_CLUB');
   });
 
+  it('returns 400 when too many clubs provided', async () => {
+    const res = await request(app).get('/api/clubs/search?club=1,2,3,4,5,6');
+
+    expect(res.status).toBe(400);
+    expect(res.body.error).toBe('TOO_MANY_CLUBS');
+  });
+
   it('passes age params to scraper', async () => {
-    mockSearchClubPlayers.mockResolvedValue(testSearchResults);
+    mockSearchMultipleClubPlayers.mockResolvedValue(testSearchResults);
 
     const res = await request(app).get('/api/clubs/search?club=6&minAge=8&maxAge=14');
 
     expect(res.status).toBe(200);
-    expect(mockSearchClubPlayers).toHaveBeenCalledWith(6, 8, 14);
+    expect(mockSearchMultipleClubPlayers).toHaveBeenCalledWith([6], 8, 14);
   });
 
   it('returns empty array on scrape failure', async () => {
-    mockSearchClubPlayers.mockRejectedValue(new Error('Network error'));
+    mockSearchMultipleClubPlayers.mockRejectedValue(new Error('Network error'));
 
     const res = await request(app).get('/api/clubs/search?club=6');
 
     expect(res.status).toBe(200);
     expect(res.body).toEqual([]);
+  });
+
+  it('returns partial results when some clubs fail', async () => {
+    const partial = [testSearchResults[0]];
+    mockSearchMultipleClubPlayers.mockResolvedValue(partial);
+
+    const res = await request(app).get('/api/clubs/search?club=6,24');
+
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual(partial);
   });
 });

@@ -4,3 +4,6 @@ dist/
 .netlify/
 *.tsbuildinfo
 chess-cache.db
+.gstack/
+opencode.json
+.opencode/

@@ -1,20 +1,46 @@
 import { Router } from 'express';
 import type { Request, Response } from 'express';
 import type { ApiError } from '../../../packages/shared/types.js';
-import { scrapeClubList, searchClubPlayers } from '../../scraper/clubs.js';
+import { scrapeClubList, searchClubPlayers, searchMultipleClubPlayers } from '../../scraper/clubs.js';
 import { getCachedClubs, upsertClubs, isClubsCacheStale } from '../../db/index.js';
 
 export const clubsRouter = Router();
 
 // Search route MUST be before any parameterized route to prevent Express matching "search" as a param
 clubsRouter.get('/search', async (req: Request, res: Response) => {
-  const clubParam = req.query.club as string | undefined;
-  const clubId = parseInt(clubParam || '', 10);
+  const clubParam = req.query.club;
+  let clubIds: number[];
 
-  if (!clubParam || isNaN(clubId) || clubId <= 0) {
+  if (Array.isArray(clubParam)) {
+    clubIds = clubParam.map((v) => parseInt(String(v), 10));
+  } else if (typeof clubParam === 'string') {
+    if (clubParam.includes(',')) {
+      clubIds = clubParam.split(',').map((v) => parseInt(v, 10));
+    } else {
+      clubIds = [parseInt(clubParam, 10)];
+    }
+  } else {
     const error: ApiError = {
       error: 'INVALID_CLUB',
       message: 'club query parameter must be a positive integer',
+      statusCode: 400,
+    };
+    return res.status(400).json(error);
+  }
+
+  if (clubIds.some((id) => isNaN(id) || id <= 0)) {
+    const error: ApiError = {
+      error: 'INVALID_CLUB',
+      message: 'club query parameter must be a positive integer',
+      statusCode: 400,
+    };
+    return res.status(400).json(error);
+  }
+
+  if (clubIds.length > 5) {
+    const error: ApiError = {
+      error: 'TOO_MANY_CLUBS',
+      message: 'Max 5 clubs allowed',
       statusCode: 400,
     };
     return res.status(400).json(error);
@@ -26,8 +52,8 @@ clubsRouter.get('/search', async (req: Request, res: Response) => {
   const maxAge = maxAgeParam ? parseInt(maxAgeParam, 10) : undefined;
 
   try {
-    const results = await searchClubPlayers(
-      clubId,
+    const results = await searchMultipleClubPlayers(
+      clubIds,
       minAge !== undefined && !isNaN(minAge) ? minAge : undefined,
       maxAge !== undefined && !isNaN(maxAge) ? maxAge : undefined
     );

@@ -126,8 +126,13 @@ describe('generateFilename', () => {
     vi.useRealTimers();
   });
 
-  it('returns format {clubName}-YYYY-MM-DD-HHmm.csv', () => {
-    const filename = generateFilename('אליצור ירושלים');
+  it('returns format {clubName}-YYYY-MM-DD-HHmm.csv for single club', () => {
+    const filename = generateFilename(['אליצור ירושלים']);
     expect(filename).toBe('אליצור ירושלים-2026-04-25-1430.csv');
+  });
+
+  it('returns clubs-export-YYYY-MM-DD-HHmm.csv for multiple clubs', () => {
+    const filename = generateFilename(['אליצור ירושלים', 'מכבי תל אביב']);
+    expect(filename).toBe('clubs-export-2026-04-25-1430.csv');
   });
 });
