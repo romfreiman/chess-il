@@ -116,7 +116,7 @@ export function ClubMultiCombobox({ clubs, selected, onChange, maxSelect = 5 }: 
                 e.stopPropagation();
                 handleRemove(club.id);
               }}
-              className="ml-1 text-blue-600 dark:text-blue-300 hover:text-blue-800 dark:hover:text-blue-100"
+              className="ms-1 text-blue-600 dark:text-blue-300 hover:text-blue-800 dark:hover:text-blue-100"
             >
               {'\u00D7'}
             </button>

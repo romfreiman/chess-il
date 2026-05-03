@@ -179,7 +179,7 @@ export function HomePage() {
           {selectedIds.size === 2 && (
             <button
               onClick={handleCompare}
-              className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#378ADD] text-white rounded-full px-8 py-3 shadow-lg hover:bg-blue-600 transition-all duration-300 font-medium text-lg animate-[bounce_0.5s_ease-in-out_1]}"
+              className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#378ADD] text-white rounded-full px-8 py-3 shadow-lg hover:bg-blue-600 transition-all duration-300 font-medium text-lg animate-[bounce_0.5s_ease-in-out_1]"
             >
               השוואה
             </button>

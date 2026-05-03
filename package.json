@@ -7,7 +7,8 @@
     "build": "tsc",
     "test": "vitest run --reporter=verbose",
     "test:watch": "vitest",
-    "dev": "netlify dev"
+    "dev": "netlify dev",
+    "dev:local": "npx tsx src/dev-server.ts & cd client && npm run dev"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +19,6 @@
     "better-sqlite3": "^12.9.0",
     "cheerio": "^1.2.0",
     "express": "^4.22.1",
-    "opencode-ai": "^1.14.33",
     "serverless-http": "^4.0.0"
   },
   "devDependencies": {

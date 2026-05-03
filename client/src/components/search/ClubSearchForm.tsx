@@ -43,7 +43,7 @@ export function ClubSearchForm({ clubs, clubsLoading, onSearch, initialClubIds, 
           onChange={setSelectedClubs}
           maxSelect={5}
         />
-        <div>
+        <div className="mb-5">
           <label className="block text-sm font-bold text-gray-700 dark:text-gray-300 mb-1">
             {'עד גיל'}
           </label>
@@ -60,7 +60,7 @@ export function ClubSearchForm({ clubs, clubsLoading, onSearch, initialClubIds, 
         <button
           type="submit"
           disabled={selectedClubs.length === 0 || clubsLoading}
-          className="px-6 py-3 rounded-xl bg-primary text-white font-normal text-base disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-600 transition-colors flex items-center gap-2"
+          className="mb-5 px-6 py-3 rounded-xl bg-primary text-white font-normal text-base disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-600 transition-colors flex items-center gap-2"
         >
           <Search className="h-5 w-5" />
           {'חיפוש'}
